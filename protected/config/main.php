@@ -29,6 +29,7 @@ return array(
           'password' => 'bdg',
           'ipFilters' => array('*'),
       ),
+      'editor',
     ),
     // application components
     'components' => array(

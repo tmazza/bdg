@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 11, 2016 at 11:52 PM
+-- Generation Time: May 12, 2016 at 12:27 AM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -51,7 +51,16 @@ INSERT INTO `equipe` (`id`, `nome`, `abreviacao`, `brasao`, `tipo`) VALUES
 --
 
 INSERT INTO `seg_authitem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
-('cliente', 0, NULL, NULL, NULL);
+('cliente', 0, NULL, NULL, NULL),
+('editor', 0, NULL, NULL, NULL),
+('modEditor', 1, NULL, NULL, NULL);
+
+--
+-- Dumping data for table `seg_authitemchild`
+--
+
+INSERT INTO `seg_authitemchild` (`parent`, `child`) VALUES
+('editor', 'modEditor');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
