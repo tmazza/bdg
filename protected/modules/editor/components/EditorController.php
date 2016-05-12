@@ -9,7 +9,7 @@ class EditorController extends MainController {
     public function beforeAction($action){
       if(!Yii::app()->user->checkAccess('modEditor')){
         HView::ferr("Sem permissão de acesso.");
-        $this->redirect($this->createUrl('/'));
+        $this->redirect($this->createUrl('/site/index'));
       }
       return parent::beforeAction($action);
     }
