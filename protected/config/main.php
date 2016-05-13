@@ -30,6 +30,7 @@ return array(
           'ipFilters' => array('*'),
       ),
       'editor',
+      'pg',
     ),
     // application components
     'components' => array(
