@@ -123,6 +123,11 @@ return array(
                     'levels' => 'trace',
                     'logFile' => 'trace',
                 ),
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'pg',
+                    'logFile' => 'pg',
+                ),
             ),
         ),
     ),

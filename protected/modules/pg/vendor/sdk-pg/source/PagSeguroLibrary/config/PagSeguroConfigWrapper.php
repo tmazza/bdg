@@ -24,12 +24,12 @@
 class PagSeguroConfigWrapper
 {
 
-    const PAGSEGURO_ENV = "";
-    const PAGSEGURO_EMAIL = "";
+    const PAGSEGURO_ENV = "sandbox";
+    const PAGSEGURO_EMAIL = "tiagomdepaula@gmail.com";
 
-    const PAGSEGURO_TOKEN_SANDBOX = "";
-    const PAGSEGURO_APP_ID_SANDBOX = "";
-    const PAGSEGURO_APP_KEY_SANDBOX = "";
+    const PAGSEGURO_TOKEN_SANDBOX = "93DA446C104F4F7E8979D0EB1197B426";
+    const PAGSEGURO_APP_ID_SANDBOX = "app3364716214";
+    const PAGSEGURO_APP_KEY_SANDBOX = "A182EC03242459F33482FFACB1A93F08";
 
     const PAGSEGURO_TOKEN_PRODUCTION = "";
     const PAGSEGURO_APP_ID_PRODUCTION = "?";

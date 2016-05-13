@@ -18,23 +18,13 @@ class DefaultController extends PgController {
 
         $sedexCode = PagSeguroShippingType::getCodeByType('NOT_SPECIFIED');
         $paymentRequest->setShippingType($sedexCode);
-
-        $paymentRequest->setSender(
-        	'João Comprador',
-        	'email@comprador.com.br',
-        	'11',
-        	'56273440',
-        	'CPF',
-        	'156.009.442-76'
-        );
-
         $paymentRequest->setCurrency("BRL");
         // Referenciando a transação do PagSeguro em seu sistema
-        $paymentRequest->setReference("REF123");
+        $paymentRequest->setReference("ADASDAS");
         // URL para onde o comprador será redirecionado (GET) após o fluxo de pagamento
         $paymentRequest->setRedirectUrl("http://www.lojamodelo.com.br");
         // URL para onde serão enviadas notificações (POST) indicando alterações no status da transação
-        $paymentRequest->addParameter('notificationURL', 'http://www.lojamodelo.com.br/nas');
+        $paymentRequest->addParameter('notificationURL', 'http://dev.questoes.io/bdg/pg/default/listener');
 
         try {
           $credentials = PagSeguroConfig::getAccountCredentials(); // getApplicationCredentials()
@@ -43,6 +33,13 @@ class DefaultController extends PgController {
         } catch (PagSeguroServiceException $e) {
           die($e->getMessage());
         }
+    }
+
+    public function actionListener(){
+      Yii::log("Requisição em " . date("d/m/Y H:i:s"), 'pg', 'pg.DefaultController.listener');
+      $_POST['notificationCode'] = 'ADASDAS';
+      $_POST['notificationType'] = 'transaction';
+      NotificationListener::main();
     }
 
 
