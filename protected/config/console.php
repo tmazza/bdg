@@ -6,6 +6,7 @@ return [
 	'import' => [
       'application.models.*',
       'application.helpers.*',
+      'application.vendor.SimpleHTMLDOM.*'
       // 'application.components.*',
       // 'application.extensions.*',
 	],
