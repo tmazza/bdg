@@ -12,13 +12,5 @@ class DefaultController extends PgController {
         'boloes' => $boloes,
       ]);
     }
-
-    public function actionListener(){
-      Yii::log("Requisição em " . date("d/m/Y H:i:s"), 'pg', 'pg.DefaultController.listener');
-      $_POST['notificationCode'] = '';
-      $_POST['notificationType'] = '';
-      NotificationListener::main();
-    }
-
-
+    
 }

@@ -27,7 +27,7 @@ class PaymentRequestGenerator {
     if(!$pedido->addProduto($bolao->id))
       return false;
 
-    $codPedido = "COD".str_pad($pedido->id,2,'0',STR_PAD_LEFT);
+    $codPedido = str_pad($pedido->id,8,'0',STR_PAD_LEFT);
     $paymentRequest->setReference($codPedido);
 
     $sedexCode = PagSeguroShippingType::getCodeByType('NOT_SPECIFIED');
