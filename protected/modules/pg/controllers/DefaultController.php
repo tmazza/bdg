@@ -7,38 +7,23 @@
 class DefaultController extends PgController {
 
     public function actionIndex() {
-      $this->redirecionaParaPagamento();
+      $bolao = Bolao::model()->find();
+
+      $url = PaymentRequestGenerator::pagamentoBolao($bolao);
+      if($url){
+        echo $url;
+        exit;
+        $this->redirect($url);
+      } else {
+        HView::ferr("Ops. Não foi possível gerar a solicitação de pagamento. Tente mais um vez.");
+      }
       $this->render('index', []);
-    }
-
-    private function redirecionaParaPagamento(){
-        $paymentRequest = new PagSeguroPaymentRequest();
-        $paymentRequest->addItem('0001', 'Notebook', 1, 2430.00);
-        $paymentRequest->addItem('0002', 'Mochila',  1, 150.99);
-
-        $sedexCode = PagSeguroShippingType::getCodeByType('NOT_SPECIFIED');
-        $paymentRequest->setShippingType($sedexCode);
-        $paymentRequest->setCurrency("BRL");
-        // Referenciando a transação do PagSeguro em seu sistema
-        $paymentRequest->setReference("ADASDAS");
-        // URL para onde o comprador será redirecionado (GET) após o fluxo de pagamento
-        $paymentRequest->setRedirectUrl("http://www.lojamodelo.com.br");
-        // URL para onde serão enviadas notificações (POST) indicando alterações no status da transação
-        $paymentRequest->addParameter('notificationURL', 'http://dev.questoes.io/bdg/pg/default/listener');
-
-        try {
-          $credentials = PagSeguroConfig::getAccountCredentials(); // getApplicationCredentials()
-          $checkoutUrl = $paymentRequest->register($credentials);
-          echo $checkoutUrl;
-        } catch (PagSeguroServiceException $e) {
-          die($e->getMessage());
-        }
     }
 
     public function actionListener(){
       Yii::log("Requisição em " . date("d/m/Y H:i:s"), 'pg', 'pg.DefaultController.listener');
-      $_POST['notificationCode'] = 'ADASDAS';
-      $_POST['notificationType'] = 'transaction';
+      $_POST['notificationCode'] = '';
+      $_POST['notificationType'] = '';
       NotificationListener::main();
     }
 
