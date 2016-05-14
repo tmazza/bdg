@@ -11,7 +11,6 @@ class PgController extends MainController {
         HView::finf("Identifique-se");
         $this->redirect($this->createUrl('/site/login'));
       }
-
       return parent::beforeAction($action);
     }
 }
