@@ -7,7 +7,7 @@
 class PgController extends MainController {
 
     public function beforeAction($action){
-      if(Yii::app()->user->isGuest){
+      if($this->id !== 'listener' && Yii::app()->user->isGuest){
         HView::finf("Identifique-se");
         $this->redirect($this->createUrl('/site/login'));
       }
