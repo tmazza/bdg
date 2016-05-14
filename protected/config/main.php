@@ -66,6 +66,7 @@ return array(
                    'class' => 'CustomFacebookService',
                    'client_id' => $__faceID,
                    'client_secret' => $__faceSecret,
+                   'scope' => 'email',
                ),
               'google_oauth' => array(
                   // register your app here: https://code.google.com/apis/console/
