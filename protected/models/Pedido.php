@@ -5,21 +5,21 @@
  *
  * The followings are the available columns in table 'pedido':
  * @property integer $id
- * @property integer $user_id
- * @property integer $status
+ * @property integer $idUsuario
+ * @property integer $idBolao
  * @property integer $data
- * @property string $link_transacao
+ * @property string $linkTransacao
+ * @property integer $status
  *
  * The followings are the available model relations:
- * @property User $user
- * @property PedidoProduto[] $pedidoProdutos
+ * @property Bolao $idBolao0
+ * @property User $idUsuario0
  */
 class Pedido extends CActiveRecord
 {
 
 	const StatusAguardando = 1;
-	const StatusAprovado = 2;
-	const StatusCancelado = 3;
+	const Statuspago = 3; # Seguindo numeração do PagSeguro
 
 	/**
 	 * @return string the associated database table name
@@ -35,9 +35,9 @@ class Pedido extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('user_id, status, data', 'required'),
-			array('user_id, status, data', 'numerical', 'integerOnly'=>true),
-			array('id, user_id, status, data, link_transacao', 'safe', 'on'=>'search'),
+			array('idUsuario, idBolao, data, status', 'required'),
+			array('idUsuario, idBolao, data, status', 'numerical', 'integerOnly'=>true),
+			array('id, idUsuario, idBolao, data, linkTransacao, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,8 +47,8 @@ class Pedido extends CActiveRecord
 	public function relations()
 	{
 		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'produtos' => array(self::HAS_MANY, 'PedidoProduto', 'pedido_id'),
+			'idBolao0' => array(self::BELONGS_TO, 'Bolao', 'idBolao'),
+			'idUsuario0' => array(self::BELONGS_TO, 'User', 'idUsuario'),
 		);
 	}
 
@@ -59,12 +59,14 @@ class Pedido extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
-			'status' => 'Status',
+			'idUsuario' => 'Id Usuario',
+			'idBolao' => 'Id Bolao',
 			'data' => 'Data',
-			'link_transacao' => 'Link da transação',
+			'linkTransacao' => 'Link Transacao',
+			'status' => 'Status',
 		);
 	}
+
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -76,15 +78,4 @@ class Pedido extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
-	/**
-	 * Adiciona produto ao pedido
-	 */
-	public function addProduto($id){
-		$pedPro = new PedidoProduto();
-		$pedPro->produto_id = $id;
-		$pedPro->pedido_id = $this->id;
-		return $pedPro->save();
-	}
-
 }

@@ -10,6 +10,10 @@ class ListenerController extends PgController {
       Yii::log("Requisição em " . date("d/m/Y H:i:s"), 'pg', 'pg.DefaultController.listener');
 
       $nc = 'notificationCode'; $nt = 'notificationType';
+
+      $_POST[$nc] = '145CFE25322F322F968BB4527F9DC0DD2DCD';
+      $_POST[$nt] = 'transaction';
+
       $code = (isset($_POST[$nc]) && trim($_POST[$nc]) !== "" ? trim($_POST[$nc]) : null);
       $type = (isset($_POST[$nt]) && trim($_POST[$nt]) !== "" ? trim($_POST[$nt]) : null);
 
@@ -66,7 +70,32 @@ class ListenerController extends PgController {
       $pedido = Pedido::model()->findByPk($id);
       if(!is_null($pedido) && $transaction->getStatus()->getValue() == 3){
           if($pedido->status == Pedido::StatusAguardando){
-            $pedido->status = Pedido::StatusAprovado;
+
+            $transaction = Yii::app()->db->beginTransaction();
+
+            $pedido->status = Pedido::Statuspago;
+            $userBolao = new UserBolao();
+            $userBolao->idUsuario = $pedido->idUsuario;
+            $userBolao->idBolao = $pedido->idBolao;
+            $userBolao->status = UserBolao::StatusAtivo;
+
+            if($userBolao->save()){
+              HEmail::toAdmin("Pagamento aprovado. Novo usuário.");
+              # Enviar email para usuário
+              $user = User::model()->findByPk((int)$pedido->idUsuario);
+              HEmail::comTemplate($user->email,"Conta ativada","Sua conta no Bolão do gordo foi ativada.","_emailContaAtivada");
+              # Atualiza status do pedido
+              if($pedido->update(['status'])){
+                $transaction->commit();
+              } else {
+                HEmail::toAdmin("Pedido: {$pedido->id}. Ao atualizar pedido.","**Erro ao processar pagamento de usuário.");
+                $transaction->rollback();
+              }
+            } else {
+              $transaction->rollback();
+              HEmail::toAdmin("Pedido: {$pedido->id}. Ao salvar user_bolao","**Erro ao processar pagamento de usuário");
+            }
+
             # TODO: inserir registro em user_bolao
             $pedido->update(['status']);
           }

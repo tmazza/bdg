@@ -10,6 +10,7 @@ $__portDatabase = ;
 $__awsSmtpHost = '';
 $__awsUsername = '';
 $__awsPassword = '';
+$__awsEmail = '';
 $__faceID = '';
 $__faceSecret = '';
 $__googleId = '';

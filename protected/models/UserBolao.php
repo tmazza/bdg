@@ -1,24 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "pedido_produto".
+ * This is the model class for table "user_bolao".
  *
- * The followings are the available columns in table 'pedido_produto':
- * @property integer $pedido_id
- * @property integer $produto_id
- *
- * The followings are the available model relations:
- * @property Bolao $produto
- * @property Pedido $pedido
+ * The followings are the available columns in table 'user_bolao':
+ * @property integer $idUsuario
+ * @property integer $idBolao
+ * @property integer $status
  */
-class PedidoProduto extends CActiveRecord
+class UserBolao extends CActiveRecord
 {
+	const StatusAtivo = 1;
+	const StatusInativo = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'pedido_produto';
+		return 'user_bolao';
 	}
 
 	/**
@@ -27,9 +27,9 @@ class PedidoProduto extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('pedido_id, produto_id', 'required'),
-			array('pedido_id, produto_id', 'numerical', 'integerOnly'=>true),
-			array('pedido_id, produto_id', 'safe', 'on'=>'search'),
+			array('idUsuario, idBolao', 'required'),
+			array('idUsuario, idBolao, status', 'numerical', 'integerOnly'=>true),
+			array('idUsuario, idBolao, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -39,8 +39,6 @@ class PedidoProduto extends CActiveRecord
 	public function relations()
 	{
 		return array(
-			'produto' => array(self::BELONGS_TO, 'Bolao', 'produto_id'),
-			'pedido' => array(self::BELONGS_TO, 'Pedido', 'pedido_id'),
 		);
 	}
 
@@ -50,8 +48,9 @@ class PedidoProduto extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'pedido_id' => 'Pedido',
-			'produto_id' => 'Produto',
+			'idUsuario' => 'Id Usuario',
+			'idBolao' => 'Id Bolao',
+			'status' => 'Status',
 		);
 	}
 
@@ -59,7 +58,7 @@ class PedidoProduto extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return PedidoProduto the static model class
+	 * @return UserBolao the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -4,8 +4,11 @@
  * This is the model class for table "bolao".
  *
  * The followings are the available columns in table 'bolao':
- * @property integer $id
- * @property integer $nome
+ * @property string $codCampeonato
+ * @property integer $idBolao
+ * @property string $tipoInscricao
+ * @property integer $valorInscricao
+ * @property integer $prazo
  */
 class Bolao extends CActiveRecord
 {
@@ -22,14 +25,12 @@ class Bolao extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('nome', 'required'),
-			array('nome', 'numerical', 'integerOnly'=>true),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, nome', 'safe', 'on'=>'search'),
+			array('codCampeonato, tipoInscricao, valorInscricao, prazo', 'required'),
+			array('valorInscricao, prazo', 'numerical', 'integerOnly'=>true),
+			array('codCampeonato', 'length', 'max'=>5),
+			array('tipoInscricao', 'length', 'max'=>1),
+			array('codCampeonato, idBolao, tipoInscricao, valorInscricao, prazo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -38,8 +39,6 @@ class Bolao extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 		);
 	}
@@ -50,32 +49,22 @@ class Bolao extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nome' => 'Nome',
+			'codCampeonato' => 'Cod Campeonato',
+			'idBolao' => 'Id Bolao',
+			'tipoInscricao' => 'Tipo Inscricao',
+			'valorInscricao' => 'Valor Inscricao',
+			'prazo' => 'Prazo',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome);
-
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
