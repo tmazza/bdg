@@ -10,10 +10,6 @@ class ListenerController extends PgController {
       Yii::log("Requisição em " . date("d/m/Y H:i:s"), 'pg', 'pg.DefaultController.listener');
 
       $nc = 'notificationCode'; $nt = 'notificationType';
-
-      $_POST[$nc] = '145CFE25322F322F968BB4527F9DC0DD2DCD';
-      $_POST[$nt] = 'transaction';
-
       $code = (isset($_POST[$nc]) && trim($_POST[$nc]) !== "" ? trim($_POST[$nc]) : null);
       $type = (isset($_POST[$nt]) && trim($_POST[$nt]) !== "" ? trim($_POST[$nt]) : null);
 
