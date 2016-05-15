@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 12, 2016 at 12:27 AM
+-- Generation Time: May 15, 2016 at 09:56 PM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -23,6 +23,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bolao`
+--
+
+CREATE TABLE IF NOT EXISTS `bolao` (
+  `codCampeonato` varchar(5) NOT NULL,
+  `idBolao` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(128) NOT NULL,
+  `tipoInscricao` char(1) NOT NULL,
+  `valorInscricao` int(11) NOT NULL,
+  `prazo` int(5) NOT NULL,
+  PRIMARY KEY (`idBolao`),
+  KEY `fk_bolao_campeonato` (`codCampeonato`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campeonato`
+--
+
+CREATE TABLE IF NOT EXISTS `campeonato` (
+  `codigo` varchar(5) NOT NULL,
+  `nome` varchar(80) NOT NULL,
+  `inicio` date NOT NULL,
+  `fim` date NOT NULL,
+  `situacao` char(1) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `equipe`
 --
 
@@ -34,6 +66,24 @@ CREATE TABLE IF NOT EXISTS `equipe` (
   `tipo` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pedido`
+--
+
+CREATE TABLE IF NOT EXISTS `pedido` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) NOT NULL,
+  `idBolao` int(11) NOT NULL,
+  `data` int(11) NOT NULL,
+  `linkTransacao` text,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_pedido_usuario` (`idUsuario`),
+  KEY `fk_pedido_bolao` (`idBolao`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -96,7 +146,21 @@ CREATE TABLE IF NOT EXISTS `user` (
   `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `social` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_bolao`
+--
+
+CREATE TABLE IF NOT EXISTS `user_bolao` (
+  `idUsuario` int(11) NOT NULL,
+  `idBolao` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idUsuario`,`idBolao`),
+  KEY `userbolao_fk_bolao` (`idBolao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -110,11 +174,38 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `data` int(11) NOT NULL,
   `ip` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_senha`
+--
+
+CREATE TABLE IF NOT EXISTS `user_senha` (
+  `user_id` int(11) NOT NULL,
+  `hash` varchar(512) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `data` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bolao`
+--
+ALTER TABLE `bolao`
+  ADD CONSTRAINT `fk_bolao_campeonato` FOREIGN KEY (`codCampeonato`) REFERENCES `campeonato` (`codigo`);
+
+--
+-- Constraints for table `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `fk_pedido_bolao` FOREIGN KEY (`idBolao`) REFERENCES `bolao` (`idBolao`),
+  ADD CONSTRAINT `fk_pedido_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `seg_authassignment`
@@ -129,6 +220,13 @@ ALTER TABLE `seg_authassignment`
 ALTER TABLE `seg_authitemchild`
   ADD CONSTRAINT `seg_authitemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `seg_authitem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `seg_authitemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `seg_authitem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_bolao`
+--
+ALTER TABLE `user_bolao`
+  ADD CONSTRAINT `userbolao_fk_bolao` FOREIGN KEY (`idBolao`) REFERENCES `bolao` (`idBolao`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `userbolao_fk_user` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
