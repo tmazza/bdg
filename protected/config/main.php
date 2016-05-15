@@ -30,6 +30,7 @@ return array(
           'ipFilters' => array('*'),
       ),
       'editor',
+      'pg',
     ),
     // application components
     'components' => array(
@@ -45,10 +46,10 @@ return array(
              'password' => $__awsPassword,    //Enter Pasword from Amazon
              'port' => 465,                        //Port number from Amazon
              'SMTPAuth' => true,
-             'from' => "contato@bolaodogordo.com",    //From may be any email you want
+             'from' => $__awsEmail,    //From may be any email you want
              'fromName' => "Bolão do gordo",
              'charSet' => "UTF-8",
-             'sender' => 'contato@bolaodogordo.com',  //Sender has to be verified email !!!
+             'sender' => $__awsEmail,  //Sender has to be verified email !!!
              'errorEmailAddresses' => array(),
         ),
 
@@ -122,6 +123,11 @@ return array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'trace',
                     'logFile' => 'trace',
+                ),
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'pg',
+                    'logFile' => 'pg',
                 ),
             ),
         ),
