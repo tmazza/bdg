@@ -7,6 +7,7 @@ class EditorModule extends CWebModule {
     public function init() {
         $this->setImport(array(
             'editor.components.*',
+            'editor.models.*',
         ));
     }
 

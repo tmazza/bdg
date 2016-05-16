@@ -13,4 +13,5 @@ class EditorController extends MainController {
       }
       return parent::beforeAction($action);
     }
+    
 }
