@@ -13,9 +13,9 @@
 </table>
 <?=CHtml::beginForm($this->createUrl('/editor/importar/salvar'),'POST',['class'=>'uk-form']);?>
   <?=CHtml::hiddenField('jogos',json_encode($jogos));?>
+  <?=CHtml::dropDownList('campeonato',null,$campeonatos);?>
   <button type="submit" class="uk-button uk-button-primary">Salvar jogos</button>
 <?=CHtml::endForm();?>
-
 <br>
 <hr>
 <br>

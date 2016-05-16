@@ -5,6 +5,7 @@
       $this->renderPartial('_listaDeJogos',[
           'jogos'=>$jogos,
           'equipes'=>$equipes,
+          'campeonatos'=>$campeonatos,
       ]);
       ?>
     <?php endif; ?>
@@ -12,8 +13,11 @@
       <div class="uk-form-row">
         <div class="uk-alert">
           <ul>
-            <li>Variáveis obrigatórias: <code>NUM</code>,<code>DATA</code>,<code>HORA</code>,<code>CASA</code>,<code>VISITANTE</code></li>
+            <li>Variáveis obrigatórias: <code>DATA</code>,<code>HORA</code>,<code>CASA</code>,<code>VISITANTE</code></li>
+            <li>Opcionais: <code>NUM</code> (se não informado será utilzado o número da linha)</li>
             <li>Descartar colunas: <code>-</code></li>
+            <br>
+            <li>Formato para data d/m. Formato para hora H:i</li>
           </ul>
         </div>
         <?= CHtml::activeLabel($model,'formato'); ?>
