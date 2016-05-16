@@ -29,7 +29,7 @@ class Bolao extends CActiveRecord
 			array('codCampeonato, tipoInscricao, valorInscricao, prazo', 'required'),
 			array('valorInscricao, prazo', 'numerical', 'integerOnly'=>true),
 			array('codCampeonato', 'length', 'max'=>5),
-			array('tipoInscricao', 'length', 'max'=>1),
+			array('tipoInscricao,isAtivo', 'length', 'max'=>1),
 			array('codCampeonato, idBolao, tipoInscricao, valorInscricao, prazo', 'safe', 'on'=>'search'),
 		);
 	}
@@ -40,6 +40,7 @@ class Bolao extends CActiveRecord
 	public function relations()
 	{
 		return array(
+			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)'],
 		);
 	}
 
@@ -80,4 +81,21 @@ class Bolao extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function userNaoInscrito(){
+		$criteria = new CDbCriteria();
+		$criteria->addNotInCondition('idBolao',array_keys(Yii::app()->controller->user->boloesInscritos));
+		$this->getDbCriteria()->mergeWith($criteria);
+		return $this;
+	}
+
+	public function scopes(){
+		return [
+			'ativo' => [
+				'condition'=>'isAtivo=1',
+			],
+		];
+	}
+
+
 }

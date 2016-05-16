@@ -25,7 +25,7 @@ class MainController extends CController  {
     private function setUser(){
       if(!Yii::app()->user->isGuest){
         $user = User::model()->findByPk((int)Yii::app()->user->id);
-        if(is_null($user)){
+        if(is_null($user) && $this->action->id != 'logout'){
           $this->redirect($this->createUrl('/site/logout'));
         } else {
           $this->user = $user;
