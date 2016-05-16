@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 15, 2016 at 09:56 PM
+-- Generation Time: May 16, 2016 at 04:44 PM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -29,13 +29,14 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `bolao` (
   `codCampeonato` varchar(5) NOT NULL,
   `idBolao` int(11) NOT NULL AUTO_INCREMENT,
+  `isAtivo` int(11) NOT NULL DEFAULT '1',
   `nome` varchar(128) NOT NULL,
   `tipoInscricao` char(1) NOT NULL,
   `valorInscricao` int(11) NOT NULL,
   `prazo` int(5) NOT NULL,
   PRIMARY KEY (`idBolao`),
   KEY `fk_bolao_campeonato` (`codCampeonato`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -70,6 +71,28 @@ CREATE TABLE IF NOT EXISTS `equipe` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jogo`
+--
+
+CREATE TABLE IF NOT EXISTS `jogo` (
+  `codCampeonato` varchar(5) NOT NULL,
+  `idJogo` int(11) NOT NULL AUTO_INCREMENT,
+  `numJogo` int(11) DEFAULT NULL,
+  `data` datetime NOT NULL,
+  `equipeMandante` int(11) NOT NULL,
+  `equipeVisitante` int(11) NOT NULL,
+  `golsMandate` int(2) DEFAULT NULL,
+  `golsVisitante` int(2) DEFAULT NULL,
+  `vencedor` char(1) DEFAULT NULL,
+  PRIMARY KEY (`idJogo`),
+  KEY `fk_jogo_campeonato` (`codCampeonato`),
+  KEY `fk_jogo_equipeMandante` (`equipeMandante`),
+  KEY `fk_jogo_equipeVisitante` (`equipeVisitante`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pedido`
 --
 
@@ -83,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   PRIMARY KEY (`id`),
   KEY `fk_pedido_usuario` (`idUsuario`),
   KEY `fk_pedido_bolao` (`idBolao`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -146,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `social` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -174,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `data` int(11) NOT NULL,
   `ip` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -199,6 +222,14 @@ CREATE TABLE IF NOT EXISTS `user_senha` (
 --
 ALTER TABLE `bolao`
   ADD CONSTRAINT `fk_bolao_campeonato` FOREIGN KEY (`codCampeonato`) REFERENCES `campeonato` (`codigo`);
+
+--
+-- Constraints for table `jogo`
+--
+ALTER TABLE `jogo`
+  ADD CONSTRAINT `fk_jogo_campeonato` FOREIGN KEY (`codCampeonato`) REFERENCES `campeonato` (`codigo`),
+  ADD CONSTRAINT `fk_jogo_equipeMandante` FOREIGN KEY (`equipeMandante`) REFERENCES `equipe` (`id`),
+  ADD CONSTRAINT `fk_jogo_equipeVisitante` FOREIGN KEY (`equipeVisitante`) REFERENCES `equipe` (`id`);
 
 --
 -- Constraints for table `pedido`
