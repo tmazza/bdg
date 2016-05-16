@@ -34,7 +34,7 @@ class Jogo extends CActiveRecord
 	{
 		return array(
 			array('codCampeonato, equipeMandante, equipeVisitante, data', 'required'),
-			array('equipeMandante, equipeVisitante, golsMandate, golsVisitante', 'numerical', 'integerOnly'=>true),
+			array('equipeMandante, equipeVisitante, golsMandate, golsVisitante,numJogo', 'numerical', 'integerOnly'=>true),
 			array('codCampeonato', 'length', 'max'=>5),
 			array('vencedor', 'length', 'max'=>1),
 			array('codCampeonato, idJogo, equipeMandante, equipeVisitante, golsMandate, golsVisitante, vencedor', 'safe', 'on'=>'search'),
@@ -47,9 +47,9 @@ class Jogo extends CActiveRecord
 	public function relations()
 	{
 		return array(
-			'equipeVisitante0' => array(self::BELONGS_TO, 'Equipe', 'equipeVisitante'),
+			'visitante' => array(self::BELONGS_TO, 'Equipe', 'equipeVisitante'),
 			'codCampeonato0' => array(self::BELONGS_TO, 'Campeonato', 'codCampeonato'),
-			'equipeMandante0' => array(self::BELONGS_TO, 'Equipe', 'equipeMandante'),
+			'mandante' => array(self::BELONGS_TO, 'Equipe', 'equipeMandante'),
 		);
 	}
 

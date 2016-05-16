@@ -29,15 +29,11 @@ class Campeonato extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('codigo, nome, inicio, fim, situacao', 'required'),
 			array('codigo', 'length', 'max'=>5),
 			array('nome', 'length', 'max'=>80),
 			array('situacao', 'length', 'max'=>1),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('codigo, nome, inicio, fim, situacao', 'safe', 'on'=>'search'),
 		);
 	}
@@ -47,8 +43,6 @@ class Campeonato extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'bolaos' => array(self::HAS_MANY, 'Bolao', 'codCampeonato'),
 			'jogos' => array(self::HAS_MANY, 'Jogo', 'codCampeonato'),
