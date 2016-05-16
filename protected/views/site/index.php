@@ -1,7 +1,7 @@
 <?php if($qtdOutros>0): ?>
   <?php if($qtdInscritos>0): ?>
     <div class="uk-alert">
-      Existe<?=HView::hasPlural($qtdOutros)?> mais <?=$qtdOutros?> oportunidade<?=HView::hasPlural($qtdOutros)?>
+      Existe<?=HView::hasPlural($qtdOutros,'m')?> mais <?=$qtdOutros?> oportunidade<?=HView::hasPlural($qtdOutros)?>
       de ganhar.
       <?=CHtml::link('Participe <b>\</b>o<b>/</b>','#!',[
         'class'=>'uk-button uk-button-success',
@@ -12,6 +12,7 @@
       <a href="#!" class="uk-close uk-close-alt uk-float-right" onclick="$(this).parent().slideUp();"></a>
       <?php $this->renderPartial('_outrosBoloes',['boloes'=>$outrosBoloes]); ?>
     </div>
+    <br>
   <?php else: ?>
     <?php $this->renderPartial('_outrosBoloes',['boloes'=>$outrosBoloes]); ?>
   <?php endif; ?>

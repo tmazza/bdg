@@ -102,4 +102,18 @@ class Campeonato extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function jogosPorDia(){
+		$dias = [];
+		foreach ($this->jogos as $j) {
+			list($dia,$mes,$ano) = explode('-',date('d-m-Y',strtotime($j->data)));
+			$key = mktime(0,0,0,$mes,$dia,$ano);
+			if(!isset($dias[$key]))
+				$dias[$key] = [];
+			$dias[$key][] = $j;
+		}
+		ksort($dias);
+		return $dias;
+	}
+
 }

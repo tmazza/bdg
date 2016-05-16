@@ -12,6 +12,10 @@
  */
 class Bolao extends CActiveRecord
 {
+
+	const TipoPago = 1;
+	const TipoAberto = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -41,6 +45,7 @@ class Bolao extends CActiveRecord
 	{
 		return array(
 			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)'],
+			'campeonato'=>[self::BELONGS_TO,'Campeonato','codCampeonato'],
 		);
 	}
 

@@ -1,4 +1,4 @@
 <div class="uk-panel uk-panel-box">
-  <?=$bolao->nome?>
+  <?=CHtml::link($bolao->nome,$this->createUrl('/bolao/index',['id'=>$bolao->idBolao]))?>
 </div>
 <br>
