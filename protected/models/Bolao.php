@@ -102,5 +102,17 @@ class Bolao extends CActiveRecord
 		];
 	}
 
+	/**
+	 * Define o horário de fechamento de acordo com o lista de $jogos e o prazo
+	 * definido para o bolão
+	 */
+	public function getHoraFechamento($jogos){
+		$menor = false;
+		foreach ($jogos as $j) {
+			if(!$menor || strtotime($j->data) < $menor)
+				$menor = $j->data;
+		}
+		return strtotime($menor) - ($this->prazo * 60);
+	}
 
 }

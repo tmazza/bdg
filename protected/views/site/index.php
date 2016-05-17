@@ -1,9 +1,9 @@
 <?php if($qtdOutros>0): ?>
   <?php if($qtdInscritos>0): ?>
     <div class="uk-alert">
-      Existe<?=HView::hasPlural($qtdOutros,'m')?> mais <?=$qtdOutros?> oportunidade<?=HView::hasPlural($qtdOutros)?>
+      Você tem mais <?=$qtdOutros?> oportunidade<?=HView::hasPlural($qtdOutros)?>
       de ganhar.
-      <?=CHtml::link('Participe <b>\</b>o<b>/</b>','#!',[
+      <?=CHtml::link('Participe','#!',[
         'class'=>'uk-button uk-button-success',
         'onClick'=>'$("#outros-boloes").slideDown(0);',
       ])?>

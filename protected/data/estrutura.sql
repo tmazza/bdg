@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2016 at 04:44 PM
+-- Generation Time: May 17, 2016 at 03:06 PM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `jogo` (
   `data` datetime NOT NULL,
   `equipeMandante` int(11) NOT NULL,
   `equipeVisitante` int(11) NOT NULL,
-  `golsMandate` int(2) DEFAULT NULL,
+  `golsMandante` int(2) DEFAULT NULL,
   `golsVisitante` int(2) DEFAULT NULL,
   `vencedor` char(1) DEFAULT NULL,
   PRIMARY KEY (`idJogo`),
@@ -89,6 +89,25 @@ CREATE TABLE IF NOT EXISTS `jogo` (
   KEY `fk_jogo_equipeMandante` (`equipeMandante`),
   KEY `fk_jogo_equipeVisitante` (`equipeVisitante`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `palpite`
+--
+
+CREATE TABLE IF NOT EXISTS `palpite` (
+  `idUsuario` int(11) NOT NULL,
+  `idBolao` int(11) NOT NULL,
+  `idJogo` int(11) NOT NULL,
+  `golsMandante` int(2) NOT NULL,
+  `golsVisitante` int(2) NOT NULL,
+  `vencedor` char(1) DEFAULT NULL,
+  `pontos` int(2) DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`,`idBolao`,`idJogo`),
+  KEY `fk_palpite_bolao` (`idBolao`),
+  KEY `fk_palpite_jogo` (`idJogo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -197,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `data` int(11) NOT NULL,
   `ip` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -230,6 +249,14 @@ ALTER TABLE `jogo`
   ADD CONSTRAINT `fk_jogo_campeonato` FOREIGN KEY (`codCampeonato`) REFERENCES `campeonato` (`codigo`),
   ADD CONSTRAINT `fk_jogo_equipeMandante` FOREIGN KEY (`equipeMandante`) REFERENCES `equipe` (`id`),
   ADD CONSTRAINT `fk_jogo_equipeVisitante` FOREIGN KEY (`equipeVisitante`) REFERENCES `equipe` (`id`);
+
+--
+-- Constraints for table `palpite`
+--
+ALTER TABLE `palpite`
+  ADD CONSTRAINT `fk_palpite_jogo` FOREIGN KEY (`idJogo`) REFERENCES `jogo` (`idJogo`),
+  ADD CONSTRAINT `fk_palpite_bolao` FOREIGN KEY (`idBolao`) REFERENCES `bolao` (`idBolao`),
+  ADD CONSTRAINT `fk_palpite_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `pedido`

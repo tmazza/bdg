@@ -43,9 +43,16 @@ class Campeonato extends CActiveRecord
 	 */
 	public function relations()
 	{
+		$inicioDoDiaDeHoje = date('Y-m-d H:i:s',mktime(0,0,0,date('m'),date('d'),date('Y')));
 		return array(
 			'bolaos' => array(self::HAS_MANY, 'Bolao', 'codCampeonato'),
 			'jogos' => array(self::HAS_MANY, 'Jogo', 'codCampeonato'),
+			'jogosEmAberto' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
+				'condition'=>"data > '{$inicioDoDiaDeHoje}'",
+			],
+			'jogosFechados' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
+				'condition'=>"data <= '{$inicioDoDiaDeHoje}'",
+			],
 		);
 	}
 
@@ -64,35 +71,6 @@ class Campeonato extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('codigo',$this->codigo,true);
-		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('inicio',$this->inicio,true);
-		$criteria->compare('fim',$this->fim,true);
-		$criteria->compare('situacao',$this->situacao,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
@@ -103,9 +81,29 @@ class Campeonato extends CActiveRecord
 		return parent::model($className);
 	}
 
-	public function jogosPorDia(){
+	public function jogosNesteDia($dia){
+		list($d,$m,$y) = [date('d',$dia),date('m',$dia),date('Y',$dia)];
+		return Jogo::model()->findAll([
+			'condition' => "codCampeonato = '{$this->codigo}' " .
+							"AND data >= '{$y}-{$m}-{$d} 00:00:00' ".
+							"AND data <= '{$y}-{$m}-{$d} 23:59:59'",
+		]);
+	}
+
+	public function jogosPorDiaFechados(){
+		return $this->jogosPorDia($this->jogosFechados);
+	}
+
+	public function jogosPorDiaEmAberto(){
+		return $this->jogosPorDia($this->jogosEmAberto);
+	}
+
+	/**
+	 * Agrupa lista de jogos por dia
+	 */
+	public function jogosPorDia($jogos){
 		$dias = [];
-		foreach ($this->jogos as $j) {
+		foreach ($jogos as $j) {
 			list($dia,$mes,$ano) = explode('-',date('d-m-Y',strtotime($j->data)));
 			$key = mktime(0,0,0,$mes,$dia,$ano);
 			if(!isset($dias[$key]))
