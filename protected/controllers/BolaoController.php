@@ -8,9 +8,9 @@ class BolaoController extends MainController {
 
   private function setMenuLateral($bolao){
     $this->menuLateral = [
-      ['index','Jogos em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])],
-      ['fechado','Finalizados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])],
-      ['classificacao','Classificação','#!'],
+      ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])],
+      ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])],
+      ['classificacao','Ranking','#!'],
     ];
   }
 
