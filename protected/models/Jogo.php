@@ -8,7 +8,7 @@
  * @property integer $idJogo
  * @property integer $equipeMandante
  * @property integer $equipeVisitante
- * @property integer $golsMandate
+ * @property integer $golsMandante
  * @property integer $golsVisitante
  * @property string $vencedor
  *
@@ -34,10 +34,10 @@ class Jogo extends CActiveRecord
 	{
 		return array(
 			array('codCampeonato, equipeMandante, equipeVisitante, data', 'required'),
-			array('equipeMandante, equipeVisitante, golsMandate, golsVisitante,numJogo', 'numerical', 'integerOnly'=>true),
+			array('equipeMandante, equipeVisitante, golsMandante, golsVisitante,numJogo', 'numerical', 'integerOnly'=>true),
 			array('codCampeonato', 'length', 'max'=>5),
 			array('vencedor', 'length', 'max'=>1),
-			array('codCampeonato, idJogo, equipeMandante, equipeVisitante, golsMandate, golsVisitante, vencedor', 'safe', 'on'=>'search'),
+			array('codCampeonato, idJogo, equipeMandante, equipeVisitante, golsMandante, golsVisitante, vencedor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,7 +63,7 @@ class Jogo extends CActiveRecord
 			'idJogo' => 'Id Jogo',
 			'equipeMandante' => 'Equipe Mandante',
 			'equipeVisitante' => 'Equipe Visitante',
-			'golsMandate' => 'Gols Mandate',
+			'golsMandante' => 'Gols Mandate',
 			'golsVisitante' => 'Gols Visitante',
 			'vencedor' => 'Vencedor',
 		);
@@ -79,4 +79,18 @@ class Jogo extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getGolsPalpiteUserBolao($bolao){
+		$palpite = Palpite::model()->findByPk([
+			'idBolao'=>$bolao->idBolao,
+			'idUsuario'=>Yii::app()->user->id,
+			'idJogo'=>$this->idJogo,
+		]);
+		if(is_null($palpite)){
+			return [null,null];
+		} else {
+			return [$palpite->golsMandante,$palpite->golsVisitante];
+		}
+	}
+
 }

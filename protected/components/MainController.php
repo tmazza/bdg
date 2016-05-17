@@ -16,6 +16,9 @@ class MainController extends CController  {
     public $pagPalavras = '';
     public $user = false;
 
+
+    public $menuLateral = [];
+
     protected function beforeAction($action) {
         $this->setUser();
         $this->addScripts();
@@ -34,6 +37,7 @@ class MainController extends CController  {
     }
 
     private function addScripts(){
+      $this->assetsDir = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.webroot'), false, -1, YII_DEBUG ? true : null);
       if (Yii::app()->request->isAjaxRequest) {
         Yii::app()->clientScript->scriptMap['jquery.js'] = false;
         Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
@@ -41,7 +45,6 @@ class MainController extends CController  {
         Yii::app()->clientScript->scriptMap['jquery-ui.min.js'] = false;
       } else {
         Yii::app()->clientScript->registerCoreScript('jquery');
-        $this->assetsDir = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.webroot'), false, -1, YII_DEBUG ? true : null);
       }
     }
 
