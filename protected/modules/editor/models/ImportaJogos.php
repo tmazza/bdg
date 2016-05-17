@@ -39,6 +39,7 @@ class ImportaJogos extends CFormModel {
       if(count($coluna) == count($partes)){
         $lista[] = [
           'NUM'  => isset($posicao['NUM']) ? $coluna[$posicao['NUM']] : $count,
+          'RODADA'  => isset($posicao['RODADA']) ? (int)$coluna[$posicao['RODADA']] : null,
           'DATA' => $coluna[$posicao['DATA']],
           'HORA' => $coluna[$posicao['HORA']],
           'CASA' => $coluna[$posicao['CASA']],

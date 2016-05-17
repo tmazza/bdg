@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2016 at 04:38 PM
+-- Generation Time: May 17, 2016 at 10:58 PM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `bolao` (
   `prazo` int(5) NOT NULL,
   PRIMARY KEY (`idBolao`),
   KEY `fk_bolao_campeonato` (`codCampeonato`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `jogo` (
   `idJogo` int(11) NOT NULL AUTO_INCREMENT,
   `numJogo` int(11) DEFAULT NULL,
   `data` datetime NOT NULL,
+  `rodada` int(11) DEFAULT NULL,
   `equipeMandante` int(11) NOT NULL,
   `equipeVisitante` int(11) NOT NULL,
   `golsMandante` int(2) DEFAULT NULL,
@@ -107,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `jogo` (
   KEY `fk_jogo_campeonato` (`codCampeonato`),
   KEY `fk_jogo_equipeMandante` (`equipeMandante`),
   KEY `fk_jogo_equipeVisitante` (`equipeVisitante`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `social` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 -- --------------------------------------------------------
 

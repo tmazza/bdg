@@ -1,8 +1,9 @@
 <h3>Jogos identificados <div class="uk-badge"><?=count($jogos)?></div></h3>
 <table class="uk-table">
-  <tr><th>Nº<br>jogo</th><th>Data</th><th>Hora</th><th>Casa</th><th>Visitante</th></tr>
+  <tr><th>Rodada</th><th>Nº<br>jogo</th><th>Data</th><th>Hora</th><th>Casa</th><th>Visitante</th></tr>
   <?php foreach ($jogos as $k=>$j): ?>
     <tr>
+      <td><?=$j['RODADA'] ?></td>
       <td><?=$j['NUM'] ?></td>
       <td><?=$j['DATA']?></td>
       <td><?=$j['HORA']?></td>

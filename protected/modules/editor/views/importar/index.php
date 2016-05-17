@@ -14,7 +14,7 @@
         <div class="uk-alert">
           <ul>
             <li>Variáveis obrigatórias: <code>DATA</code>,<code>HORA</code>,<code>CASA</code>,<code>VISITANTE</code></li>
-            <li>Opcionais: <code>NUM</code> (se não informado será utilzado o número da linha)</li>
+            <li>Opcionais: <code>NUM</code> (se não informado será utilzado o número da linha), <code>RODADA</code></li>
             <li>Descartar colunas: <code>-</code></li>
             <br>
             <li>Formato para data d/m. Formato para hora H:i</li>

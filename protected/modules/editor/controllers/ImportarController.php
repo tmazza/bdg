@@ -51,6 +51,7 @@ class ImportarController extends EditorController {
           $model->equipeVisitante = $j['VISITANTE'];
           $model->data = $dateTime;
           $model->numJogo = $j['NUM'];
+          $model->rodada = $j['RODADA'];
           $ok = $model->save() ? $ok : false;
 
         }
