@@ -27,7 +27,7 @@ class TaskCommand extends CConsoleCommand
       $id = 'BRA16';
       $lastHash = $this->getLastPage($id);
       $html = $this->parserHTML->file_get_html('http://www.cbf.com.br/competicoes/brasileiro-serie-a/alteracoes-de-jogos/2016');
-      $hash = hash('sha512',$html->plaintext);
+      $hash = hash('sha512',$html->find('.col-md-9',0)->plaintext);
 
       if($lastHash == $hash){
         $this->saveLog("{$id} Sem alterações");
