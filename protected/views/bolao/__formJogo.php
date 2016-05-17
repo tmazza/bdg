@@ -25,7 +25,7 @@
           </span>
           <input value="<?=$golsMandante?>" name='<?=$j->idJogo?>[casa]' style="width:30px;text-align:center;" numerical />
         </td>
-        <td class="uk-text-center uk-hidden-small" style="width:8px;">x</td>
+        <td class="uk-text-center uk-hidden-small" style="width:8px;background:#eee;">x</td>
         <td style="width:;" class="uk-text-left">
           <input value="<?=$golsVisitante?>" name='<?=$j->idJogo?>[visi]' style="width:30px;text-align:center;" numerical />
           <span class="uk-hidden-small">

@@ -4,6 +4,7 @@ foreach ($jogosPorDia as $dia => $jogos) {
   $this->renderPartial('_jogosFechados',[
     'dia'=>$dia,
     'jogos'=>$jogos,
+    'bolao'=>$bolao,
   ]);
 }
 ?>

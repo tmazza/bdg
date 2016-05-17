@@ -93,4 +93,17 @@ class Jogo extends CActiveRecord
 		}
 	}
 
+	public function getPontosObtidos($bolao){
+		$palpite = Palpite::model()->findByPk([
+			'idBolao'=>$bolao->idBolao,
+			'idUsuario'=>Yii::app()->user->id,
+			'idJogo'=>$this->idJogo,
+		]);
+		if(is_null($palpite)){
+			return '-';
+		} else {
+			return $palpite->pontos;
+		}
+	}
+
 }

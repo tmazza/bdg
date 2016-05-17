@@ -25,21 +25,29 @@ $fechamento = $bolao->getHoraFechamento($jogos);
         'dia'=>$dia,
         'bolao'=>$bolao,
       ]);?>
+      <br>
       <?php
-      echo CHtml::ajaxSubmitButton('Atualizar aposta',$this->createUrl('/bolao/salvaPalpite'),[
+      echo CHtml::ajaxSubmitButton('Atualizar palpite',$this->createUrl('/bolao/salvaPalpite'),[
         'beforeSend'=>"js:function(){
-          $('#dia-{$dia}').html('<i class=\'uk-icon uk-icon-spin uk-icon-spinner\'></i> Atualizando.');
+          $('#dia-{$dia}').find('input').prop('disabled','1');
+          var icon = '<i class=\'uk-icon uk-icon-spin uk-icon-spinner\'></i>';
+          $('#status-{$dia}').html('<div class=\'uk-alert\'>'+icon+' Atualizando aguarde...</div>');
         }",
         'success'=>"js:function(html){
             $('#dia-{$dia}').html(html);
             var icon = '<i class=\'uk-icon uk-icon-check\'></i>';
-            $('#dia-{$dia}').append('<div class=\'uk-alert uk-alert-success\'>'+icon+' Atualizado.</div>');
+            $('#status-{$dia}').html('<div class=\'uk-alert uk-alert-success\'>'+icon+' Palpite atualizado.</div>');
+        }",
+        'error'=>"js:function(){
+            var icon = '<i class=\'uk-icon uk-icon-times\'></i>';
+            $('#status-{$dia}').html('<div class=\'uk-alert uk-alert-danger\'>'+icon+' Erro ao salvar palpite. Atualize a página e tente novamente.</div>');
         }",
       ],[
         'id'=>'btn-dia-'.$dia,
         'class'=>'uk-button uk-button-primary',
         'style'=>'color:white',
       ]);?>
+      <div id='status-<?=$dia?>' class="uk-float-right"></div>
     <?=CHtml::endForm();?>
   </div>
 </div>

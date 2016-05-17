@@ -91,7 +91,7 @@ class Campeonato extends CActiveRecord
 	}
 
 	public function jogosPorDiaFechados(){
-		return $this->jogosPorDia($this->jogosFechados);
+		return $this->jogosPorDia($this->jogosFechados,false);
 	}
 
 	public function jogosPorDiaEmAberto(){
@@ -101,7 +101,7 @@ class Campeonato extends CActiveRecord
 	/**
 	 * Agrupa lista de jogos por dia
 	 */
-	public function jogosPorDia($jogos){
+	public function jogosPorDia($jogos,$ascendente=true){
 		$dias = [];
 		foreach ($jogos as $j) {
 			list($dia,$mes,$ano) = explode('-',date('d-m-Y',strtotime($j->data)));
@@ -110,7 +110,11 @@ class Campeonato extends CActiveRecord
 				$dias[$key] = [];
 			$dias[$key][] = $j;
 		}
-		ksort($dias);
+		if($ascendente){
+			ksort($dias);
+		} else {
+			krsort($dias);
+		}
 		return $dias;
 	}
 
