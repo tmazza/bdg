@@ -6,7 +6,18 @@ class SiteController extends MainController {
   }
 
   public function actionIndex(){
-    $this->render('index');
+    if(Yii::app()->user->isGuest){
+      # TODO: não redirecionar. Criar página de apresentação.
+      $this->redirect($this->createUrl('/site/login'));
+    } else {
+      $outrosBoloes = Bolao::model()->ativo()->userNaoInscrito()->findAll();
+      $this->render('index',[
+        'outrosBoloes'=>$outrosBoloes,
+        'qtdOutros'=>count($outrosBoloes),
+        'boloesInscritos'=>$this->user->boloesInscritos,
+        'qtdInscritos'=>count($this->user->boloesInscritos),
+      ]);
+    }
   }
 
   public function actionLogin($rt=false) {
@@ -16,7 +27,7 @@ class SiteController extends MainController {
         $model->attributes = $_POST['LoginForm'];
         if ($model->validate() && $model->login()) {
             User::saveLogin();
-            HView::finf('Olá ' . CHtml::link(Yii::app()->user->nome,$this->createUrl('/site/index')));
+            HView::finf('Olá ' . Yii::app()->user->nome,$this->createUrl('/site/index'));
             if($rt !== false){
               $this->redirect($this->createUrl(base64_decode($rt)));
             } else {
@@ -55,11 +66,10 @@ class SiteController extends MainController {
                     $eauth->cancel();
                 }
             }
-            // Something went wrong, redirect to login page
             $this->redirect(array('/site/login'));
         } catch (EAuthException $e) {
-            Yii::app()->user->setFlash('error', 'EAuthException: '.$e->getMessage());         // save authentication error to session
-            $eauth->redirect($eauth->getCancelUrl());      // close popup window and redirect to cancelUrl
+            Yii::app()->user->setFlash('error', 'EAuthException: '.$e->getMessage()); // save authentication error to session
+            $eauth->redirect($eauth->getCancelUrl()); // close popup window and redirect to cancelUrl
         }
     }
   }

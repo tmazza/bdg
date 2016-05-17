@@ -46,7 +46,11 @@ class User extends CActiveRecord
 	public function relations()
 	{
 		return array(
-			'logins' => array(self::HAS_MANY,'UserLogin','user_id'),
+			'logins' => [self::HAS_MANY,'UserLogin','user_id'],
+			'boloesInscritos' => [self::MANY_MANY,'Bolao','user_bolao(idUsuario,idBolao)',
+				'condition'=>'boloesInscritos_boloesInscritos.status='.UserBolao::StatusAtivo,
+				'index'=>'idBolao',
+			],
 		);
 	}
 
@@ -81,7 +85,7 @@ class User extends CActiveRecord
 	 * @access public
 	 * @return User
 	 */
-	public function findByEmail($email){
+	public static function findByEmail($email){
 		return self::model()->findByAttributes(array('email' => $email));
 	}
 

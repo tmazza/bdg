@@ -13,5 +13,6 @@ if(YII_DEBUG){
 }
 
 require_once("protected/extensions/yii-ses/vendor/autoload.php");
+require_once("protected/modules/pg/vendor/sdk-pg/source/PagSeguroLibrary/PagSeguroLibrary.php");
 require_once($yii);
 Yii::createWebApplication($config)->run();

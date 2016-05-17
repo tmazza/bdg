@@ -72,7 +72,9 @@ class Equipe extends CActiveRecord
 
 	public function imagemBrasao($size='M',$htmlOptions=[]){
 		$style = isset($htmlOptions['style']) ? $htmlOptions['style'] : '';
-		if($size == 'P')
+		if($size == 'PP')
+			$style .= 'width:15px;';
+		elseif($size == 'P')
 			$style .= 'width:30px;';
 		elseif($size == 'M')
 			$style .= 'width:45px;';
