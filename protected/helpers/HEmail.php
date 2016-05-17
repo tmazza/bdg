@@ -25,5 +25,8 @@ class HEmail {
     self::templateSimples(Yii::app()->params['adminEmail'],$assunto,$msg);
   }
 
+  public static function toAdminNoTemplate($assunto,$msg){
+    Yii::app()->ses->sendEmail(Yii::app()->params['adminEmail'],$assunto,$msg);
+  }
 
 }
