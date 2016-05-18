@@ -25,11 +25,16 @@
           } ?>
         </ul>
         <?php if($this->tabelaBrasileirao): ?>
-          <div class="uk-hidden-small">
-            <br><br>
-            <h3>Tabela do brasileirão</h3>
-            <?php $this->widget('application.widgets.TabelaBrasileirao.TabelaBrasileirao'); ?>
-          </div>
+          <br><br><hr><br>
+          <?php
+          echo CHtml::ajaxLink('Ver tabela do Brasileirão',$this->createUrl('/bolao/loadTabBra'),[
+            'success'=>'js:function(html){ $("#ver-tabela").html(html); }',
+          ],[
+            'onclick'=>'$(this).slideUp();',
+            'class'=>'uk-hidden-small uk-button',
+          ]);
+          ?>
+          <div id='ver-tabela' data-uk-sticky="{top:5,boundary: true}"></div>
         <?php endif;?>
       </div>
     </div>

@@ -16,6 +16,7 @@ class BolaoController extends MainController {
 
   public function actionIndex($id){
     $bolao = $this->getBolao($id);
+    $this->tabelaBrasileirao=true;
     $this->setMenuLateral($bolao);
     $this->render('index',['bolao'=>$bolao]);
   }
@@ -34,7 +35,7 @@ class BolaoController extends MainController {
       $userBolao->idBolao = (int)$id;
       $userBolao->status = UserBolao::StatusPendente;
       if($userBolao->save()){
-        HView::finf("Bem vindo(a)");
+        HView::finf("Bem-vindo(a).");
         $this->redirect($this->createUrl('/bolao/index',['id'=>$id]));
       }
     }
@@ -50,7 +51,7 @@ class BolaoController extends MainController {
       $userBolao->idBolao = (int)$id;
       $userBolao->status = UserBolao::StatusAtivo;
       if($userBolao->save()){
-        HView::finf("Bem vindo(a)");
+        HView::finf("Bem-vindo(a).");
         $this->redirect($this->createUrl('/bolao/index',['id'=>$id]));
       }
     }
@@ -110,6 +111,10 @@ class BolaoController extends MainController {
     }
   }
 
+  public function actionLoadTabBra(){
+    $this->renderPartial('/bolao/_tabelaBrasileirao');
+  }
+
   private function getBolao($id){
     $bolao = Bolao::model()->findByPk((int)$id);
     if(is_null($bolao) || !$this->isUserInscritoNoBolao($bolao)){
@@ -122,5 +127,6 @@ class BolaoController extends MainController {
   private function isUserInscritoNoBolao($bolao){
       return in_array($bolao->idBolao,array_keys($this->user->boloesInscritos));
   }
+
 
 }
