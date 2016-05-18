@@ -11,7 +11,8 @@
 class UserBolao extends CActiveRecord
 {
 	const StatusAtivo = 1;
-	const StatusInativo = 2;
+	const StatusPendente = 2;
+	const StatusInativo = 3;
 
 	/**
 	 * @return string the associated database table name

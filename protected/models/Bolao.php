@@ -115,4 +115,15 @@ class Bolao extends CActiveRecord
 		return strtotime($menor) - ($this->prazo * 60);
 	}
 
+	/**
+	 *
+	 */
+	public function isUserPendente(){
+		$userBolao = UserBolao::model()->findByPk([
+			'idUsuario'=>Yii::app()->user->id,
+			'idBolao'=>$this->idBolao,
+		]);
+		return is_null($userBolao) || $userBolao->status == UserBolao::StatusPendente;
+	}
+
 }

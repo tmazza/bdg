@@ -26,6 +26,22 @@ class BolaoController extends MainController {
     $this->render('fechado',['bolao'=>$bolao]);
   }
 
+  public function actionInscricaoPaga($id){
+    $bolao = Bolao::model()->findByPk((int)$id);
+    if(!is_null($bolao) && $bolao->tipoInscricao == Bolao::TipoPago){
+      $userBolao = new UserBolao();
+      $userBolao->idUsuario = $this->user->id;
+      $userBolao->idBolao = (int)$id;
+      $userBolao->status = UserBolao::StatusPendente;
+      if($userBolao->save()){
+        HView::finf("Bem vindo(a)");
+        $this->redirect($this->createUrl('/bolao/index',['id'=>$id]));
+      }
+    }
+    HView::ferr("Ops. Algo deu errado. Tente novamente.");
+    $this->redirect($this->createUrl('/site/index'));
+  }
+
   public function actionInscricaoGratuita($id){
     $bolao = Bolao::model()->findByPk((int)$id);
     if(!is_null($bolao) && $bolao->tipoInscricao == Bolao::TipoAberto){

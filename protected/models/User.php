@@ -48,7 +48,7 @@ class User extends CActiveRecord
 		return array(
 			'logins' => [self::HAS_MANY,'UserLogin','user_id'],
 			'boloesInscritos' => [self::MANY_MANY,'Bolao','user_bolao(idUsuario,idBolao)',
-				'condition'=>'boloesInscritos_boloesInscritos.status='.UserBolao::StatusAtivo,
+				'condition'=>'boloesInscritos_boloesInscritos.status IN ('.UserBolao::StatusAtivo.','.UserBolao::StatusPendente.')',
 				'index'=>'idBolao',
 			],
 		);

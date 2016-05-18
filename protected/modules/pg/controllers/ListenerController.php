@@ -10,6 +10,10 @@ class ListenerController extends PgController {
       Yii::log("Requisição em " . date("d/m/Y H:i:s"), 'pg', 'pg.DefaultController.listener');
 
       $nc = 'notificationCode'; $nt = 'notificationType';
+
+      // $_POST[$nc] = '0F6FAD8421C621C653E554D30F8B8CB32265';
+      // $_POST[$nt] = 'transaction';
+
       $code = (isset($_POST[$nc]) && trim($_POST[$nc]) !== "" ? trim($_POST[$nc]) : null);
       $type = (isset($_POST[$nt]) && trim($_POST[$nt]) !== "" ? trim($_POST[$nt]) : null);
 
@@ -70,30 +74,33 @@ class ListenerController extends PgController {
             $transaction = Yii::app()->db->beginTransaction();
 
             $pedido->status = Pedido::Statuspago;
-            $userBolao = new UserBolao();
-            $userBolao->idUsuario = $pedido->idUsuario;
-            $userBolao->idBolao = $pedido->idBolao;
-            $userBolao->status = UserBolao::StatusAtivo;
+            $userBolao = UserBolao::model()->findByPk([
+              'idUsuario'=>$pedido->idUsuario,
+              'idBolao'=>$pedido->idBolao,
+            ]);
 
-            if($userBolao->save()){
-              HEmail::toAdmin("Pagamento aprovado. Novo usuário.");
-              # Enviar email para usuário
-              $user = User::model()->findByPk((int)$pedido->idUsuario);
-              HEmail::comTemplate($user->email,"Conta ativada","Sua conta no Bolão do gordo foi ativada.","_emailContaAtivada");
-              # Atualiza status do pedido
-              if($pedido->update(['status'])){
-                $transaction->commit();
-              } else {
-                HEmail::toAdmin("Pedido: {$pedido->id}. Ao atualizar pedido.","**Erro ao processar pagamento de usuário.");
-                $transaction->rollback();
-              }
+            if(is_null($userBolao)){
+              HEmail::toAdmin("Pedido {$pedido->id}: registro de user_bolao não encontrado.");
             } else {
-              $transaction->rollback();
-              HEmail::toAdmin("Pedido: {$pedido->id}. Ao salvar user_bolao","**Erro ao processar pagamento de usuário");
+              $userBolao->status = UserBolao::StatusAtivo;
+              if($userBolao->update(['status'])){
+                HEmail::toAdmin("Pagamento aprovado. Novo usuário.");
+                # Enviar email para usuário
+                $user = User::model()->findByPk((int)$pedido->idUsuario);
+                HEmail::comTemplate($user->email,"Conta ativada","Sua conta no Bolão do gordo foi ativada.","_emailContaAtivada");
+                # Atualiza status do pedido
+                if($pedido->update(['status'])){
+                  $transaction->commit();
+                } else {
+                  HEmail::toAdmin("Pedido: {$pedido->id}. Ao atualizar pedido.","**Erro ao processar pagamento de usuário.");
+                  $transaction->rollback();
+                }
+              } else {
+                $transaction->rollback();
+                HEmail::toAdmin("Pedido: {$pedido->id}. Ao salvar user_bolao","**Erro ao processar pagamento de usuário");
+              }
+              $pedido->update(['status']);
             }
-
-            # TODO: inserir registro em user_bolao
-            $pedido->update(['status']);
           }
       }
     }
