@@ -137,5 +137,6 @@ return array(
         'domain' => $__dominio,
         'bucketId' => $__s3BucketId,
         'bucketEndPoint' => $__s3BucketEndPoint,
+        'hashTrocaSenha' => $__hashTrocaSenha,
     ),
 );
