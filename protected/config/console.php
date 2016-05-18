@@ -5,6 +5,7 @@ return [
   'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'import' => [
       'application.models.*',
+      'application.commands.*',
       'application.helpers.*',
       'application.vendor.SimpleHTMLDOM.*',
       'application.extensions.yii-ses.*',

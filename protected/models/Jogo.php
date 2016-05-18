@@ -19,6 +19,11 @@
  */
 class Jogo extends CActiveRecord
 {
+
+	const StatusAguardando = 0;
+	const StatusEmAberto = 1;
+	const StatusFechado = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -36,7 +41,7 @@ class Jogo extends CActiveRecord
 			array('codCampeonato, equipeMandante, equipeVisitante, data', 'required'),
 			array('equipeMandante, equipeVisitante, golsMandante, golsVisitante,numJogo', 'numerical', 'integerOnly'=>true),
 			array('codCampeonato', 'length', 'max'=>5),
-			array('vencedor', 'length', 'max'=>1),
+			array('vencedor,status', 'length', 'max'=>1),
 			array('codCampeonato, idJogo, equipeMandante, equipeVisitante, golsMandante, golsVisitante, vencedor', 'safe', 'on'=>'search'),
 		);
 	}
@@ -103,6 +108,14 @@ class Jogo extends CActiveRecord
 			return '-';
 		} else {
 			return $palpite->pontos;
+		}
+	}
+
+	public function getGolsFechado(){
+		if($this->status == self::StatusFechado){
+			return [$this->golsMandante,$this->golsVisitante];
+		} else {
+			return [null,null];
 		}
 	}
 

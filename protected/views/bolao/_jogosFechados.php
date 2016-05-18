@@ -10,6 +10,9 @@
         <th class="uk-text-center-small">Visitante</th>
       </tr>
       <?php foreach ($jogos as $j): ?>
+        <?php
+        list($jGolsMandante,$jGolsVisitante) = $j->getGolsFechado();
+        ?>
         <tr style="border-top:4px solid #eee;important;">
           <td style="width:40px;" class="uk-hidden-small"><?=substr($j->data,11,5)?></td>
           <td class="uk-text-right">
@@ -24,13 +27,13 @@
               </span>
             </span>
             <span class='uk-badge uk-text-large' style="background:#85BAE6">
-              <?=$j->golsMandante;?>
+              <?=is_null($jGolsMandante) ? '' : $jGolsMandante;?>
             </span>
           </td>
           <td class="uk-text-center uk-hidden-small" style="width:8px;background:#eee;">x</td>
           <td style="width:;" class="uk-text-left">
             <span class='uk-badge uk-text-large' style="background:#85BAE6">
-              <?=$j->golsVisitante;?>
+              <?=is_null($jGolsVisitante) ? '' : $jGolsVisitante;?>
             </span>
             <span class="uk-hidden-small">
               <?=$j->visitante->imagemBrasao('P')?>
