@@ -79,10 +79,8 @@ class SenhaController extends MainController {
   }
 
   private function getHash($user){
-    $p1 = hash('sha512','?');
-    $p2 = hash('sha512','?');
-    $p3 = hash('sha512','?');
-    return ($p1 . $p2 . $p3);
+    $fnHash = Yii::app()->params['hashTrocaSenha'];
+    return $fnHash($user);
   }
 
 }
