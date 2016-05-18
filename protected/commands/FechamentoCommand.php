@@ -35,14 +35,12 @@ class FechamentoCommand extends MainCommand
         }
       }
       $this->interpretaJogosEncontrados($id,$jogos);
-      // $this->hashAntigo[$id] = [
-      //   'hash'=>$hash,
-      //   'paginas'=>[],
-      // ];
-      // echo $hash;
-      // $this->setLastPage();
-      // $msg = "{$id} ***  posíveis alterações";
-      // $this->saveLog($msg);
+      $this->hashAntigo[$id] = [
+         'hash'=>$hash,
+         'paginas'=>[],
+      ];
+      $this->setLastPage();
+      $this->saveLog('Alterações processadas');
     }
   }
 
@@ -83,11 +81,20 @@ class FechamentoCommand extends MainCommand
               } elseif($golsVisi != (int)$golsVisi){ # Controle de caracteres não numéricos que zerariam o num gols
                 $erros[] = 'Num gosl visi inválido. IdJogo: ' . $jogo->idJogo;
               } else {
-                $atualizados[]=[$jogo->idJogo=>HView::removeAcentos($jogo->mandante->nome).'x'.HView::removeAcentos($jogo->visitante->nome)];
-                $jogo->golsMandante = (int)$golsCasa;
-                $jogo->golsVisitante = (int)$golsVisi;
-                $jogo->status = Jogo::StatusEmAberto;
-                $jogo->update(['golsMandante','golsVisitante','status']);
+                $comAlteracoes = false;
+                if($jogo->golsMandante != (int)$golsCasa){
+                  $jogo->golsMandante = (int)$golsCasa;
+                  $comAlteracoes = true;
+                }
+                if($jogo->golsVisitante != (int)$golsVisi){
+                  $jogo->golsVisitante = (int)$golsVisi;
+                  $comAlteracoes = true;
+                }
+                if($comAlteracoes){
+                  $jogo->status = Jogo::StatusEmAberto;
+                  $jogo->update(['golsMandante','golsVisitante','status']);
+                  $atualizados[]=[$jogo->idJogo=>HView::removeAcentos($jogo->mandante->nome).'x'.HView::removeAcentos($jogo->visitante->nome)];
+                }
               }
             }
           }
