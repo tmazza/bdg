@@ -5,7 +5,7 @@
       <div id='header'>
         <div class="uk-container uk-container-center">
           <a href="<?=$this->createUrl('/site/index')?>" class="" style="padding:10px 2px;">
-            <?=CHtml::image($this->assetsDir.'/images/logo-2.png','Bolão do Gordo',['style'=>'width:140px;']);?>
+            <?=CHtml::image($this->assetsDir.'/images/logo.png','Bolão do Gordo',['style'=>'width:140px;']);?>
           </a>
           <div class="uk-float-right uk-margin-top">
             <?php if($this->user): ?>
