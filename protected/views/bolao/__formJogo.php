@@ -1,8 +1,8 @@
 <div id='dia-<?=$dia?>'>
-  <table class="uk-table">
+  <table class="uk-table uk-table-condensed">
     <tr>
       <th class="uk-hidden-small">Horário</th>
-      <th class="uk-text-center-small">Mandante</th>
+      <th class="uk-text-center-small uk-text-right">Mandante</th>
       <th class="uk-hidden-small"></th>
       <th class="uk-text-center-small">Visitante</th>
     </tr>
