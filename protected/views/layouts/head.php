@@ -7,7 +7,7 @@
     <meta name="keywords" content="<?=$this->pagPalavras?>">
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?=Yii::app()->baseUrl;?>/favicon.ico?v1" />
+    <link rel="shortcut icon" href="<?=Yii::app()->baseUrl;?>/favicon.ico?v2"/>
 
     <!-- estilos -->
     <link rel="stylesheet" href="<?=$this->assetsDir;?>/uikit/css/uikit.almost-flat.min.css" />
