@@ -16,7 +16,7 @@ class BolaoController extends MainController {
 
   public function actionIndex($id){
     $bolao = $this->getBolao($id);
-    $this->tabelaBrasileirao=true;
+    $this->tabelaBrasileirao=false;
     $this->setMenuLateral($bolao);
     $this->render('index',['bolao'=>$bolao]);
   }
