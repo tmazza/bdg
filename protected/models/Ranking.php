@@ -1,32 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "alteracao".
+ * This is the model class for table "ranking".
  *
- * The followings are the available columns in table 'alteracao':
- * @property integer $id
- * @property string $codCampeonato
- * @property string $descricao
- * @property integer $numJogo
- * @property string $de
- * @property string $para
- * @property string $motivo
- * @property integer $data
- * @property integer $status
+ * The followings are the available columns in table 'ranking':
+ * @property integer $idBolao
+ * @property integer $idUsuario
+ * @property integer $qtdExatos
+ * @property integer $qtdVencedores
+ * @property integer $pontos
  */
-class Alteracao extends CActiveRecord
+class Ranking extends CActiveRecord
 {
-
-	const StatusAguardando = 1;
-	const StatusFechada = 2;
-
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'alteracao';
+		return 'ranking';
 	}
 
 	/**
@@ -34,12 +25,14 @@ class Alteracao extends CActiveRecord
 	 */
 	public function rules()
 	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
 		return array(
-			array('codCampeonato, numJogo, de, para, data', 'required'),
-			array('numJogo, data, status', 'numerical', 'integerOnly'=>true),
-			array('codCampeonato', 'length', 'max'=>5),
-			array('descricao, motivo', 'safe'),
-			array('id, codCampeonato, descricao, numJogo, de, para, motivo, data, status', 'safe', 'on'=>'search'),
+			array('idBolao, idUsuario', 'required'),
+			array('idBolao, idUsuario, qtdExatos, qtdVencedores, pontos', 'numerical', 'integerOnly'=>true),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('idBolao, idUsuario, qtdExatos, qtdVencedores, pontos', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,6 +41,8 @@ class Alteracao extends CActiveRecord
 	 */
 	public function relations()
 	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
 		return array(
 		);
 	}
@@ -58,15 +53,11 @@ class Alteracao extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'codCampeonato' => 'Cod Campeonato',
-			'descricao' => 'Descricao',
-			'numJogo' => 'Num Jogo',
-			'de' => 'De',
-			'para' => 'Para',
-			'motivo' => 'Motivo',
-			'data' => 'Data',
-			'status' => 'Status',
+			'idBolao' => 'Id Bolao',
+			'idUsuario' => 'Id Usuario',
+			'qtdExatos' => 'Qtd Exatos',
+			'qtdVencedores' => 'Qtd Vencedores',
+			'pontos' => 'Pontos',
 		);
 	}
 
@@ -88,15 +79,11 @@ class Alteracao extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('codCampeonato',$this->codCampeonato,true);
-		$criteria->compare('descricao',$this->descricao,true);
-		$criteria->compare('numJogo',$this->numJogo);
-		$criteria->compare('de',$this->de,true);
-		$criteria->compare('para',$this->para,true);
-		$criteria->compare('motivo',$this->motivo,true);
-		$criteria->compare('data',$this->data);
-		$criteria->compare('status',$this->status);
+		$criteria->compare('idBolao',$this->idBolao);
+		$criteria->compare('idUsuario',$this->idUsuario);
+		$criteria->compare('qtdExatos',$this->qtdExatos);
+		$criteria->compare('qtdVencedores',$this->qtdVencedores);
+		$criteria->compare('pontos',$this->pontos);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,7 +94,7 @@ class Alteracao extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Alteracao the static model class
+	 * @return Ranking the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

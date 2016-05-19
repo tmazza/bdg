@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 18, 2016 at 04:52 PM
+-- Generation Time: May 19, 2016 at 02:30 AM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -151,6 +151,22 @@ CREATE TABLE IF NOT EXISTS `pedido` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ranking`
+--
+
+CREATE TABLE IF NOT EXISTS `ranking` (
+  `idBolao` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `qtdExatos` int(3) NOT NULL DEFAULT '0',
+  `qtdVencedores` int(3) NOT NULL DEFAULT '0',
+  `pontos` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idBolao`,`idUsuario`),
+  KEY `fk_ranking_user` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `seg_authassignment`
 --
 
@@ -285,6 +301,13 @@ ALTER TABLE `palpite`
 ALTER TABLE `pedido`
   ADD CONSTRAINT `fk_pedido_bolao` FOREIGN KEY (`idBolao`) REFERENCES `bolao` (`idBolao`),
   ADD CONSTRAINT `fk_pedido_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `ranking`
+--
+ALTER TABLE `ranking`
+  ADD CONSTRAINT `fk_ranking_bolao` FOREIGN KEY (`idBolao`) REFERENCES `bolao` (`idBolao`),
+  ADD CONSTRAINT `fk_ranking_user` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `seg_authassignment`
