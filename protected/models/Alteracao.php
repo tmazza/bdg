@@ -16,6 +16,11 @@
  */
 class Alteracao extends CActiveRecord
 {
+
+	const StatusAguardando = 1;
+	const StatusFechada = 2;
+
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -29,15 +34,11 @@ class Alteracao extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('codCampeonato, numJogo, de, para, data', 'required'),
 			array('numJogo, data, status', 'numerical', 'integerOnly'=>true),
 			array('codCampeonato', 'length', 'max'=>5),
 			array('descricao, motivo', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('id, codCampeonato, descricao, numJogo, de, para, motivo, data, status', 'safe', 'on'=>'search'),
 		);
 	}
@@ -47,8 +48,6 @@ class Alteracao extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 		);
 	}
