@@ -45,7 +45,7 @@ class Campeonato extends CActiveRecord
 	{
 		$inicioDoDiaDeHoje = date('Y-m-d H:i:s',mktime(0,0,0,date('m'),date('d'),date('Y')));
 		return array(
-			'bolaos' => array(self::HAS_MANY, 'Bolao', 'codCampeonato'),
+			'boloes' => array(self::HAS_MANY, 'Bolao', 'codCampeonato'),
 			'jogos' => array(self::HAS_MANY, 'Jogo', 'codCampeonato'),
 			'jogosEmAberto' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
 				'condition'=>"data > '{$inicioDoDiaDeHoje}'",
@@ -87,6 +87,16 @@ class Campeonato extends CActiveRecord
 			'condition' => "codCampeonato = '{$this->codigo}' " .
 							"AND data >= '{$y}-{$m}-{$d} 00:00:00' ".
 							"AND data <= '{$y}-{$m}-{$d} 23:59:59'",
+		]);
+	}
+
+	public function jogosNesteDiaNaoProcessados($dia){
+		list($d,$m,$y) = [date('d',$dia),date('m',$dia),date('Y',$dia)];
+		return Jogo::model()->findAll([
+			'condition' => "codCampeonato = '{$this->codigo}' " .
+							"AND data >= '{$y}-{$m}-{$d} 00:00:00' ".
+							"AND data <= '{$y}-{$m}-{$d} 23:59:59' ".
+							"AND status != " . Jogo::StatusFechado,
 		]);
 	}
 

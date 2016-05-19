@@ -11,7 +11,12 @@
       </tr>
       <?php $ok = true; ?>
       <?php foreach ($jogos as $j): ?>
-          <tr>
+          <?php
+          if($j->status == Jogo::StatusFechado){
+            $ok = false;
+          }
+          ?>
+          <tr <?=$ok?'':'style="background:#ddd"';?>>
             <td style="width:10px;"><?=$j->rodada?></td>
             <td style="width:150px;"><?=$j->mandante->nome?></td>
             <td style="width:100px;">
@@ -30,11 +35,9 @@
         <tr><td colspan="3">
           <?php if($ok): ?>
             <?=CHtml::submitButton("Processar rodada",['class'=>'uk-button uk-button-primary'])?>
-          <?php else: ?>
-            <div class='uk-alert'>Aguardando resultado de jogo(s)</div>
           <?php endif; ?>
         </td><td></td></tr>
     </table>
   <?=CHtml::endForm();?>
-  <br><br><hr>
+  <br><hr>
 <?php endforeach; ?>

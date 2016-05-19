@@ -71,4 +71,5 @@ class Palpite extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 }
