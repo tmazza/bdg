@@ -45,6 +45,7 @@ class Bolao extends CActiveRecord
 	{
 		return array(
 			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)'],
+			'posicoes'=>[self::HAS_MANY,'Ranking','idBolao','order'=>'pontos DESC,qtdExatos DESC,qtdVencedores DESC'],
 			'campeonato'=>[self::BELONGS_TO,'Campeonato','codCampeonato'],
 		);
 	}

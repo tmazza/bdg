@@ -10,7 +10,7 @@ class BolaoController extends MainController {
     $this->menuLateral = [
       ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])],
       ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])],
-      ['classificacao','Ranking','#!'],
+      ['ranking','Ranking',$this->createUrl('/bolao/ranking',['id'=>$bolao->idBolao])],
     ];
   }
 
@@ -25,6 +25,14 @@ class BolaoController extends MainController {
     $bolao = $this->getBolao($id);
     $this->setMenuLateral($bolao);
     $this->render('fechado',['bolao'=>$bolao]);
+  }
+
+  public function actionRanking($id){
+    $bolao = Bolao::model()->findByPk((int)$id);
+    $this->setMenuLateral($bolao);
+    $this->render('ranking',[
+      'bolao'=>$bolao,
+    ]);
   }
 
   public function actionInscricaoPaga($id){
