@@ -46,7 +46,7 @@ class Campeonato extends CActiveRecord
 		$inicioDoDiaDeHoje = date('Y-m-d H:i:s',mktime(0,0,0,date('m'),date('d'),date('Y')));
 		return array(
 			'bolaos' => array(self::HAS_MANY, 'Bolao', 'codCampeonato'),
-			'jogos' => array(self::HAS_MANY, 'Jogo', 'codCampeonato'),
+			'jogos' => array(self::HAS_MANY, 'Jogo', 'codCampeonato', 'order'=>'data ASC'),
 			'jogosEmAberto' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
 				'condition'=>"data > '{$inicioDoDiaDeHoje}'",
 			],

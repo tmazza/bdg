@@ -40,7 +40,7 @@ class CampeonatoController extends EditorController {
       if(isset($_POST['id'])){
         $jogo = Jogo::model()->findByPk((int)$_POST['id']);
         $jogo->attributes = $_POST;
-        echo $jogo->update(['numJogo','data','equipeMandante','equipeVisitante']) > 0 ? 'OK' : 'NO';
+        echo $jogo->update(['numJogo','data','equipeMandante','equipeVisitante','golsMandante','golsVisitante']) > 0 ? 'OK' : 'NO';
       }
     }
 
