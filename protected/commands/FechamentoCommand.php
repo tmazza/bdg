@@ -82,11 +82,11 @@ class FechamentoCommand extends MainCommand
                 $erros[] = 'Num gosl visi inválido. IdJogo: ' . $jogo->idJogo;
               } else {
                 $comAlteracoes = false;
-                if($jogo->golsMandante != (int)$golsCasa){
+                if(is_null($jogo->golsMandante) || $jogo->golsMandante != (int)$golsCasa){
                   $jogo->golsMandante = (int)$golsCasa;
                   $comAlteracoes = true;
                 }
-                if($jogo->golsVisitante != (int)$golsVisi){
+                if(is_null($jogo->golsVisitante) || $jogo->golsVisitante != (int)$golsVisi){
                   $jogo->golsVisitante = (int)$golsVisi;
                   $comAlteracoes = true;
                 }
