@@ -16,7 +16,7 @@ class HEmail {
    *
    */
   public static function templateSimples($email,$assunto,$msg){
-    Yii::app()->ses->mailer->AddEmbeddedImage(Yii::getPathOfAlias('application').'/webroot/images/logo.png', 'logo');
+    Yii::app()->ses->mailer->AddEmbeddedImage(Yii::getPathOfAlias('application').'/webroot/images/logo-email.png', 'logo');
     self::comTemplate($email,$assunto,$msg);
   }
 
