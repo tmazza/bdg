@@ -39,7 +39,6 @@ class ResultadoController extends EditorController {
       $ok = true;
       foreach ($boloes as $b) {
         $participantes = $b->participantes;
-        echo count($participantes) . '-';
         $pontuacao = []; # Valor que deve ser somado à pontuação de um $user
 
         foreach ($participantes as $u) {
@@ -70,11 +69,8 @@ class ResultadoController extends EditorController {
       }
 
       if($ok){
-        echo 'OK';
-        exit;
-
         HView::fsuc('Ranking atualizado. ' . count($jogosNoDia) . ' jogos processados.');
-        // $transaction->commit();
+        $transaction->commit();
       } else {
         HView::ferr('Erro ao atualizar.');
         $transaction->rollback();
