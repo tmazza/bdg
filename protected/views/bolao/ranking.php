@@ -20,7 +20,8 @@ $posicoes = $bolao->posicoes;
     <?php $count = 0; ?>
     <?php foreach ($posicoes as $p): ?>
       <?php $count++; ?>
-      <tr>
+      <?php $class = $bolao->isInscricaoPendente($p->user->id)  ? 'pendente' : ''; ?>
+      <tr class="<?=$class?>">
         <td><?=$count?>º</td>
         <td><?=CHtml::encode(ucfirst($p->user->nome))?></td>
         <td class="uk-text-right"><?=$p->qtdExatos?></td>
@@ -29,6 +30,7 @@ $posicoes = $bolao->posicoes;
       </tr>
     <?php endforeach; ?>
   </table>
+  <span class="uk-badge pendente uk-margin uk-text-danger">Inscrição não confirmada.</span>
 <?php else: ?>
   <br>
   <div class="uk-alert">

@@ -18,3 +18,8 @@
     padding: 8px !important;
   }
 }
+
+.pendente {
+  color: #d85030;
+  background: #fff1f0;
+}

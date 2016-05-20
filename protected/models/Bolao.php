@@ -124,11 +124,22 @@ class Bolao extends CActiveRecord
 	 *
 	 */
 	public function isUserPendente(){
+		return $this->isInscricaoPendente(Yii::app()->user->id);
+	}
+
+	public function isInscricaoPendente($userId){
 		$userBolao = UserBolao::model()->findByPk([
-			'idUsuario'=>Yii::app()->user->id,
+			'idUsuario'=>$userId,
 			'idBolao'=>$this->idBolao,
 		]);
 		return is_null($userBolao) || $userBolao->status == UserBolao::StatusPendente;
+	}
+
+	public function getInscricao($userId){
+		return UserBolao::model()->findByPk([
+			'idUsuario'=>$userId,
+			'idBolao'=>$this->idBolao,
+		]);
 	}
 
 }

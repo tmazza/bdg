@@ -1,9 +1,15 @@
 <div class="uk-alert uk-alert-danger">
   <a href="#!" class="uk-alert-close uk-close" onclick="$(this).parent().remove()"></a>
   <b>Sua inscrição nesse bolão está pendente.</b>
-  Efeteu o pagamento para ativá-la. <br>
+  Efetue o pagamento até
+  <?php
+  $data = $b->getInscricao(Yii::app()->user->id)->dataInscricao;
+  echo HView::tradDia(date('l, d/m',$data+7*24*60*60));
+  ?>.
   <br>
-      Valor da inscrição:
+  Após esta data suas apostas não serão consideradas enquanto a inscrição não for ativada.
+  <br><br>
+  Valor da inscrição:
   <span class="uk-badge uk-badge-notification uk-badge-success">
     R$ <?=number_format($b->valorInscricao,2,',','.')?>
   </span>
