@@ -76,4 +76,17 @@ class HView {
     ];
   }
 
+  public static function tradDia($str){
+    $replace = [
+      'Sunday' => 'Domingo',
+      'Monday' => 'Segunda-feira',
+      'Tuesday' => 'Terça-feira',
+      'Wednesday' => 'Quarta-feira',
+      'Thursday' => 'Quinta-feira',
+      'Friday' => 'Sexta-feira',
+      'Saturday' => 'Sábado',
+    ];
+    return str_replace(array_keys($replace),array_values($replace),$str);
+  }
+
 }

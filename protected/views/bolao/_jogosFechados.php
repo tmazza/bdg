@@ -1,5 +1,5 @@
 <div class="uk-panel uk-panel-box" >
-  <h4><?=date('d/m/Y',$dia);?></h4>
+  <h4><?=HView::tradDia(date('l, d/m',$dia));?></h4>
   <div>
     <hr>
     <table class="uk-table uk-table-condensed">
@@ -57,13 +57,13 @@
               Sua aposta:
             </div>
             <span class='uk-badge uk-badge-notification uk-text-large' style="background:grey">
-              <?=is_null($golsMandante)?'*':$golsMandante;?>
+              <?=is_null($golsMandante)?'':$golsMandante;?>
             </span>
           </td>
           <td class="uk-text-center uk-hidden-small" style="width:8px;background:#eee;"></td>
           <td style="width:;" class="uk-text-left">
             <span class='uk-badge uk-badge-notification uk-text-large'  style="background:grey">
-              <?=is_null($golsVisitante)?'*':$golsVisitante;?>
+              <?=is_null($golsVisitante)?'':$golsVisitante;?>
             </span>
           </td>
         </tr>

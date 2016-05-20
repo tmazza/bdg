@@ -119,10 +119,14 @@ class Jogo extends CActiveRecord
 			'idUsuario'=>Yii::app()->user->id,
 			'idJogo'=>$this->idJogo,
 		]);
-		if(is_null($palpite)){
-			return '-';
+		if($this->status==Jogo::StatusFechado){
+			if(is_null($palpite)){
+				return '0';
+			} else {
+				return $palpite->pontos;
+			}
 		} else {
-			return $palpite->pontos;
+			return '<small>Aguardando correção</small>';
 		}
 	}
 

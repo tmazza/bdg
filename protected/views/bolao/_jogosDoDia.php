@@ -3,11 +3,11 @@ $fechamento = $bolao->getHoraFechamento($jogos);
 ?>
 <div class="uk-panel uk-panel-box" >
   <h4>
-    <?=date('d/m/Y',$dia);?>
+    <?=HView::tradDia(date('l, d/m',$dia));?>
     <small>
       <div data-uk-tooltip='' class="uk-float-right" title='Após este horário você não poderá salvar os palpites do dia.'>
         <div class="uk-hidden-small">
-          Fecha às <?=date('H:i:s \d\e d/m/Y',$fechamento-1)?>
+          Fecha às <?=HView::tradDia(date('H:i:s \d\e l',$fechamento-1))?>
         </div>
         <div class="uk-visible-small">
           Fecha às <?=date('H:i:s',$fechamento-1)?>
