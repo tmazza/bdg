@@ -29,7 +29,7 @@ class UserBolao extends CActiveRecord
 	{
 		return array(
 			array('idUsuario, idBolao', 'required'),
-			array('idUsuario, idBolao, status', 'numerical', 'integerOnly'=>true),
+			array('idUsuario, idBolao, status, dataInscricao', 'numerical', 'integerOnly'=>true),
 			array('idUsuario, idBolao, status', 'safe', 'on'=>'search'),
 		);
 	}

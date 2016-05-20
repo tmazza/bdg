@@ -43,8 +43,12 @@ class Bolao extends CActiveRecord
 	 */
 	public function relations()
 	{
+		$semanaPasada = time() - 7*24*60*60;
 		return array(
-			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)'],
+			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)',
+				'condition' => 'participantes_participantes.status = ' . UserBolao::StatusAtivo
+										. ' OR (participantes_participantes.status = ' . UserBolao::StatusPendente . ' AND participantes_participantes.dataInscricao > ' . $semanaPasada . ')'
+			],
 			'posicoes'=>[self::HAS_MANY,'Ranking','idBolao','order'=>'pontos DESC,qtdExatos DESC,qtdVencedores DESC'],
 			'campeonato'=>[self::BELONGS_TO,'Campeonato','codCampeonato'],
 		);

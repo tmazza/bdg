@@ -237,6 +237,7 @@ CREATE TABLE IF NOT EXISTS `user_bolao` (
   `idUsuario` int(11) NOT NULL,
   `idBolao` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
+  `dataInscricao` int(11) NOT NULL,
   PRIMARY KEY (`idUsuario`,`idBolao`),
   KEY `userbolao_fk_bolao` (`idBolao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

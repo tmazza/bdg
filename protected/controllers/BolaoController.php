@@ -41,6 +41,7 @@ class BolaoController extends MainController {
       $userBolao = new UserBolao();
       $userBolao->idUsuario = $this->user->id;
       $userBolao->idBolao = (int)$id;
+      $userBolao->dataInscricao = time();
       $userBolao->status = UserBolao::StatusPendente;
       if($userBolao->save()){
         HView::finf("Bem-vindo(a).");
@@ -57,6 +58,7 @@ class BolaoController extends MainController {
       $userBolao = new UserBolao();
       $userBolao->idUsuario = $this->user->id;
       $userBolao->idBolao = (int)$id;
+      $userBolao->dataInscricao = time();
       $userBolao->status = UserBolao::StatusAtivo;
       if($userBolao->save()){
         HView::finf("Bem-vindo(a).");
