@@ -24,18 +24,9 @@
             echo '</li>';
           } ?>
         </ul>
-        <?php if($this->tabelaBrasileirao): ?>
-          <br><br><hr><br>
-          <?php
-          echo CHtml::ajaxLink('Ver tabela do Brasileirão',$this->createUrl('/bolao/loadTabBra'),[
-            'success'=>'js:function(html){ $("#ver-tabela").html(html); }',
-          ],[
-            'onclick'=>'$(this).slideUp();',
-            'class'=>'uk-hidden-small uk-button',
-          ]);
-          ?>
-          <div id='ver-tabela' data-uk-sticky="{top:5,boundary: true}"></div>
-        <?php endif;?>
+        <?php if($this->viewSecundaria){
+          $this->renderPartial($this->viewSecundaria,$this->dataViewSecundaria);
+        } ?>
       </div>
     </div>
   </div>

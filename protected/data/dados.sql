@@ -60,6 +60,7 @@ INSERT INTO `seg_authitem` (`name`, `type`, `description`, `bizrule`, `data`) VA
 --
 
 INSERT INTO `seg_authitemchild` (`parent`, `child`) VALUES
+('editor', 'cliente'),
 ('editor', 'modEditor');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

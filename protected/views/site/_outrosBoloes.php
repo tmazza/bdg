@@ -1,7 +1,7 @@
 <div class="uk-panel uk-panel-box uk-panel-box-secondary">
   <h3>Bolões disponíveis</h3>
   <div class="uk-grid">
-    <div class="uk-width-medium-2-3 uk-width-small-1-1">
+    <div class="uk-width-small-1-1">
       <table class="uk-table uk-table-condensed uk-table">
         <tr>
           <th></th>
@@ -10,7 +10,14 @@
         </tr>
         <?php foreach ($boloes as $b):?>
           <tr>
-            <td><?=$b->nome;?></td>
+            <td>
+              <?=$b->nome;?>
+              <?=CHtml::ajaxLink("Regulamento",$this->createUrl('/regulamento/bolao',[
+                'id'=>$b->idBolao,
+              ]),HView::modalUpdate('main-modal-large'),[
+                'class'=>'uk-button uk-button-link uk-button-mini'
+                ])?>
+            </td>
             <?php if($b->tipoInscricao == Bolao::TipoPago): ?>
               <td  class="uk-text-right">
                 <span class="uk-badge uk-badge-notification uk-badge-success">

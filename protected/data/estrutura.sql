@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `bolao` (
   `tipoInscricao` char(1) NOT NULL,
   `valorInscricao` int(11) NOT NULL,
   `prazo` int(5) NOT NULL,
+  `regulamento` text,
   PRIMARY KEY (`idBolao`),
   KEY `fk_bolao_campeonato` (`codCampeonato`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;

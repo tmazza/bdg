@@ -2,7 +2,14 @@
 class BolaoController extends MainController {
 
   public function beforeAction($action){
+    if(!Yii::app()->user->checkAccess('cliente')){
+      HView::ferr("Acesse sua conta.");
+      $this->redirect($this->createUrl('/site/login'));
+    }
     $this->layout = '//layouts/menuDireita';
+    $this->viewSecundaria = '//bolao/_menuLateral';
+
+
     return parent::beforeAction($action);
   }
 
@@ -16,7 +23,6 @@ class BolaoController extends MainController {
 
   public function actionIndex($id){
     $bolao = $this->getBolao($id);
-    $this->tabelaBrasileirao=false;
     $this->setMenuLateral($bolao);
     $this->render('index',['bolao'=>$bolao]);
   }
@@ -28,7 +34,7 @@ class BolaoController extends MainController {
   }
 
   public function actionRanking($id){
-    $bolao = Bolao::model()->findByPk((int)$id);
+    $bolao = $this->getBolao($id);
     $this->setMenuLateral($bolao);
     $this->render('ranking',[
       'bolao'=>$bolao,
@@ -131,6 +137,7 @@ class BolaoController extends MainController {
       HView::ferr("Bolão não existe.");
       $this->redirect($this->createUrl('/site/index'));
     }
+    $this->dataViewSecundaria['bolao'] = $bolao;
     return $bolao;
   }
 

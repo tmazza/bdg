@@ -6,18 +6,13 @@ class SiteController extends MainController {
   }
 
   public function actionIndex(){
-    if(Yii::app()->user->isGuest){
-      # TODO: não redirecionar. Criar página de apresentação.
-      $this->redirect($this->createUrl('/site/login'));
-    } else {
-      $outrosBoloes = Bolao::model()->ativo()->userNaoInscrito()->findAll();
-      $this->render('index',[
-        'outrosBoloes'=>$outrosBoloes,
-        'qtdOutros'=>count($outrosBoloes),
-        'boloesInscritos'=>$this->user->boloesInscritos,
-        'qtdInscritos'=>count($this->user->boloesInscritos),
-      ]);
-    }
+    $outrosBoloes = Bolao::model()->ativo()->userNaoInscrito()->findAll();
+    $this->render('index',[
+      'outrosBoloes'=>$outrosBoloes,
+      'qtdOutros'=>count($outrosBoloes),
+      'boloesInscritos'=>$this->user->boloesInscritos,
+      'qtdInscritos'=>count($this->user->boloesInscritos),
+    ]);
   }
 
   public function actionLogin($rt=false) {
