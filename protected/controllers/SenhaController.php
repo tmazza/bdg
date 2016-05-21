@@ -37,7 +37,7 @@ class SenhaController extends MainController {
   }
 
   public function actionAlterar($h){
-    if(strlen($h) < 300){
+    if(strlen($h) < 150){
       $this->redirect($this->createUrl('/site/login'));
     } else {
       $s = UserSenha::model()->findByAttributes(array(
@@ -71,7 +71,7 @@ class SenhaController extends MainController {
   private function sendEmail($requisicao){
     $msg = 'Solicitação de alteração de senha.<br>';
     $msg .= 'Clique no link abaixo para alterar sua senha.<br><br>';
-    $msg .= CHtml::link('Alterar senha','http://'.Yii::app()->params['domain'].'/'.$this->createUrl('/senha/alterar',array('h'=>$requisicao->hash)));
+    $msg .= CHtml::link('Alterar senha','http://'.Yii::app()->params['domain'].$this->createUrl('/senha/alterar',array('h'=>$requisicao->hash)));
     $msg .= '<br><br><br>';
     $msg .= 'Caso não tenha feito essa solicitação, ignore.';
     HEmail::templateSimples($requisicao->user->email,"Alteração de senha",$msg);
