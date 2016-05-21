@@ -1,6 +1,7 @@
 <?php
 $this->renderPartial('_headerBolao',['bolao'=>$bolao]);
 $posicoes = $bolao->posicoes;
+$algumPendente = false;
 ?>
 <?php if(count($posicoes)>0):?>
   <table class="uk-table uk-table-condensed uk-table-striped">
@@ -20,8 +21,11 @@ $posicoes = $bolao->posicoes;
     <?php $count = 0; ?>
     <?php foreach ($posicoes as $p): ?>
       <?php $count++; ?>
-      <?php $class = $bolao->isInscricaoPendente($p->user->id)  ? 'pendente' : ''; ?>
-      <tr class="<?=$class?>">
+      <?php
+      $pendente =  $bolao->isInscricaoPendente($p->user->id);
+      $algumPendente = $pendente || $algumPendente;
+      ?>
+      <tr class="<?=$pendente ? 'pendente' : ''?>">
         <td><?=$count?>º</td>
         <td><?=CHtml::encode(ucfirst($p->user->nome))?></td>
         <td class="uk-text-right"><?=$p->qtdExatos?></td>
@@ -30,7 +34,9 @@ $posicoes = $bolao->posicoes;
       </tr>
     <?php endforeach; ?>
   </table>
-  <span class="uk-badge pendente uk-margin uk-text-danger">Inscrição não confirmada.</span>
+  <?php if($algumPendente):?>
+    <span class="uk-badge pendente uk-margin uk-text-danger">Legenda: Inscrição não confirmada.</span>
+  <?php endif;?>
 <?php else: ?>
   <br>
   <div class="uk-alert">
