@@ -142,4 +142,39 @@ class Bolao extends CActiveRecord
 		]);
 	}
 
+	public function getJogosEmAberto(){
+		return $this->filtraJogosDoDia(true);
+	}
+
+	public function getJogosFechados(){
+		return $this->filtraJogosDoDia(false);
+	}
+
+	private function filtraJogosDoDia($abertos=true){
+		$dias = $abertos ? $this->campeonato->jogosPorDiaEmAberto() : $this->campeonato->jogosPorDiaFechados();
+		$primeiro = key($dias);
+		if($abertos && $this->isDiaFechado()){
+			unset($dias[$primeiro]);
+		}
+		if(!$abertos && !$this->isDiaFechado()){
+			unset($dias[$primeiro]);
+		}
+		return $dias;
+	}
+
+	public function isDiaFechado(){
+		$inicioDoDiaDeHoje = date('Y-m-d H:i:s',mktime(0,0,0,date('m'),date('d'),date('Y')));
+		$finalDoDiaDeHoje = date('Y-m-d H:i:s',mktime(23,59,59,date('m'),date('d'),date('Y')));
+		$primeiroJogo = Jogo::model()->find([
+			'order'=>'data ASC',
+			'condition'=>"codCampeonato='{$this->codCampeonato}' AND data>'{$inicioDoDiaDeHoje}' AND data<'{$finalDoDiaDeHoje}'"
+		]);
+		if(is_null($primeiroJogo)){ # Nenhum jogo no dia.
+			return true;
+		} else {
+			$limiteDia = time()-($this->prazo*60);
+			return $primeiroJogo->data < date('Y-m-d H:i:s',$limiteDia);
+		}
+	}
+
 }

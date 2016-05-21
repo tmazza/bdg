@@ -1,6 +1,6 @@
 <?php
 $this->renderPartial('_headerBolao',['bolao'=>$bolao]);
-$jogosPorDia = $bolao->campeonato->jogosPorDiaFechados();
+$jogosPorDia = $bolao->getJogosFechados();
 foreach ($jogosPorDia as $dia => $jogos) {
   $this->renderPartial('_jogosFechados',[
     'dia'=>$dia,

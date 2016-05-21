@@ -8,8 +8,6 @@ class BolaoController extends MainController {
     }
     $this->layout = '//layouts/menuDireita';
     $this->viewSecundaria = '//bolao/_menuLateral';
-
-
     return parent::beforeAction($action);
   }
 
@@ -85,35 +83,39 @@ class BolaoController extends MainController {
       $jogos = $bolao->campeonato->jogosNesteDia($dia);
       // Busca hora de fechamento do dia
       $fechamento = $bolao->getHoraFechamento($jogos);
-      $idsJogos = array_map(function($i){return $i->idJogo;},$jogos);
-      foreach ($_POST as $j => $palpite) {
-        $idJogo = (int) $j;
-        if(in_array($j,$idsJogos)){
-          $model = Palpite::model()->findByPk([
-            'idBolao'=>$bolao->idBolao,
-            'idUsuario'=>$this->user->id,
-            'idJogo'=>$idJogo,
-          ]);
-          if(is_null($model)){
-            $model = new Palpite();
-            $model->idBolao=$bolao->idBolao;
-            $model->idUsuario=$this->user->id;
-            $model->idJogo=$idJogo;
-          }
-          $camposParaUpdate=[];
-          if(isset($palpite['casa']) && strlen($palpite['casa']) > 0){
-            $model->golsMandante=(int)$palpite['casa'];
-            $camposParaUpdate[] = 'golsMandante';
-          }
-          if(isset($palpite['visi']) && strlen($palpite['visi']) > 0){
-            $model->golsVisitante=(int)$palpite['visi'];
-            $camposParaUpdate[] = 'golsVisitante';
-          }
-          if(count($camposParaUpdate) > 0){
-            if($model->isNewRecord){
-              $model->save();
-            } else {
-              $model->update($camposParaUpdate);
+      if(time() >= $fechamento){
+        echo 'Apostas do dia encerradas.';
+      } else {
+        $idsJogos = array_map(function($i){return $i->idJogo;},$jogos);
+        foreach ($_POST as $j => $palpite) {
+          $idJogo = (int) $j;
+          if(in_array($j,$idsJogos)){
+            $model = Palpite::model()->findByPk([
+              'idBolao'=>$bolao->idBolao,
+              'idUsuario'=>$this->user->id,
+              'idJogo'=>$idJogo,
+            ]);
+            if(is_null($model)){
+              $model = new Palpite();
+              $model->idBolao=$bolao->idBolao;
+              $model->idUsuario=$this->user->id;
+              $model->idJogo=$idJogo;
+            }
+            $camposParaUpdate=[];
+            if(isset($palpite['casa']) && strlen($palpite['casa']) > 0){
+              $model->golsMandante=(int)$palpite['casa'];
+              $camposParaUpdate[] = 'golsMandante';
+            }
+            if(isset($palpite['visi']) && strlen($palpite['visi']) > 0){
+              $model->golsVisitante=(int)$palpite['visi'];
+              $camposParaUpdate[] = 'golsVisitante';
+            }
+            if(count($camposParaUpdate) > 0){
+              if($model->isNewRecord){
+                $model->save();
+              } else {
+                $model->update($camposParaUpdate);
+              }
             }
           }
         }

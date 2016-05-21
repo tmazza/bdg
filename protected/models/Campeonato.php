@@ -44,6 +44,7 @@ class Campeonato extends CActiveRecord
 	public function relations()
 	{
 		$inicioDoDiaDeHoje = date('Y-m-d H:i:s',mktime(0,0,0,date('m'),date('d'),date('Y')));
+		$finalDoDiaDeHoje = date('Y-m-d H:i:s',mktime(23,59,59,date('m'),date('d'),date('Y')));
 		return array(
 			'boloes' => array(self::HAS_MANY, 'Bolao', 'codCampeonato'),
 			'jogos' => array(self::HAS_MANY, 'Jogo', 'codCampeonato', 'order'=>'data ASC'),
@@ -51,7 +52,7 @@ class Campeonato extends CActiveRecord
 				'condition'=>"data > '{$inicioDoDiaDeHoje}'",
 			],
 			'jogosFechados' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
-				'condition'=>"data <= '{$inicioDoDiaDeHoje}'",
+				'condition'=>"data <= '{$finalDoDiaDeHoje}'",
 			],
 		);
 	}
