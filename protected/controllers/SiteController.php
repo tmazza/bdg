@@ -49,6 +49,22 @@ class SiteController extends MainController {
       $this->redirect(Yii::app()->homeUrl);
   }
 
+  public function actionDadosAdicionais(){
+    $model = new DadosAdicionaisForm();
+
+    if(isset($_POST['DadosAdicionaisForm'])){
+      $model->attributes = $_POST['DadosAdicionaisForm'];
+      if($model->validate()){
+        echo 'OK!';
+        exit;
+      }
+    }
+    $this->render('dadosAdicionais',[
+      'model'=>$model,
+    ]);
+  }
+
+
   private function trataLoginSocial(){
     $serviceName = Yii::app()->request->getQuery('service');
     if (isset($serviceName)) {

@@ -30,10 +30,16 @@ class MainController extends CController  {
     private function setUser(){
       if(!Yii::app()->user->isGuest){
         $user = User::model()->findByPk((int)Yii::app()->user->id);
-        if(is_null($user) && $this->action->id != 'logout'){
-          $this->redirect($this->createUrl('/site/logout'));
-        } else {
-          $this->user = $user;
+        $action = strtolower($this->action->id);
+        $semCadastro = ['logout','dadosadicionais','error'];
+        if(!in_array($action,$semCadastro)){
+          if(is_null($user)){
+            $this->redirect($this->createUrl('/site/logout'));
+          // } else if(strlen($user->email == 0)){
+            // $this->redirect($this->createUrl('/site/dadosAdicionais'));
+          } else {
+            $this->user = $user;
+          }
         }
       }
     }
