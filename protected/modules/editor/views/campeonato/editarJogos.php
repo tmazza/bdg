@@ -4,11 +4,11 @@
     <?=CHtml::textField('num',$j->numJogo,['style'=>'width:25px',]);?>
     <?=CHtml::textField('data',$j->data,['style'=>'width:135px',]);?>
     <?=CHtml::dropDownList('casa',$j->equipeMandante,$equipes);?>
-    <?=CHtml::textField('golsMandante',$j->golsMandante,['style'=>'width:20px',]);?>
+    <?=CHtml::textField('golsMandante',$j->golsMandante,['style'=>'width:40px',]);?>
     <?=$j->mandante->imagemBrasao('PP')?>
     x
     <?=$j->visitante->imagemBrasao('PP')?>
-    <?=CHtml::textField('golsVisitante',$j->golsVisitante,['style'=>'width:20px',]);?>
+    <?=CHtml::textField('golsVisitante',$j->golsVisitante,['style'=>'width:40px',]);?>
     <?=CHtml::dropDownList('vist',$j->equipeVisitante,$equipes);?>
     <button onclick='atualizaJogo($(this).parent())' class="uk-button uk-button-primary">Atualizar</button>
   </div>
