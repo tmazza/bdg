@@ -43,7 +43,7 @@ class Bolao extends CActiveRecord
 	 */
 	public function relations()
 	{
-		$semanaPasada = time() - 7*24*60*60;
+		$semanaPasada = time() - 14*24*60*60;
 		return array(
 			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)',
 				'condition' => 'participantes_participantes.status = ' . UserBolao::StatusAtivo

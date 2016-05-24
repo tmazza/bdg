@@ -4,7 +4,7 @@
   Efetue o pagamento até
   <?php
   $data = $b->getInscricao(Yii::app()->user->id)->dataInscricao;
-  echo HView::tradDia(date('l, d/m',$data+7*24*60*60));
+  echo HView::tradDia(date('l, d/m',$data+14*24*60*60));
   ?>.
   <br>
   Após esta data suas apostas não serão consideradas enquanto a inscrição não for ativada.
