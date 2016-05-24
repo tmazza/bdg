@@ -29,4 +29,10 @@ class HEmail {
     Yii::app()->ses->sendEmail(Yii::app()->params['adminEmail'],$assunto,$msg);
   }
 
+
+  public static function noTemplate($email,$assunto,$msg){
+    Yii::app()->ses->mailer->AddEmbeddedImage(Yii::getPathOfAlias('application').'/webroot/images/logo-email.png', 'logo');
+    Yii::app()->ses->sendEmail($email,$assunto,$msg);
+  }
+
 }

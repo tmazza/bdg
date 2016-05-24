@@ -51,6 +51,9 @@ class Bolao extends CActiveRecord
 			],
 			'posicoes'=>[self::HAS_MANY,'Ranking','idBolao','order'=>'pontos DESC,qtdExatos DESC,qtdVencedores DESC'],
 			'campeonato'=>[self::BELONGS_TO,'Campeonato','codCampeonato'],
+			'emailDoDia'=>[self::HAS_ONE,'BolaoEmail','idBolao',
+				'condition' => "dia='".date('Y-m-d')."'",
+			],
 		);
 	}
 
