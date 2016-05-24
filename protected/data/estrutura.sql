@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 19, 2016 at 02:30 AM
+-- Generation Time: May 24, 2016 at 02:53 AM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -53,10 +53,23 @@ CREATE TABLE IF NOT EXISTS `bolao` (
   `tipoInscricao` char(1) NOT NULL,
   `valorInscricao` int(11) NOT NULL,
   `prazo` int(5) NOT NULL,
-  `regulamento` text,
   PRIMARY KEY (`idBolao`),
   KEY `fk_bolao_campeonato` (`codCampeonato`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bolao_email`
+--
+
+CREATE TABLE IF NOT EXISTS `bolao_email` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idBolao` int(11) NOT NULL,
+  `dia` varchar(10) NOT NULL,
+  `tipo` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 -- --------------------------------------------------------
 
@@ -87,6 +100,22 @@ CREATE TABLE IF NOT EXISTS `equipe` (
   `tipo` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fila_email`
+--
+
+CREATE TABLE IF NOT EXISTS `fila_email` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) NOT NULL,
+  `email` int(11) NOT NULL,
+  `foi` tinyint(1) NOT NULL,
+  `data` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_fila_email_usuario` (`idUsuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 -- --------------------------------------------------------
 
@@ -147,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   PRIMARY KEY (`id`),
   KEY `fk_pedido_usuario` (`idUsuario`),
   KEY `fk_pedido_bolao` (`idBolao`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -255,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `user_login` (
   `data` int(11) NOT NULL,
   `ip` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 -- --------------------------------------------------------
 
@@ -280,6 +309,12 @@ CREATE TABLE IF NOT EXISTS `user_senha` (
 --
 ALTER TABLE `bolao`
   ADD CONSTRAINT `fk_bolao_campeonato` FOREIGN KEY (`codCampeonato`) REFERENCES `campeonato` (`codigo`);
+
+--
+-- Constraints for table `fila_email`
+--
+ALTER TABLE `fila_email`
+  ADD CONSTRAINT `fk_fila_email_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `jogo`
