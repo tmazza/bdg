@@ -10,7 +10,7 @@
         <td><?php
         $palpite = $j->getPalpiteUserBolao($u->id,$bolao->idBolao);
         if(is_null($palpite)){
-          echo '*';
+          echo ' - x -';
         } else {
           echo $palpite->golsMandante . ' x ' . $palpite->golsVisitante;
         }
@@ -21,4 +21,6 @@
   </table>
 <?php endforeach; ?>
 <br>
-* Nenhum palpite cadastrado
+<div style="font-size: 13px;">
+- x - Nenhum palpite cadastrado
+</div>

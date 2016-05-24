@@ -156,7 +156,7 @@ class Bolao extends CActiveRecord
 	private function filtraJogosDoDia($abertos=true){
 		$dias = $abertos ? $this->campeonato->jogosPorDiaEmAberto() : $this->campeonato->jogosPorDiaFechados();
 		$primeiro = key($dias);
-		if($abertos && $this->isDiaFechado()){
+		if($abertos && $this->campeonato->temJogosHoje() && $this->isDiaFechado()){
 			unset($dias[$primeiro]);
 		}
 		if(!$abertos && !$this->isDiaFechado()){
