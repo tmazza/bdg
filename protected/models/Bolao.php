@@ -175,8 +175,8 @@ class Bolao extends CActiveRecord
 		if(is_null($primeiroJogo)){ # Nenhum jogo no dia.
 			return true;
 		} else {
-			$limiteDia = time()-($this->prazo*60);
-			return $primeiroJogo->data < date('Y-m-d H:i:s',$limiteDia);
+			$limiteDia = time()+($this->prazo*60);
+			return $primeiroJogo->data <= date('Y-m-d H:i:s',$limiteDia);
 		}
 	}
 
