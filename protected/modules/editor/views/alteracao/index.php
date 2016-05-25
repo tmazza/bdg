@@ -18,7 +18,7 @@
       <td><?=$a->para?></td>
       <td><?=$a->descricao?></td>
       <td><?=$a->motivo?></td>
-      <td>Em <?=date('d/m/Y H:i:s')?></td>
+      <td>Em <?=date('d/m/Y H:i:s',$a->data)?></td>
       <td><?php
       if($a->status == Alteracao::StatusFechada){
         echo '-';
