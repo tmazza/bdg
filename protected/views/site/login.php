@@ -39,7 +39,10 @@
   </div>
   <div class="uk-width-medium-1-2 uk-width-small-1-1">
     <div class="uk-visible-small"><hr></div>
-    
+Estão abertas as inscrições para o Bolão do Gordo 2016!<br/>
+São dois bolões disponíveis: O bolão gratuito não tem taxa de inscrição, e o primeiro colocado ganha R$50,00. O bolão pago tem taxa de R$30,00 e os 3 primeiros colocados recebem prêmios em dinheiro.<br/>
+Maiores informações no regulamento de cada bolão.<br/>
+<b>Atenção</b>, o bolão inicia na 4ª rodada do Brasileirão, dia 28/05    
   </div>
 </div>
 <div id="modal2" class="uk-modal">
