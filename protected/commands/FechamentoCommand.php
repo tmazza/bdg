@@ -15,7 +15,8 @@ class FechamentoCommand extends MainCommand
   private function jogosFechadosBrasileiroA2016(){
     $id = 'BRA16';
     $lastHash = $this->getLastPage($id);
-    $html = $this->parserHTML->file_get_html('http://www.cbf.com.br/competicoes/brasileiro-serie-a');
+    $html = $this->parserHTML->file_get_html('http://www.cbf.com.br/competicoes/brasileiro-serie-a/tabela/2016');
+    #$html = $this->parserHTML->file_get_html('http://www.cbf.com.br/competicoes/brasileiro-serie-a');
     $hash = hash('sha512',$html->find('.col-md-9',0)->plaintext);
     if($lastHash == $hash){
       $this->saveLog("{$id} Sem alterações");
@@ -67,10 +68,13 @@ class FechamentoCommand extends MainCommand
             'codCampeonato'=>$id,
           ]);
           if(is_null($jogo)){
-            $erros[] = HView::removeAcentos("Jogo nao encontrado. " . $j['casa'] . ':'
+             $time = strtotime($data);
+	     if($time > time()-48*60*60){
+		 $erros[] = HView::removeAcentos("Jogo nao encontrado. " . $j['casa'] . ':'
                                  . $timeCasa->id . 'x' . $j['visitante'] . ':'
                                  . $timeVisi->id . ' | numJogo: ' . $j['numJogo']
                                  . 'Data: ' . $data);
+	     }
           } else {
             $dataJogo = strtotime($jogo->data);
             if($jogo->status != Jogo::StatusFechado && $dataJogo < time()){
