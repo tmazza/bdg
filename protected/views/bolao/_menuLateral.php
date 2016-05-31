@@ -8,7 +8,7 @@
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Lateral -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:600px"
+     style="display:inline-block;width:300px;height:600px;background:transparent!important"
      data-ad-client="ca-pub-3847082477827226"
      data-ad-slot="7794195282"></ins>
 <script>
