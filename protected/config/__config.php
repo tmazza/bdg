@@ -4,7 +4,7 @@ $__hostDatabase = '';
 $__nameDatabase = '';
 $__userDatabase = '';
 $__passDatabase = '';
-$__portDatabase = ;
+$__portDatabase = '';
 
 #chaves APIs
 $__awsSmtpHost = '';
