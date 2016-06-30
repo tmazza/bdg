@@ -9,7 +9,43 @@ class FechamentoCommand extends MainCommand
   }
 
   public function actionIndex() {
-    $this->jogosFechadosBrasileiroA2016();
+    $this->jogosFechadosBrasileiroA2016V2();
+    //$this->jogosFechadosBrasileiroA2016(); // # site cbf
+  }
+
+  private function jogosFechadosBrasileiroA2016V2(){
+    $id = 'BRA16';
+    $lastHash = $this->getLastPage($id);
+    $html = $this->parserHTML->file_get_html('http://www.tabeladobrasileirao.net/');
+    $hash = hash('sha512',$html->find('#jogos',0)->plaintext);
+    if($lastHash == $hash){
+      $this->saveLog("{$id} Sem alterações");
+    } else {
+      $linhas = $html->find('#jogos tbody',0)->find('tr');
+      $jogos = [];
+      foreach ($linhas as $l) {
+       $colunas = $l->find('td');
+       if(count($colunas) > 0){
+         $data = $l->find('td',1)->plaintext;
+         if(substr_count($data,'/') > 0){
+           $jogos[] = [
+             'numJogo' => '?',
+             'dataHora' => $l->find('td',1)->plaintext . '/2016 - ' . ' ' . $l->find('td',3)->plaintext,
+             'casa' => $l->find('td',4)->plaintext,
+             'placar' => $l->find('td',5)->plaintext . ' x ' . $l->find('td',7)->plaintext,
+             'visitante' => $l->find('td',8)->plaintext,
+           ];
+         }
+       }
+      }
+      $this->interpretaJogosEncontrados($id,$jogos);
+      $this->hashAntigo[$id] = [
+          'hash'=>$hash,
+          'paginas'=>[],
+      ];
+      $this->setLastPage();
+      $this->saveLog('Alterações processadas');
+    }
   }
 
   private function jogosFechadosBrasileiroA2016(){
@@ -45,6 +81,14 @@ class FechamentoCommand extends MainCommand
     }
   }
 
+  /**
+   * Entrada: lista de jogos no formato.
+   * numJogo: qualquer | identificador do jogo usado nos logs
+   * dataHora: d/m/Y - H:i
+   * casa: string | equipe visitante usa levenshtein para match com equipe cadastrada
+   * placara: "int x int" ou " x "
+   * visitante: string | equipe visitante usa levenshtein para match com equipe cadastrada
+   */
   private function interpretaJogosEncontrados($id,$jogos){
     $erros = $atualizados = [];
     foreach ($jogos as $j) {
