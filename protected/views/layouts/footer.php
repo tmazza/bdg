@@ -1,6 +1,26 @@
 <br>
 <hr>
 <footer>
+<div class="uk-container uk-container-center uk-text-center">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- rodape -->
+  <ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3847082477827226"
+     data-ad-slot="1958616887"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>   
+<br><br> 
+  <div class="uk-grid">
+    <div class="uk-width-medium-1-2 uk-width-small-1-1">
+
+</div>
+    <div class="uk-width-medium-1-2 uk-width-small-1-1">
+
+    </div>
+  </div>
   <div class="uk-container uk-container-center">
     <div class="uk-grid">
       <div class="uk-width-medium-1-2">
