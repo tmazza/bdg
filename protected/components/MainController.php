@@ -35,10 +35,9 @@ class MainController extends CController  {
         if(!in_array($action,$semCadastro)){
           if(is_null($user)){
             $this->redirect($this->createUrl('/site/logout'));
-          // } else if(strlen($user->email == 0)){
-            // $this->redirect($this->createUrl('/site/dadosAdicionais'));
           } else {
             $this->user = $user;
+            $this->user->setOnline();
           }
         }
       }
