@@ -24,16 +24,14 @@ $algumPendente = false;
       <?php
       $pendente =  $bolao->isInscricaoPendente($p->user->id);
       $algumPendente = $pendente || $algumPendente;
+      $userLogado = $p->user->id == $this->user->id;
+      $class = '';
+      if($pendente) $class = 'pendente';
+      else if($userLogado) $class = 'logado';
       ?>
-      <tr class="<?=$pendente ? 'pendente' : ''?>">
+      <tr class="<?=$class?>">
         <td><?=$count?>º</td>
-        <td>
-          <?php 
-          if($p->user->id != $this->user->id && $p->user->isOnline())
-            $this->renderPartial('_userOnline');
-          ?>
-          <?=CHtml::encode(ucfirst($p->user->nome))?>
-        </td>
+        <td><?=CHtml::encode(ucfirst($p->user->nome));?></td>
         <td class="uk-text-right"><?=$p->qtdExatos?></td>
         <td class="uk-text-right"><?=$p->qtdVencedores?></td>
         <td class="uk-text-right"><b><?=$p->pontos?></b></td>
