@@ -21,10 +21,22 @@
           </a>
           <div class="uk-float-right uk-margin-top">
             <?php if($this->user): ?>
-              <?=$this->user->nome;?>
-              (<?=CHtml::link('Sair',$this->createUrl('/site/logout'));?>)
-            <?php else: ?>
-              <!-- <?//=CHtml::link('Minha conta',$this->createUrl('/site/login'));?> -->
+              <div class="uk-button-dropdown" data-uk-dropdown="">
+                  <button class="uk-button">
+                    <?=$this->user->nome;?> <i class="uk-icon-caret-down"></i>
+                  </button>
+                  <div style="top:30px;left:0px;" class="uk-dropdown uk-dropdown-small uk-dropdown-bottom">
+                      <ul class="uk-nav uk-nav-dropdown">
+                          <li>
+                            <?=CHtml::link('<i class="uk-icon uk-icon-cog"></i> Configurações',$this->createUrl('/configuracao/index'));?>
+                          </li>
+                          <li class="uk-nav-divider"></li>
+                          <li>
+                            <?=CHtml::link('Sair',$this->createUrl('/site/logout'));?>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
             <?php endif; ?>
           </div>
         </div>

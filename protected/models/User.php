@@ -36,6 +36,7 @@ class User extends CActiveRecord
 			array('nome', 'length', 'max'=>128),
 			array('email', 'length', 'max'=>400),
 			array('senha', 'compare','compareAttribute'=>'senha2','on'=>'register', 'message' => 'A senha deve ser exatamente repetida.'),
+	        array('emailFechaDia,emailAvisoFechaDia,faceAvisoFechaDia', 'boolean'),
 			array('id, nome, email, senha,social,social_id', 'safe', 'on'=>'search'),
 		);
 	}
