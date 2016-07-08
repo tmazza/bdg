@@ -27,16 +27,18 @@ class EmailFechaDiaCommand extends MainCommand
             if($b->campeonato->temJogosHoje()){
               $participantes = $b->participantes;
               foreach ($participantes as $u) {
-                $model = new FilaEmail();
-                $model->idUsuario = $u->id;
-                $model->email = $bolaoEmail->id;
-                $model->foi = 0;
-                if(!$model->save()){
-                  $bolaoEmail->delete();
-                  $this->saveLog("Erro ao salvar fila de email para U:{$u->id}");
-                  HEmail::toAdmin("Erro ao salvar fila de email para U:{$u->id} D:".date('d/m/Y'));
-                } else {
-                  $this->saveLog("Add na fila U:{$u->id} EMAIL:{$bolaoEmail->id}");
+                if($u->emailFechaDia){
+                  $model = new FilaEmail();
+                  $model->idUsuario = $u->id;
+                  $model->email = $bolaoEmail->id;
+                  $model->foi = 0;
+                  if(!$model->save()){
+                    $bolaoEmail->delete();
+                    $this->saveLog("Erro ao salvar fila de email para U:{$u->id}");
+                    HEmail::toAdmin("Erro ao salvar fila de email para U:{$u->id} D:".date('d/m/Y'));
+                  } else {
+                    $this->saveLog("Add na fila U:{$u->id} EMAIL:{$bolaoEmail->id}");
+                  }
                 }
               }
             } else {
