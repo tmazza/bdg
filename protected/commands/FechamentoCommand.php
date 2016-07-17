@@ -17,32 +17,42 @@ class FechamentoCommand extends MainCommand
     $id = 'BRA16';
     $lastHash = $this->getLastPage($id);
     $html = $this->parserHTML->file_get_html('http://www.tabeladobrasileirao.net/');
-    $hash = hash('sha512',$html->find('#jogos',0)->plaintext);
+    $hash = hash('sha512',$html->find('table',0)->plaintext);
     if($lastHash == $hash){
       $this->saveLog("{$id} Sem alterações");
     } else {
-      $linhas = $html->find('#jogos tbody',0)->find('tr');
+      $linhas = $html->find('table tbody',0)->find('tr');
       $jogos = [];
       foreach ($linhas as $l) {
        $colunas = $l->find('td');
        if(count($colunas) > 0){
          $data = $l->find('td',1)->plaintext;
          if(substr_count($data,'/') > 0){
-           $jogos[] = [
+           $primeiraColuna = $l->find('td',0);
+
+           $casa = $primeiraColuna->find('.home_name',0)->title;
+           $visi = $primeiraColuna->find('.visitor_name',0)->title;
+
+           $placarCasa = $primeiraColuna->find('.game-scoreboard-input',0)->plaintext;
+           $placarVisi = $primeiraColuna->find('.game-scoreboard-input',2)->plaintext;
+           $placar = str_replace($placarCasa,'&nbsp','') . ' x ' . str_replace($placarVisi,'&nbsp','');
+
+           $jogos[] = [ 
              'numJogo' => '?',
-             'dataHora' => $l->find('td',1)->plaintext . '/2016 - ' . ' ' . $l->find('td',3)->plaintext,
-             'casa' => $l->find('td',4)->plaintext,
-             'placar' => $l->find('td',5)->plaintext . ' x ' . $l->find('td',7)->plaintext,
-             'visitante' => $l->find('td',8)->plaintext,
+             'dataHora' => $data . '/2016 - ' . $l->find('td',3)->plaintext,
+             'casa' => $casa,
+             'visitante' => $visi,
+             'placar' => $placar,
            ];
          }
        }
       }
+
       $this->interpretaJogosEncontrados($id,$jogos);
       $this->hashAntigo[$id] = [
-          'hash'=>$hash,
-          'paginas'=>[],
-      ];
+           'hash'=>$hash,
+           'paginas'=>[],
+       ];
       $this->setLastPage();
       $this->saveLog('Alterações processadas');
     }
