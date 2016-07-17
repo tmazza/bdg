@@ -35,8 +35,8 @@ class FechamentoCommand extends MainCommand
 
            $placarCasa = $primeiraColuna->find('.game-scoreboard-input',0)->plaintext;
            $placarVisi = $primeiraColuna->find('.game-scoreboard-input',2)->plaintext;
-           $placar = str_replace($placarCasa,'&nbsp','') . ' x ' . str_replace($placarVisi,'&nbsp','');
-
+           $placar = str_replace('&nbsp;','',$placarCasa) . ' x ' . str_replace('&nbsp;','',$placarVisi);
+           
            $jogos[] = [ 
              'numJogo' => '?',
              'dataHora' => $data . '/2016 - ' . $l->find('td',3)->plaintext,
@@ -47,7 +47,6 @@ class FechamentoCommand extends MainCommand
          }
        }
       }
-
       $this->interpretaJogosEncontrados($id,$jogos);
       $this->hashAntigo[$id] = [
            'hash'=>$hash,
