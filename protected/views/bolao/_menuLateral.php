@@ -1,20 +1,22 @@
 <br><hr>
-<ul class="uk-list">
+<ul class="uk-nav">
   	<li>
   	<?php
-  	echo CHtml::ajaxLink("Regulamento do bolão",$this->createUrl('/regulamento/bolao',[
+  	echo CHtml::ajaxLink("&nbsp;&nbsp;&nbsp;&nbsp;Regulamento do bolão",$this->createUrl('/regulamento/bolao',[
 		'id'=>$bolao->idBolao,
 	]),HView::modalUpdate('main-modal-large'),[
-  		'class'=>'',
+	  'class'=>'uk-button',
 	]);
 	?>
 	</li>
 	<li class="uk-hidden-small">
+		<div class="uk-badge uk-badge-danger uk-float-left">Novo</div>
 		<?php
 		echo CHtml::ajaxLink('Tabela do Brasileirão',$this->createUrl('/bolao/TabelaBrasileirao'),[
 		  'success'=>'js:function(html){ $("#ver-tabela").html(html); }',
 		],[
-		  'onclick'=>'$(this).slideUp();',
+		  'onclick'=>'$(this).parent().remove();',
+		  'class'=>'uk-button',
 		]);
 		?>
 	</li>
