@@ -133,6 +133,10 @@ class BolaoController extends MainController {
     $this->renderPartial('/bolao/_tabelaBrasileirao');
   }
 
+  public function actionTabelaBrasileirao(){
+    $this->renderPartial('/bolao/_iframeTabelaBrasileirao');
+  }
+
   private function getBolao($id){
     $bolao = Bolao::model()->findByPk((int)$id);
     if(is_null($bolao) || !$this->isUserInscritoNoBolao($bolao)){
