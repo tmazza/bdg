@@ -12,10 +12,13 @@ class BolaoController extends MainController {
   }
 
   private function setMenuLateral($bolao){
+    $labelRank = '<i class="uk-icon uk-icon-trophy"></i><span class="uk-hidden-small"> &nbsp;Ranking</span>';
+    $labelStat = '<i class="uk-icon uk-icon-bar-chart"></i><span class="uk-hidden-small"> &nbsp;Estatísticas</span>';
     $this->menuLateral = [
       ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])],
       ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])],
-      ['ranking','Ranking',$this->createUrl('/bolao/ranking',['id'=>$bolao->idBolao])],
+      ['ranking',$labelRank,$this->createUrl('/bolao/ranking',['id'=>$bolao->idBolao])],
+      ['estatistica',$labelStat,$this->createUrl('/bolao/estatistica',['id'=>$bolao->idBolao])],
     ];
   }
 
@@ -34,10 +37,33 @@ class BolaoController extends MainController {
   public function actionRanking($id){
     $bolao = $this->getBolao($id);
     $this->setMenuLateral($bolao);
-    $this->render('ranking',[
+    $this->render('ranking',['bolao'=>$bolao]);
+  }
+
+  public function actionEstatistica($id){
+    $bolao = $this->getBolao($id);
+    $this->setMenuLateral($bolao);
+    $this->render('estatistica',[
       'bolao'=>$bolao,
+      'pontosPorRodada'=>$this->pontosPorRodada($bolao),
     ]);
   }
+
+  private function pontosPorRodada($bolao){
+    $data = Yii::app()->db->createCommand()
+      ->select('j.rodada,sum(p.pontos) as soma')
+      ->from('palpite p')
+      ->join('jogo j','j.idJogo = p.idJogo')
+      ->where('p.idBolao = ' . $bolao->idBolao)
+      ->group('j.rodada')
+      ->having('sum(p.pontos) > 0')
+      ->queryAll();
+    $formatedData = array_map(function($i){
+      return [$i['rodada'],(int)$i['soma']];
+    }, $data);
+    return json_encode(array_merge([['Rodadas','Pontos']],$formatedData));
+  }
+
 
   public function actionInscricaoPaga($id){
     $bolao = Bolao::model()->findByPk((int)$id);

@@ -17,7 +17,7 @@
           <?=$content?>
       </div>
       <div class='uk-width-medium-3-10 uk-hidden-small'>
-        <ul class="uk-tab uk-tab-right uk-width-medium-1-2" >
+        <ul class="uk-tab uk-tab-right" >
           <?php foreach ($this->menuLateral as $i) {
             echo '<li ' . ($i[0]==$this->action->id?'class="uk-active"':'') . '>';
             echo CHtml::link($i[1],$i[2],isset($i[3])?$i[3]:[]);

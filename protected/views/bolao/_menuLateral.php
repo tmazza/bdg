@@ -2,7 +2,7 @@
 <ul class="uk-nav">
   	<li>
   	<?php
-  	echo CHtml::ajaxLink("&nbsp;&nbsp;&nbsp;&nbsp;Regulamento do bolão",$this->createUrl('/regulamento/bolao',[
+  	echo CHtml::ajaxLink("&nbsp;&nbsp;&nbsp;&nbsp;Regulamento desse bolão",$this->createUrl('/regulamento/bolao',[
 		'id'=>$bolao->idBolao,
 	]),HView::modalUpdate('main-modal-large'),[
 	  'class'=>'uk-button',
