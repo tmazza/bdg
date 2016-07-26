@@ -18,7 +18,7 @@ class BolaoController extends MainController {
       ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])],
       ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])],
       ['ranking',$labelRank,$this->createUrl('/bolao/ranking',['id'=>$bolao->idBolao])],
-      ['estatistica',$labelStat,$this->createUrl('/bolao/estatistica',['id'=>$bolao->idBolao])],
+      // ['estatistica',$labelStat,$this->createUrl('/bolao/estatistica',['id'=>$bolao->idBolao])],
     ];
   }
 

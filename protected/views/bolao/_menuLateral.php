@@ -9,8 +9,9 @@
 	]);
 	?>
 	</li>
+	<?php if(substr($bolao->codCampeonato, 0,3) == 'BRA'): ?>
 	<li class="uk-hidden-small">
-		<div class="uk-badge uk-badge-danger uk-float-left">Novo</div>
+		<!-- <div class="uk-badge uk-badge-danger uk-float-left">Novo</div> -->
 		<?php
 		echo CHtml::ajaxLink('Tabela do Brasileirão',$this->createUrl('/bolao/TabelaBrasileirao'),[
 		  'success'=>'js:function(html){ $("#ver-tabela").html(html); }',
@@ -20,6 +21,7 @@
 		]);
 		?>
 	</li>
+	<?php endif; ?>
 </ul>
 <div id='ver-tabela'></div>
 <br>
