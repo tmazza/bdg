@@ -1,57 +1,42 @@
 <div class="uk-panel uk-panel-box uk-panel-box-secondary">
   <h3>Bolões disponíveis</h3>
-  <div class="uk-grid">
-    <div class="uk-width-small-1-1">
-      <table class="uk-table uk-table-condensed uk-table">
-        <tr>
-          <th></th>
-          <th class="uk-text-right">Valor da inscrição</th>
-          <th></th>
-        </tr>
-        <?php foreach ($boloes as $b):?>
-          <tr>
-            <td>
-              <?=$b->nome;?>
-              <?=CHtml::ajaxLink("Regulamento",$this->createUrl('/regulamento/bolao',[
-                'id'=>$b->idBolao,
-              ]),HView::modalUpdate('main-modal-large'),[
-                'class'=>'uk-button uk-button-link uk-button-mini'
-                ])?>
-            </td>
-            <?php if($b->tipoInscricao == Bolao::TipoPago): ?>
-              <td  class="uk-text-right">
-                <span class="uk-badge uk-badge-notification uk-badge-success">
-                  R$ <?=number_format($b->valorInscricao,2,',','.')?>
-                </span>
-              </td>
-              <td class="uk-text-right">
-                <?php
-                echo CHtml::link('Participar',$this->createUrl("/bolao/inscricaoPaga",[
-                  'id'=>$b->idBolao,
-                ]),[
-                  'class'=>'uk-button uk-button-primary',
-                ]);
-                ?>
-              </td>
-            <?php else: ?>
-              <td class="uk-text-right">
-                <span class="uk-badge uk-badge-notification uk-badge-success">
-                  Gratuito
-                </span>
-              </td>
-              <td class="uk-text-right">
-                <?php
-                echo CHtml::link('Participar',$this->createUrl("/bolao/inscricaoGratuita",[
-                  'id'=>$b->idBolao,
-                ]),[
-                  'class'=>'uk-button uk-button-primary',
-                ]);
-                ?>
-              </td>
+  <div class="uk-grid">     
+    <?php foreach ($boloes as $b):?>
+        <div class="uk-width-medium-1-3 uk-width-small-1-1">
+          <div class="uk-thumbnail uk-thumbnail-expand">
+            <?php if(!is_null($b->capa)): ?>
+              <img src="<?=$b->capa;?>" alt="Imagem <?=$b->nome?>">
             <?php endif; ?>
-          </tr>
-        <?php endforeach; ?>
-      </table>
-    </div>
+            <div class="uk-thumbnail-caption">
+              <h3><?=$b->nome;?></h3>
+
+              <div class="uk-text-left">
+                <?=CHtml::ajaxLink("Regulamento",$this->createUrl('/regulamento/bolao',[
+                  'id'=>$b->idBolao,
+                ]),HView::modalUpdate('main-modal-large'),[
+                  'class'=>'uk-button uk-button-link'
+                ]); ?>
+              </div>
+              <hr>
+              <span class="uk-badge uk-badge-notification uk-badge-success uk-float-left">
+              Valor inscrição: 
+                <?php if($b->tipoInscricao == Bolao::TipoPago){
+                  echo 'R$ ' . number_format($b->valorInscricao,2,',','.');
+                  $url='/bolao/inscricaoPaga';
+                } else {
+                  echo 'Gratuito';
+                  $url='/bolao/inscricaoGratuita';
+                } ?>
+              </span>
+              <?= CHtml::link('Participar',$this->createUrl($url,[
+                'id'=>$b->idBolao,
+              ]),[
+                'class'=>'uk-button uk-button-primary uk-float-right',
+              ]); ?>
+            </div>
+        </div>
+      </div>
+    <?php endforeach; ?>
   </div>
 </div>
+
