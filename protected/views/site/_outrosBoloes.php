@@ -19,7 +19,7 @@
               </div>
               <hr>
               <span class="uk-badge uk-badge-notification uk-badge-success uk-float-left">
-              Valor inscrição: 
+              Inscrição: 
                 <?php if($b->tipoInscricao == Bolao::TipoPago){
                   echo 'R$ ' . number_format($b->valorInscricao,2,',','.');
                   $url='/bolao/inscricaoPaga';
