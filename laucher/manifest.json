@@ -1,5 +1,5 @@
 {
-	"name":"tmazza",
+	"name":"Bolão do Gordo",
     "icons": [
 	    {
 	      "src": "/laucher/launcher-icon-0-75x.png",
@@ -38,7 +38,7 @@
 	      "density": 4.0
 	    }
     ],
-	"theme_color": "#ff0000",
-	"background_color": "#0000ff",
-	"start_url": "index.html",
+	"theme_color": "#ffffff",
+	"background_color": "#ffffff",
+	"start_url": "index.php",
 }
