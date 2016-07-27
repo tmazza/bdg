@@ -2,6 +2,8 @@
     <title><?=$this->pagTitulo;?></title>
 
     <meta charset="utf-8" />
+    <link rel="manifest" href="laucher/manifest.json">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?=$this->pagDescricao?>">
     <meta name="keywords" content="<?=$this->pagPalavras?>">
