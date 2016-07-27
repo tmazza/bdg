@@ -9,7 +9,7 @@ class SiteController extends MainController {
     if(Yii::app()->user->isGuest){
       $this->redirect($this->createUrl('/site/login'));
     } else {
-      $outrosBoloes = Bolao::model()->ativo()->userNaoInscrito()->findAll();
+      $outrosBoloes = Bolao::model()->userNaoInscrito()->ativo()->findAll();
       $this->render('index',[
         'outrosBoloes'=>$outrosBoloes,
         'qtdOutros'=>count($outrosBoloes),
