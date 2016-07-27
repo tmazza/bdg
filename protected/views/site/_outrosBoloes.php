@@ -2,7 +2,7 @@
   <h3>Bolões disponíveis</h3>
   <div class="uk-grid">     
     <?php foreach ($boloes as $b):?>
-        <div class="uk-width-medium-1-3 uk-width-small-1-1">
+        <div class="uk-width-medium-1-3 uk-width-large-1-4 uk-width-small-1-2">
           <div class="uk-thumbnail uk-thumbnail-expand">
             <?php if(!is_null($b->capa)): ?>
               <img src="<?=$b->capa;?>" alt="Imagem <?=$b->nome?>">

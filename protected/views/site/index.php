@@ -8,7 +8,7 @@
     <h3>Bolões inscrito</h3>
     <div class="uk-grid">
       <?php foreach ($this->user->boloesInscritos as $b): ?>
-        <div class="uk-width-medium-1-3 uk-width-small-1-1">
+        <div class="uk-width-medium-1-3 uk-width-large-1-4 uk-width-small-1-2">
           <a href='<?=$this->createUrl('/bolao/index',['id'=>$b->idBolao]);?>'>
             <div class="uk-thumbnail uk-thumbnail-expand">
                 <?php if(!is_null($b->capa)): ?>
