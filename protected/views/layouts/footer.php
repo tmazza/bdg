@@ -32,9 +32,9 @@
       </div>
       <div class="uk-width-medium-1-2 uk-text-right uk-text-center-small uk-width-small-1-1">
         <div class='uk-visible-small'><br></div>
-        <a href="https://www.facebook.com/bolaodogordo" class="uk-icon-hover uk-icon-large uk-icon-facebook-official" data-uk-tooltip title="Facebook"></a>&nbsp;&nbsp;
-        <a href="https://twitter.com/bolaodogordo" class="uk-icon-hover uk-icon-large uk-icon-twitter" data-uk-tooltip title="Twitter"></a>&nbsp;&nbsp;
-        <a href="https://github.com/tmazza/bdg" class="uk-icon-hover uk-icon-large uk-icon-github" data-uk-tooltip title="GitHub"></a>
+        <a href="https://www.facebook.com/bolaodogordo" target="_blank" class="uk-icon-hover uk-icon-large uk-icon-facebook-official" data-uk-tooltip title="Facebook"></a>&nbsp;&nbsp;
+        <a href="https://twitter.com/bolaodogordo" target="_blank" class="uk-icon-hover uk-icon-large uk-icon-twitter" data-uk-tooltip title="Twitter"></a>&nbsp;&nbsp;
+        <a href="https://github.com/tmazza/bdg" target="_blank" class="uk-icon-hover uk-icon-large uk-icon-github" data-uk-tooltip title="GitHub"></a>
         <br>
         <div class="uk-hidden-small">
         <div id="fb-root"></div>
