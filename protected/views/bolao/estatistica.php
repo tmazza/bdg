@@ -10,7 +10,6 @@
 
     var options = {
       title: '',
-      // curveType: 'function',
       legend: { position: 'bottom' }
     };
 
@@ -19,10 +18,9 @@
     chart.draw(data, options);
   }
 </script>
-
 <h5 class="uk-text-center"><b>Pontos distribuídos por rodada</b></h5>
 <div id="curve_chart" style="width: 100%"></div>
-
+<br>
 <hr>
 <br>
 <div class="uk-grid">
@@ -82,3 +80,4 @@
     </table>
   </div>
 </div>
+
