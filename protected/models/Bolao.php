@@ -54,6 +54,9 @@ class Bolao extends CActiveRecord
 			'emailDoDia'=>[self::HAS_ONE,'BolaoEmail','idBolao',
 				'condition' => "dia='".date('Y-m-d')."'",
 			],
+			'palpitesProcessados'=>[self::HAS_MANY,'Palpite','idBolao',
+				'condition'=>'pontos IS NOT NULL',
+			],
 		);
 	}
 
@@ -180,4 +183,17 @@ class Bolao extends CActiveRecord
 		}
 	}
 
+	public function getPalpites(){
+		$palpites = [];
+		foreach ($this->palpitesProcessados as $j) {
+			$key = $j->golsMandante.' x '.$j->golsVisitante;
+			if(!isset($palpites[$key])) $palpites[$key]=['q'=>0,'p'=>0];
+			$palpites[$key]['q']++;
+			$palpites[$key]['p']+=$j->pontos;
+		}
+		return [
+			'placares'=>$palpites,
+			'totalQtd'=>array_sum(array_column($palpites, 'q')),
+		];
+	}
 }

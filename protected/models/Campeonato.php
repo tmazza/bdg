@@ -58,6 +58,9 @@ class Campeonato extends CActiveRecord
 			'jogosDeHoje' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
 				'condition'=>"data > '{$inicioDoDiaDeHoje}' AND data <= '{$finalDoDiaDeHoje}'",
 			],
+			'jogosComResultado' => [self::HAS_MANY, 'Jogo', 'codCampeonato',
+				'condition'=>"status = " . Jogo::StatusFechado,
+			],
 
 
 		);
@@ -137,6 +140,21 @@ class Campeonato extends CActiveRecord
 
 	public function temJogosHoje(){
 		return count($this->jogosDeHoje) > 0;
+	}
+
+	public function getPlacares(){
+		$placares = [];
+		foreach ($this->jogosComResultado as $j) {
+			$key = $j->golsMandante.' x '.$j->golsVisitante;
+			if(!isset($placares[$key]))
+				$placares[$key]=0;
+			$placares[$key]++;
+		}
+		arsort($placares);
+		return [
+			'placares'=>$placares,
+			'total'=>array_sum($placares),
+		];
 	}
 
 
