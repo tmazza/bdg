@@ -57,7 +57,7 @@ class MainController extends CController  {
 
     public function actionError() {
         $erro = Yii::app()->errorHandler->error;
-        if(!in_array($erro['code'],array(404)) && $this->sentEmails < 5 && !YII_DEBUG){
+        if(!in_array($erro['code'],array(400,401,402,403,404)) && $this->sentEmails < 5 && !YII_DEBUG){
           $msg = array();
           $msg['erro'] = Yii::app()->errorHandler->error;
           $msg['request'] = Yii::app()->request;
