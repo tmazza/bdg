@@ -27,13 +27,18 @@ class BolaoController extends MainController {
   public function actionIndex($id){
     $bolao = $this->getBolao($id);
     $this->setMenuLateral($bolao);
-    $this->render('index',['bolao'=>$bolao]);
+    $this->render('index',[
+      'bolao'=>$bolao,
+    ]);
   }
 
-  public function actionFechado($id){
+  public function actionFechado($id,$listaCompleta=false){
     $bolao = $this->getBolao($id);
     $this->setMenuLateral($bolao);
-    $this->render('fechado',['bolao'=>$bolao]);
+    $this->render('fechado',[
+      'bolao'=>$bolao,
+      'listaCompleta'=>(bool)$listaCompleta,
+    ]);
   }
 
   public function actionRanking($id){

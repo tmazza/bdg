@@ -152,11 +152,11 @@ class Bolao extends CActiveRecord
 		return $this->filtraJogosDoDia(true);
 	}
 
-	public function getJogosFechados(){
-		return $this->filtraJogosDoDia(false);
+	public function getJogosFechados($limit){
+		return $this->filtraJogosDoDia(false,$limit);
 	}
 
-	private function filtraJogosDoDia($abertos=true){
+	private function filtraJogosDoDia($abertos=true,$limit=false){
 		$dias = $abertos ? $this->campeonato->jogosPorDiaEmAberto() : $this->campeonato->jogosPorDiaFechados();
 		$primeiro = key($dias);
 		if($abertos && $this->campeonato->temJogosHoje() && $this->isDiaFechado()){
@@ -165,7 +165,7 @@ class Bolao extends CActiveRecord
 		if(!$abertos && !$this->isDiaFechado()){
 			unset($dias[$primeiro]);
 		}
-		return $dias;
+		return $limit ? array_slice($dias,0,$limit) : $dias;
 	}
 
 	public function isDiaFechado(){
