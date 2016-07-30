@@ -42,12 +42,22 @@ class Bolao extends CActiveRecord
 	 * @return array relational rules.
 	 */
 	public function relations()
-	{
+	{	
+		$primeiroJogo = mktime(0,0,0,8,4,2016); # 1º jogo OL16M
 		$semanaPasada = time() - 14*24*60*60;
+
+
+		$condCarenciaPag = ' OR (participantes_participantes.status = ' . UserBolao::StatusPendente . ' AND ';
+		
+		$condCarenciaPag .= '(';
+		$condCarenciaPag .= '(participantes_participantes.dataInscricao < ' . $primeiroJogo . ' AND participantes_participantes.idBolao  = 3)';
+		$condCarenciaPag .= ' OR ';
+		$condCarenciaPag .= '(participantes_participantes.dataInscricao > ' . $semanaPasada . ' AND participantes_participantes.idBolao != 3)';
+		$condCarenciaPag .= ')';
 		return array(
 			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)',
 				'condition' => 'participantes_participantes.status = ' . UserBolao::StatusAtivo
-										. ' OR (participantes_participantes.status = ' . UserBolao::StatusPendente . ' AND participantes_participantes.dataInscricao > ' . $semanaPasada . ')'
+										. $condCarenciaPag,
 			],
 			'posicoes'=>[self::HAS_MANY,'Ranking','idBolao','order'=>'pontos DESC,qtdExatos DESC,qtdVencedores DESC'],
 			'campeonato'=>[self::BELONGS_TO,'Campeonato','codCampeonato'],
