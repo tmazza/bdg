@@ -165,7 +165,7 @@ class Bolao extends CActiveRecord
 		if(!$abertos && !$this->isDiaFechado()){
 			unset($dias[$primeiro]);
 		}
-		return $limit ? array_slice($dias,0,$limit) : $dias;
+		return $limit ? array_slice($dias,0,$limit,true) : $dias;
 	}
 
 	public function isDiaFechado(){
