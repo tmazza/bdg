@@ -54,6 +54,7 @@ class Bolao extends CActiveRecord
 		$condCarenciaPag .= ' OR ';
 		$condCarenciaPag .= '(participantes_participantes.dataInscricao > ' . $semanaPasada . ' AND participantes_participantes.idBolao != 3)';
 		$condCarenciaPag .= ')';
+		$condCarenciaPag .= ')';
 		return array(
 			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)',
 				'condition' => 'participantes_participantes.status = ' . UserBolao::StatusAtivo
