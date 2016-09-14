@@ -31,7 +31,7 @@ class MainController extends CController  {
       if(!Yii::app()->user->isGuest){
         $user = User::model()->findByPk((int)Yii::app()->user->id);
         $action = strtolower($this->action->id);
-        $semCadastro = ['logout','dadosadicionais','error'];
+        $semCadastro = ['logout','error'];
         if(!in_array($action,$semCadastro)){
           if(is_null($user)){
             $this->redirect($this->createUrl('/site/logout'));

@@ -9,12 +9,24 @@ class SiteController extends MainController {
     if(Yii::app()->user->isGuest){
       $this->redirect($this->createUrl('/site/login'));
     } else {
-      $outrosBoloes = Bolao::model()->userNaoInscrito()->ativo()->findAll();
+      
+      $boloesInscritos = $this->user->boloesInscritos;
+
+      $boloesNaoInscritos = Bolao::model()
+          ->userNaoInscrito()
+          ->ativo()
+          ->naoEncerrado()
+          ->findAll();
+
+      $boloesEncerrados = Bolao::model()
+          ->ativo()
+          ->encerrado()
+          ->findAll();
+        
       $this->render('index',[
-        'outrosBoloes'=>$outrosBoloes,
-        'qtdOutros'=>count($outrosBoloes),
-        'boloesInscritos'=>$this->user->boloesInscritos,
-        'qtdInscritos'=>count($this->user->boloesInscritos),
+        'boloesNaoInscritos'=>$boloesNaoInscritos,
+        'boloesInscritos'=>$boloesInscritos,
+        'boloesEncerrados'=>$boloesEncerrados,
       ]);
     }
   }
@@ -47,21 +59,6 @@ class SiteController extends MainController {
   public function actionLogout() {
       Yii::app()->user->logout(FALSE);
       $this->redirect(Yii::app()->homeUrl);
-  }
-
-  public function actionDadosAdicionais(){
-    $model = new DadosAdicionaisForm();
-
-    if(isset($_POST['DadosAdicionaisForm'])){
-      $model->attributes = $_POST['DadosAdicionaisForm'];
-      if($model->validate()){
-        echo 'OK!';
-        exit;
-      }
-    }
-    $this->render('dadosAdicionais',[
-      'model'=>$model,
-    ]);
   }
 
 

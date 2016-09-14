@@ -121,6 +121,12 @@ class Bolao extends CActiveRecord
 			'ativo' => [
 				'condition'=>'isAtivo=1',
 			],
+			'encerrado' => [
+				'condition'=>'isEncerrado=1',
+			],
+			'naoEncerrado' => [
+				'condition'=>'isEncerrado=0',
+			],
 		];
 	}
 

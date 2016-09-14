@@ -14,16 +14,23 @@ class BolaoController extends MainController {
   private function setMenuLateral($bolao){
     $labelRank = '<i class="uk-icon uk-icon-trophy"></i><span class="uk-hidden-small"> &nbsp;Ranking</span>';
     $labelStat = '<i class="uk-icon uk-icon-bar-chart"></i><span class="uk-hidden-small"> &nbsp;Estatísticas</span>';
-    $this->menuLateral = [
-      ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])],
-      ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])],
-      ['ranking',$labelRank,$this->createUrl('/bolao/ranking',['id'=>$bolao->idBolao])],
-      ['estatistica',$labelStat,$this->createUrl('/bolao/estatistica',['id'=>$bolao->idBolao])],
-    ];
+    $this->menuLateral = [];
+    if(!$bolao->isEncerrado){
+      $this->menuLateral[] = ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])];
+    }
+    $this->menuLateral[] = ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])];
+    $this->menuLateral[] = ['ranking',$labelRank,$this->createUrl('/bolao/ranking',['id'=>$bolao->idBolao])];
+    $this->menuLateral[] = ['estatistica',$labelStat,$this->createUrl('/bolao/estatistica',['id'=>$bolao->idBolao])];
   }
 
   public function actionIndex($id){
     $bolao = $this->getBolao($id);
+
+    if($bolao->isEncerrado){ # Bolão encerrado tem como página inicial o ranking
+      $this->redirect($this->createUrl('/bolao/ranking',[
+        'id' => $id,
+      ]));
+    }
     $this->setMenuLateral($bolao);
     $this->render('index',[
       'bolao'=>$bolao,
