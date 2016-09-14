@@ -190,7 +190,7 @@ class BolaoController extends MainController {
     return in_array($bolao->idBolao,array_keys($this->getBoloesInscritos()));
   }
 
-  private function getBoloesInscritos(){
+  public function getBoloesInscritos(){
     if(is_null($this->boloesInscritos)){
       $this->boloesInscritos = $this->user->boloesInscritos; 
     }
