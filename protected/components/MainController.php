@@ -35,7 +35,6 @@ class MainController extends CController  {
             $this->redirect($this->createUrl('/site/logout'));
           } else {
             $this->user = $user;
-            $this->user->setOnline();
           }
         }
       }

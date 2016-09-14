@@ -131,13 +131,4 @@ class User extends CActiveRecord
 		return array();
 	}
 
-	public function setOnline(){
-		$this->ultimaInteracao = time();
-		$this->update(['ultimaInteracao']);
-	}
-
-	public function isOnline(){
-		return $this->ultimaInteracao > (time() - 5*60);
-	}
-
 }
