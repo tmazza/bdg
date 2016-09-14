@@ -1,13 +1,13 @@
 <?php
 class BolaoController extends MainController {
 
+  public $boloesInscritos = null;
+
   public function beforeAction($action){
     if(!Yii::app()->user->checkAccess('cliente')){
       HView::ferr("Acesse sua conta.");
       $this->redirect($this->createUrl('/site/login'));
     }
-    $this->layout = '//layouts/menuDireita';
-    $this->viewSecundaria = '//bolao/_menuLateral';
     return parent::beforeAction($action);
   }
 
@@ -183,13 +183,18 @@ class BolaoController extends MainController {
       HView::ferr("Bolão não existe.");
       $this->redirect($this->createUrl('/site/index'));
     }
-    $this->dataViewSecundaria['bolao'] = $bolao;
     return $bolao;
   }
 
   private function isUserInscritoNoBolao($bolao){
-      return in_array($bolao->idBolao,array_keys($this->user->boloesInscritos));
+    return in_array($bolao->idBolao,array_keys($this->getBoloesInscritos()));
   }
 
+  private function getBoloesInscritos(){
+    if(is_null($this->boloesInscritos)){
+      $this->boloesInscritos = $this->user->boloesInscritos; 
+    }
+    return $this->boloesInscritos;
+  }
 
 }

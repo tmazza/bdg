@@ -17,8 +17,6 @@ class MainController extends CController  {
     public $user = false;
 
     public $menuLateral = [];
-    public $viewSecundaria = false;
-    public $dataViewSecundaria = [];
 
 
     protected function beforeAction($action) {
