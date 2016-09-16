@@ -13,7 +13,7 @@
     $algumPendente = false;
     ?>
     <?php if(count($posicoes)>0):?>
-      <table class="uk-table uk-table-condensed uk-table-striped">
+      <table class="uk-table uk-table-striped">
         <tr>
           <th>#</th>
           <th></th>
@@ -42,6 +42,23 @@
             <td><?=$count?>º</td>
             <td>
               <?=CHtml::encode(ucfirst($p->user->nome));?>
+              <?php
+              $conquistas = $p->user->conquistas;
+              if(count($conquistas) > 0){
+                foreach ($conquistas as $c) {
+                  $img = CHtml::image($c->badge,'',[
+                    'style' => 'max-width:30px;padding:2px;'
+                  ]);
+                  echo CHtml::link($img,$this->createUrl('/bolao/index',[
+                    'id' => $c->idBolao,
+                  ]),[
+                    'data-uk-tooltip'=>'{animation:"fade"}',
+                    'title' => $c->titulo,
+                    'class' => 'inline-badge'
+                  ]);
+                }
+              }
+              ?>
             </td>
             <td class="uk-text-right uk-hidden-small"><?=$p->qtdExatos?></td>
             <td class="uk-text-right uk-hidden-small"><?=$p->qtdVencedores?></td>

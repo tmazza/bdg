@@ -52,6 +52,7 @@ class User extends CActiveRecord
 				'condition'=>'boloesInscritos_boloesInscritos.status IN ('.UserBolao::StatusAtivo.','.UserBolao::StatusPendente.')',
 				'index'=>'idBolao',
 			],
+			'conquistas' => [self::HAS_MANY,'Conquista','idUsuario'],
 		);
 	}
 

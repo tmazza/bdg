@@ -28,3 +28,16 @@
   background: #ccc!important;
 }
 
+.inline-badge {
+  display:inline-block;
+  height:36px;
+  background: white;
+  border-radius:2px;
+  box-shadow:0px 1px 1px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.24) !important;
+  margin-right: 3px;
+  vertical-align: top;
+}
+
+.inline-badge:hover {
+  box-shadow:0px 1px 6px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.24) !important;
+}
