@@ -14,11 +14,6 @@
                   </div>
               </div>
             </a>
-            <?php if($b->isUserPendente()){
-              $this->renderPartial('_inscricaoPendente',[
-                'b'=>$b,
-              ]);
-            } ?>
           </div>
       <?php endforeach; ?>
     </div>
