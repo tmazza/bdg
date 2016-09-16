@@ -4,7 +4,7 @@ class BolaoController extends MainController {
   public $boloesInscritos = null;
 
   public function beforeAction($action){
-    if(!Yii::app()->user->checkAccess('cliente')){
+    if(Yii::app()->user->isGuest || !Yii::app()->user->checkAccess('cliente')){
       HView::ferr("Acesse sua conta.");
       $this->redirect($this->createUrl('/site/login'));
     }
@@ -181,7 +181,7 @@ class BolaoController extends MainController {
 
   private function getBolao($id){
     $bolao = Bolao::model()->findByPk((int)$id);
-    if(is_null($bolao) || !$this->isUserInscritoNoBolao($bolao)){
+    if((is_null($bolao) || !$this->isUserInscritoNoBolao($bolao)) && !$bolao->isEncerrado){
       HView::ferr("Bolão não existe.");
       $this->redirect($this->createUrl('/site/index'));
     }
