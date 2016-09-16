@@ -181,7 +181,8 @@ class BolaoController extends MainController {
 
   private function getBolao($id){
     $bolao = Bolao::model()->findByPk((int)$id);
-    if((is_null($bolao) || !$this->isUserInscritoNoBolao($bolao)) && !$bolao->isEncerrado){
+
+    if(is_null($bolao) || !($bolao->isEncerrado || $this->isUserInscritoNoBolao($bolao))) {
       HView::ferr("Bolão não existe.");
       $this->redirect($this->createUrl('/site/index'));
     }

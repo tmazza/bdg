@@ -54,7 +54,7 @@
                   ]),[
                     'data-uk-tooltip'=>'{animation:"fade"}',
                     'title' => $c->titulo,
-                    'class' => 'inline-badge'
+                    'class' => 'inline-badge uk-animation-scale-up'
                   ]);
                 }
               }
