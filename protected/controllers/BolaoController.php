@@ -12,10 +12,12 @@ class BolaoController extends MainController {
   }
 
   private function setMenuLateral($bolao){
-    $labelRank = '<i class="uk-icon uk-icon-trophy"></i><span class="uk-hidden-small"> &nbsp;Ranking</span>';
     $labelStat = '<i class="uk-icon uk-icon-bar-chart"></i><span class="uk-hidden-small"> &nbsp;Estatísticas</span>';
     $this->menuLateral = [];
-    if(!$bolao->isEncerrado){
+    if($bolao->isEncerrado){
+      $labelRank = '<i class="uk-icon uk-icon-trophy"></i><span class="uk-hidden-small"> &nbsp;Resultados</span>';
+    } else {
+      $labelRank = '<i class="uk-icon uk-icon-trophy"></i><span class="uk-hidden-small"> &nbsp;Ranking</span>';
       $this->menuLateral[] = ['index','Em aberto',$this->createUrl('/bolao/index',['id'=>$bolao->idBolao])];
     }
     $this->menuLateral[] = ['fechado','Fechados',$this->createUrl('/bolao/fechado',['id'=>$bolao->idBolao])];

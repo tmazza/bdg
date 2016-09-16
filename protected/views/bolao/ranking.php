@@ -1,4 +1,11 @@
 <?php $this->renderPartial('_headerBolao',['bolao'=>$bolao]); ?>
+
+<?php if($bolao->isEncerrado): ?>
+  <?php $this->renderPartial('_bolaoEncerrado',[
+    'bolao' => $bolao,
+  ]); ?>
+<?php endif; ?>
+
 <div class="uk-grid">
   <div class='uk-width-medium-7-10 uk-width-small-1-1'>
     <?php 

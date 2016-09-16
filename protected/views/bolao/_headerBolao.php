@@ -47,7 +47,7 @@
 </div>
 
 <?php
-if($bolao->isUserPendente()){
+if($bolao->isUserPendente() && !$bolao->isEncerrado){
   echo '<br>';
   $this->renderPartial('/site/_inscricaoPendente',[
     'b'=>$bolao,

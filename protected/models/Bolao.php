@@ -68,6 +68,7 @@ class Bolao extends CActiveRecord
 			'palpitesProcessados'=>[self::HAS_MANY,'Palpite','idBolao',
 				'condition'=>'pontos IS NOT NULL',
 			],
+			'userVencedor' => [self::BELONGS_TO,'User','vencedor'],
 		);
 	}
 
@@ -212,5 +213,9 @@ class Bolao extends CActiveRecord
 			'placares'=>$palpites,
 			'totalQtd'=>array_sum(array_column($palpites, 'q')),
 		];
+	}
+
+	public function getTextoVitoria(){
+		return 'Campeã' . ($this->isVencedorFem ? '' : 'o') . ' do ' . $this->nome;
 	}
 }
