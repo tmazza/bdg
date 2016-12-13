@@ -1,3 +1,4 @@
+<?php if(count($boloesInscritos) > 0): ?>
   <br>
   <div class="uk-panel uk-panel-box uk-panel-box-secondary">
     <h3>Bolões inscrito</h3>
@@ -25,3 +26,4 @@
       <?php endforeach; ?>
     </div>
   </div>
+<?php endif; ?>
