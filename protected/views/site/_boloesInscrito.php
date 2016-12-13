@@ -1,4 +1,10 @@
-<?php if(count($boloesInscritos) > 0): ?>
+<?php
+$hasInscrito = false;
+foreach ($boloesInscritos as $b){
+  if(!$b->isEncerrado){ $hasInscrito = true; }
+} ?>
+
+<?php if($hasInscrito): ?>
   <br>
   <div class="uk-panel uk-panel-box uk-panel-box-secondary">
     <h3>Bolões inscrito</h3>
