@@ -7,7 +7,8 @@ class SiteController extends MainController {
 
   public function actionIndex(){
     if(Yii::app()->user->isGuest){
-      $this->redirect($this->createUrl('/site/login'));
+      Yii::app()->theme = '2017onlyHome';
+      $this->render('home');
     } else {
       
       $boloesInscritos = $this->user->boloesInscritos;

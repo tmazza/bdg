@@ -41,7 +41,7 @@ class MainController extends CController  {
     }
 
     private function addScripts(){
-      $this->assetsDir = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.webroot'), false, -1, YII_DEBUG ? true : null);
+      $this->assetsDir = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.webroot'), false, -1, YII_DEBUG);
       if (Yii::app()->request->isAjaxRequest) {
         Yii::app()->clientScript->scriptMap['jquery.js'] = false;
         Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
