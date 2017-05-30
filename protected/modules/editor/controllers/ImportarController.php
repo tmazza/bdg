@@ -18,6 +18,7 @@ class ImportarController extends EditorController {
         $model->attributes = $_POST['ImportaJogos'];
         if($model->validate()){
           $nomes = CHtml::listData($equipes,'id',function($m){ return strtolower($m->nome); });
+          uasort($nomes,function($a,$b) { return strlen($a)<strlen($b); });
           $model->codJogos = str_replace($nomes,array_keys($nomes),strtolower($model->jogos));
           $jogos = $model->aplicaFormato();
         }
