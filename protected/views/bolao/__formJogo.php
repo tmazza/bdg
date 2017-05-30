@@ -38,6 +38,16 @@
             </span>
             <?=$j->visitante->abreviacao;?>
           </span>
+          <?php if($j->complemento): ?>
+            <div class="uk-float-right">
+              <?php if($j->complemento == Jogo::SerieA): ?>
+                <span class="uk-badge uk-badge-success">A</span>
+              <?php endif; ?>
+              <?php if($j->complemento == Jogo::SerieB): ?>
+                <span class="uk-badge uk-badge-danger">B</span>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
         </td>
       </tr>
     <?php endforeach; ?>

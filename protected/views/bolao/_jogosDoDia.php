@@ -1,7 +1,7 @@
 <?php
 $fechamento = $bolao->getHoraFechamento($jogos);
 ?>
-<div class="uk-panel uk-panel-box" >
+<div class="uk-panel uk-panel-box" style="padding: 10px;">
   <h4>
     <?=HView::tradDia(date('l, d/m',$dia));?>
     <small>

@@ -34,6 +34,8 @@ class Jogo extends CActiveRecord
 	const PUmPlacar = 3;
 	const PNada = 0;
 
+	const SerieA = 1;
+	const SerieB = 2;
 
 	/**
 	 * @return string the associated database table name
@@ -50,7 +52,7 @@ class Jogo extends CActiveRecord
 	{
 		return array(
 			array('codCampeonato, equipeMandante, equipeVisitante, data', 'required'),
-			array('equipeMandante, equipeVisitante, golsMandante, golsVisitante,numJogo', 'numerical', 'integerOnly'=>true),
+			array('equipeMandante, equipeVisitante, golsMandante, golsVisitante,numJogo,complemento', 'numerical', 'integerOnly'=>true),
 			array('codCampeonato', 'length', 'max'=>5),
 			array('vencedor,status', 'length', 'max'=>1),
 			array('codCampeonato, idJogo, equipeMandante, equipeVisitante, golsMandante, golsVisitante, vencedor', 'safe', 'on'=>'search'),
