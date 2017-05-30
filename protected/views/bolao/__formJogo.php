@@ -44,7 +44,7 @@
                 <span class="uk-badge uk-badge-success">A</span>
               <?php endif; ?>
               <?php if($j->complemento == Jogo::SerieB): ?>
-                <span data-uk-tooltip="" title="Este jogo está ocorrendo na série B do campeonato" class="uk-badge" style="background: transparent!important; color:black!important;">B</span>
+                <span data-uk-tooltip="" title="Este jogo está ocorrendo na série B do campeonato" class="uk-badge" style="font-weight: normal!important;background: transparent!important; color:black!important;">B</span>
               <?php endif; ?>
             </div>
           <?php endif; ?>
