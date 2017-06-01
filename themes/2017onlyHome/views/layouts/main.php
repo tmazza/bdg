@@ -42,8 +42,10 @@
         <p>Ganhe prêmios e divirta-se junto com amigos e familiares</p>
         <ul class="actions">
           <li>
-            <a href="#conheca" class="button big">Conheça</a>
-            <a href="<?=$this->createUrl('/cadastro/index');?>" class="button big" style='background: transparent;'>
+            <a href="<?=$this->createUrl('/site/login');?>" class="button big" style='background: transparent;'>
+              Entrar
+            </a>
+            <a href="<?=$this->createUrl('/cadastro/index');?>" class="button big">
               Cadastre-se
             </a>
           </li>
