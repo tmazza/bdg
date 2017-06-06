@@ -52,125 +52,55 @@
         </ul>
       </section>
 
-    <!-- One -->
+    <section id="conheca" class="wrapper style1 special">
+      <div class="container">
+        <header class="major">
+          <h2>Todo dia tem jogo !!</h2>
+          <p>Em 2017 o bolão terá jogos das séries A e B do Brasileirão! Isso significa que tem jogo todos os dias da semana. Nesse ano, teremos apenas o bolão pago.</p>
+        </header>
+      </div>
+      <div class="container">
+        <header class="major">
+          <h2>Como funciona?</h2>
+          <p>
+            Você cadastra seus palpites até meia hora antes do primeiro jogo do dia, e vai acumulando pontos em cada jogo.
+            <br>
+            Os primeiros colocados no final do campeonatos ganham prêmios em dinheiro.
+            <?=CHtml::link("Clique aqui",$this->createUrl('/regulamento/geral'))?> e veja como funciona o sistema de pontuação.
 
-      <section id="conheca" class="wrapper style1 special">
-        <div class="container">
-          <header class="major">
-            <h2>Bolão 2017</h2>
-            <p>Neste ano teremos o bolão pago do Brasileirão de 2017 série A. <!-- O valor da inscrição é R$ 50,00. --></p>
-          </header>
-        </div>
-      </section>
+            <br><br>
+            Faça sua inscrição, o Bolão do Gordo 2017 inicia no dia 10/06.
+            <br>
+            <a href="<?=$this->createUrl('/site/login');?>">Conhecer</a>
+          </p>
+        </header>
+      </div>
+    </section>
 
-    <!--
-      <section id="conheca" class="wrapper style1 special">
-        <div class="container">
-          <header class="major">
-            <h2>Como funciona</h2>
-            <p>Modalidade paga e modalidade gratuita. Como assim?</p>
-          </header>
-          <div class="row ">
-            <div class="6u 6u$(medium) 12u$(small)">
-              <section class="box">
-                <i class="icon big rounded color1 fa-cloud"></i>
-                <h3>Lorem ipsum dolor</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim quam consectetur quibusdam magni minus aut modi aliquid.</p>
-              </section>
-            </div>
-            <div class="6u 6u$(medium) 12u$(small)">
-              <section class="box">
-                <i class="icon big rounded color6 fa-rocket"></i>
-                <h3>Adipisicing elit totam</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque eaque eveniet, nesciunt molestias. Ipsam, voluptate vero.</p>
-              </section>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="two" class="wrapper style2 special">
-        <div class="container">
-          <header class="major">
-            <h2>Depoimento dos campeões</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, autem.</p>
-          </header>
-          <section class="profiles">
-            <div class="row">
-              <section class="3u 6u(medium) 12u$(xsmall) profile">
-                <img src="<?//=$this->assetsDir;?>/2017onlyHome/images/profile_placeholder.gif" alt="" />
-                <h4>Lorem ipsum</h4>
-                <p>Lorem ipsum dolor</p>
-              </section>
-              <section class="3u 6u$(medium) 12u$(xsmall) profile">
-                <img src="<?//=$this->assetsDir;?>/2017onlyHome/images/profile_placeholder.gif" alt="" />
-                <h4>Voluptatem dolores</h4>
-                <p>Ullam nihil repudi</p>
-              </section>
-              <section class="3u 6u(medium) 12u$(xsmall) profile">
-                <img src="<?//=$this->assetsDir;?>/2017onlyHome/images/profile_placeholder.gif" alt="" />
-                <h4>Doloremque quo</h4>
-                <p>Harum corrupti quia</p>
-              </section>
-              <section class="3u$ 6u$(medium) 12u$(xsmall) profile">
-                <img src="<?//=$this->assetsDir;?>/2017onlyHome/images/profile_placeholder.gif" alt="" />
-                <h4>Voluptatem dicta</h4>
-                <p>Et natus sapiente</p>
-              </section>
-            </div>
-          </section>
-          <footer>
-            <p>
-            Explicar que existe um periodo em que é possível participar do bolão pago sem precisar pagar  ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam dolore illum, temporibus veritatis eligendi, aliquam, dolor enim itaque veniam aut eaque sequi qui quia vitae pariatur repudiandae ab dignissimos ex!</p>
-            <ul class="actions">
-              <li>
-                <a href="<?//=$this->createUrl('/cadastro/index');?>" class="button big">Comece agora</a>
-              </li>
-            </ul>
-          </footer>
-        </div>
-      </section>
-    -->
     <!-- Footer -->
       <footer id="footer">
         <div class="container">
-          <section class="links">
-            <div class="row">
-              <section class="3u 6u(medium) 12u$(small)">
+          <section class="links" style="padding-bottom: 0px;">
                 <ul class="">
                   <li><?=CHtml::link("<i class='uk-icon uk-icon-soccer-ball-o'></i> Regulamento geral",$this->createUrl('/regulamento/geral'),['class'=>'uk-button uk-button-link'])?></li>
                   <li><?=CHtml::link("Sobre o PagSeguro",'https://pagseguro.uol.com.br/para_voce/como_funciona.jhtml',['class'=>'uk-button uk-button-link'])?></li>
                   <li><?=CHtml::link("<i class='uk-icon uk-icon-bug'></i> Reportar um erro",'https://github.com/tmazza/BdG/issues/new',['class'=>'uk-button uk-button-link'])?></li>
                 </ul>
-              </section>
-              <section class="3u 6u$(medium) 12u$(small)">
-              </section>
-              <section class="3u 6u(medium) 12u$(small)">
-              </section>
-              <section class="3u$ 6u$(medium) 12u$(small)">
-              </section>
-            </div>
           </section>
-          <div class="row">
-            <div class="8u 12u$(medium)">
-              <ul class="copyright">
-                <li>&copy; Untitled. All rights reserved.</li>
-                <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-              </ul>
-            </div>
-            <div class="4u$ 12u$(medium)">
-              <ul class="icons">
-                <li>
-                    <a href="https://www.facebook.com/bolaodogordo" target="_blank" class="icon rounded fa-facebook" data-uk-tooltip title="Facebook"><span class="label">Facebook</span></a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/bolaodogordo" target="_blank" class="icon rounded fa-twitter" data-uk-tooltip title="Twitter"><span class="label">Twitter</span></a>
-                </li>
-                <li>
-                    <a href="https://github.com/tmazza/bdg" target="_blank" class="icon rounded fa-github" data-uk-tooltip title="GitHub"><span class="label">Github</span></a>
-                </li>
-              </ul>
-            </div>
+          <div >
+            Design by <a href="http://templated.co">templated</a> | Code at
+            <a href="https://github.com/tmazza/bdg" target="_blank" title="GitHub">Github</a>
+
+            <ul style="float: right;" class="icons">
+              <li>
+                  <a href="https://www.facebook.com/bolaodogordo" target="_blank" class="icon rounded fa-facebook" data-uk-tooltip title="Facebook"><span class="label">Facebook</span></a>
+              </li>
+              <li>
+                  <a href="https://twitter.com/bolaodogordo" target="_blank" class="icon rounded fa-twitter" data-uk-tooltip title="Twitter"><span class="label">Twitter</span></a>
+              </li>
+              <li>
+              </li>
+            </ul>
           </div>
         </div>
       </footer>
