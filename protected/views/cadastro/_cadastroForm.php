@@ -7,8 +7,7 @@ $form=$this->beginWidget('CActiveForm', array(
     ),
 ));
 ?>
-<fieldset>
-    <legend>Criar uma conta</legend>
+    <b>Criar uma conta</b>
     <div class="uk-grid">
       <div class="uk-width-small-1-1">
         <?php echo $form->labelEx($model,'nome'); ?>
@@ -32,8 +31,7 @@ $form=$this->beginWidget('CActiveForm', array(
       </div>
     </div>
     <br>
-    <div class="uk-text-right">
+    <div class="">
       <?php echo CHtml::submitButton('Criar', array('class'=>'uk-button uk-button-primary','style'=>'color:white;')); ?>
     </div>
-</fieldset>
 <?php $this->endWidget(); ?>

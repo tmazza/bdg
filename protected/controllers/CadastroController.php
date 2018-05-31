@@ -3,6 +3,8 @@
 class CadastroController extends MainController {
 
   public function actionIndex(){
+    $this->centerLogo = true;
+    $this->layout = 'mainNoBox';
     $model = new CadastroForm;
 
     if (isset($_POST['CadastroForm'])) {

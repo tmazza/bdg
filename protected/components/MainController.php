@@ -17,6 +17,7 @@ class MainController extends CController  {
     public $user = false;
 
     public $menuLateral = [];
+    public $centerLogo = false;
 
 
     protected function beforeAction($action) {

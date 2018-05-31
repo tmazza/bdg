@@ -7,7 +7,7 @@ class SiteController extends MainController {
 
   public function actionIndex(){
     if(Yii::app()->user->isGuest){
-      Yii::app()->theme = '2017onlyHome';
+      Yii::app()->theme = '2018';
       $this->render('home');
     } else {
       
@@ -33,6 +33,8 @@ class SiteController extends MainController {
   }
 
   public function actionLogin($rt=false) {
+    $this->centerLogo = true;
+    $this->layout = 'mainNoBox';
     $this->trataLoginSocial();
     $model = new LoginForm;
     if (isset($_POST['LoginForm'])) {
