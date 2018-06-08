@@ -1,34 +1,15 @@
 <?php
 
-/**
- * This is the model class for table "bolao".
- *
- * The followings are the available columns in table 'bolao':
- * @property string $codCampeonato
- * @property integer $idBolao
- * @property string $tipoInscricao
- * @property integer $valorInscricao
- * @property integer $prazo
- */
-class Bolao extends CActiveRecord
-{
+class Bolao extends CActiveRecord {
 
 	const TipoPago = 1;
 	const TipoAberto = 2;
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
+	public function tableName() {
 		return 'bolao';
 	}
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
+	public function rules() {
 		return array(
 			array('codCampeonato, tipoInscricao, valorInscricao, prazo', 'required'),
 			array('valorInscricao, prazo', 'numerical', 'integerOnly'=>true),
@@ -38,11 +19,7 @@ class Bolao extends CActiveRecord
 		);
 	}
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{	
+	public function relations() {	
 		$primeiroJogo = self::dataCarencia();
 		$semanaPasada = time() - 14*24*60*60;
 
@@ -71,6 +48,9 @@ class Bolao extends CActiveRecord
 				'condition'=>'pontos IS NOT NULL',
 			],
 			'userVencedor' => [self::BELONGS_TO,'User','vencedor'],
+			'qualquerParticipante' => [self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)', 
+				'order' => 'qualquerParticipante.nome',
+			], 
 		);
 	}
 

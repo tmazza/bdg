@@ -3,29 +3,6 @@
   <div class='uk-width-medium-7-10 uk-width-small-1-1'>
     <?php if(count($resultados['placares']) > 0): ?>
 
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-      <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-          var data = google.visualization.arrayToDataTable(<?=$pontosPorRodada?>);
-
-          var options = {
-            title: '',
-            legend: { position: 'bottom' }
-          };
-
-          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-          chart.draw(data, options);
-        }
-      </script>
-      <h5 class="uk-text-center"><b>Pontos distribuídos por rodada</b></h5>
-      <div id="curve_chart" style="width: 100%"></div>
-      <br>
-      <hr>
-      <br>
       <div class="uk-grid">
         <!-- RESULTADOS  -->
         <div class="uk-width-1-2">
@@ -85,8 +62,8 @@
       </div>
     <?php else: ?>
       <br>
-      <div class="uk-alert">
-        Nenhum resultado.
+      <div class="uk-alert" style="font-size: 18px;line-height: 26px;max-width: 320px;">
+        <b>Mais informações após o resultado do primeiro jogo.</b><br>
       </div>
     <?php endif; ?>
    

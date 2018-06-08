@@ -75,9 +75,13 @@
         <span class="uk-badge pendente uk-margin uk-text-danger">Legenda: Inscrição não confirmada.</span>
       <?php endif;?>
     <?php else: ?>
+      <?php
+      $todosParticipantes = $bolao->qualquerParticipante;
+      ?>
       <br>
-      <div class="uk-alert">
-        Nenhum resultado.
+      <div class="uk-alert" style="font-size: 18px;line-height: 26px;max-width: 320px;">
+        <b>Resultados iniciais em breve!</b><br>
+        <?=count($todosParticipantes)?> pessoas já deram seus palpites
       </div>
     <?php endif; ?>
   </div>
