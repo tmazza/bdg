@@ -23,13 +23,14 @@
 	<?php endif; ?>
 </ul>
 <div id='ver-tabela'></div>
+<?php
+/*
 <hr>
 <div id="disqus_thread"></div>
 <script>
-
 var disqus_config = function () {
-  this.page.url = '<?=Yii::app()->baseUrl;?>';
-  this.page.identifier = '<?=Yii::app()->baseUrl.'/bolao/index/id/'.$bolao->idBolao;?>';
+  this.page.url = '<?//=Yii::app()->baseUrl;?>';
+  this.page.identifier = '<?//=Yii::app()->baseUrl.'/bolao/index/id/'.$bolao->idBolao;?>';
 };
 (function() {
 var d = document, s = d.createElement('script');
@@ -39,8 +40,9 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                            
 <hr>
+  */                          
+?>
 
 <!-- Ads -->
 <br>
