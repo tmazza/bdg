@@ -23,6 +23,25 @@
 	<?php endif; ?>
 </ul>
 <div id='ver-tabela'></div>
+<hr>
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+  this.page.url = '<?=Yii::app()->baseUrl;?>';
+  this.page.identifier = '<?=Yii::app()->baseUrl.'/bolao/index/id/'.$bolao->idBolao;?>';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://bolaodogordo-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+<hr>
+
 <!-- Ads -->
 <br>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -34,3 +53,5 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
+
