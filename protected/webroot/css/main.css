@@ -1,6 +1,5 @@
 html {
-  background: #213218 url('/images/a.png') no-repeat;
-  background-size: cover;
+  background: #e7e7e7;
 }
 
 .errorMessage {color:red;}
