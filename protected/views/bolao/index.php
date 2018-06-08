@@ -18,3 +18,11 @@
     ]); ?>
   </div>
 </div>
+
+  <?php
+    echo CHtml::ajaxLink("Regulamento desse bolão",$this->createUrl('/regulamento/bolao',[
+    'id'=>$bolao->idBolao,
+  ]), HView::modalUpdate('main-modal-large'),[
+    'class'=>'uk-button',
+  ]);
+  ?>

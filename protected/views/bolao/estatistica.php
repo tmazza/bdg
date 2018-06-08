@@ -62,7 +62,7 @@
       </div>
     <?php else: ?>
       <br>
-      <div class="uk-alert" style="font-size: 18px;line-height: 26px;max-width: 320px;">
+      <div class="uk-alert" style="margin: 0 auto;font-size: 18px;line-height: 26px;max-width: 320px;">
         <b>Mais informações após o resultado do primeiro jogo.</b><br>
       </div>
     <?php endif; ?>

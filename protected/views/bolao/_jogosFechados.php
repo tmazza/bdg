@@ -1,7 +1,8 @@
-<div class="uk-panel uk-panel-box" >
-  <h4><?=HView::tradDia(date('l, d/m',$dia));?></h4>
+<div class="uk-panel uk-panel-box" style="padding: 10px;max-width: 600px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24) !important;background: #ffffff;margin:0 auto;border-radius: 0px;">
+  <h4>
+    <b><?=HView::tradDia(date('l, d/m',$dia));?></b>
+  </h4>
   <div>
-    <hr>
     <table class="uk-table uk-table-condensed">
       <tr>
         <th class="uk-hidden-small">Horário</th>
@@ -76,7 +77,6 @@
             <b><?=$j->getPontosObtidos($bolao);?></b>
           </td>
         </tr>
-        <tr><td colspan="4"><br></td></tr>
       <?php endforeach; ?>
     </table>
   </div>

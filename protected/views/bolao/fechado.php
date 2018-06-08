@@ -20,7 +20,7 @@
       ]);
     }
   } else {
-    echo '<br><div class="uk-alert" style="font-size: 18px;line-height: 26px;max-width: 320px;">';
+    echo '<br><div class="uk-alert" style="margin: 0 auto;font-size: 18px;line-height: 26px;max-width: 320px;">';
     echo '<b>Nenhum jogo finalizado.</b><br>';
     echo '</div>';
   }

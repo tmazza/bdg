@@ -6,19 +6,7 @@
   } ?>
 </ul>
 
-<br><hr>
-
 <ul class="uk-nav">
-	<!-- Regulamento -->
-  	<li>
-  	<?php
-  	echo CHtml::ajaxLink("&nbsp;&nbsp;&nbsp;&nbsp;Regulamento desse bolão",$this->createUrl('/regulamento/bolao',[
-		'id'=>$bolao->idBolao,
-	]),HView::modalUpdate('main-modal-large'),[
-	  'class'=>'uk-button',
-	]);
-	?>
-	</li>
 	<!-- Tabela do brasilerio -->
 	<?php if(substr($bolao->codCampeonato, 0,3) == 'BRA'): ?>
 	<li class="uk-hidden-small">

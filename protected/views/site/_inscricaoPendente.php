@@ -2,7 +2,7 @@
 $inscricao = $b->getInscricao(Yii::app()->user->id);
 ?>
 <?php if(!is_null($inscricao)): ?>
-  <div class="uk-alert uk-alert-danger">
+  <div class="uk-alert uk-alert-danger" style="max-width: 600px;margin: 0 auto;margin-bottom:12px;">
     <a href="#!" class="uk-alert-close uk-close" onclick="$(this).parent().remove()"></a>
     <b>Sua inscrição nesse bolão está pendente.</b>
     Efetue o pagamento até

@@ -1,30 +1,27 @@
 <?php
 $fechamento = $bolao->getHoraFechamento($jogos);
 ?>
-<div class="uk-panel uk-panel-box" style="padding: 10px;">
-  <h4>
-    <?=HView::tradDia(date('l, d/m',$dia));?>
-    <small>
-      <div data-uk-tooltip='' class="uk-float-right" title='Após este horário você não poderá salvar os palpites do dia.'>
-        <div class="uk-hidden-small">
-          Fecha às <?=HView::tradDia(date('H:i:s \d\e l',$fechamento-1))?>
-        </div>
-        <div class="uk-visible-small">
-          Fecha às <?=date('H:i:s',$fechamento-1)?>
-        </div>
-      </div>
-    </small>
+<div class="uk-panel uk-panel-box" style="padding: 10px;max-width: 450px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24) !important;background: #ffffff;margin:0 auto;border-radius: 0px;">
+  <h4 style="margin-bottom: 0px;">
+    <b><?=HView::tradDia(date('l, d/m',$dia));?></b>
   </h4>
+  <small>
+    <div data-uk-tooltip='' title='Após este horário você não poderá salvar os palpites do dia.'>
+      Fecha às <?=HView::tradDia(date('H:i:s \d\e l',$fechamento-1))?>
+    </div>
+  </small>
+  <br>
   <div>
-    <hr>
     <?=CHtml::beginForm('','POST',['id'=>'form-'.$dia,'class'=>'uk-form']);?>
       <input type='hidden' name='dia' value='<?=$dia?>' />
       <input type='hidden' name='bolao' value='<?=$bolao->idBolao?>' />
-      <?php $this->renderPartial('__formJogo',[
+      <?php
+      $this->renderPartial('__formJogo',[
         'jogos'=>$jogos,
         'dia'=>$dia,
         'bolao'=>$bolao,
-      ]);?>
+      ]);
+      ?>
       <br>
       <?php
       echo CHtml::ajaxSubmitButton('Atualizar palpite',$this->createUrl('/bolao/salvaPalpite'),[
@@ -44,8 +41,8 @@ $fechamento = $bolao->getHoraFechamento($jogos);
         }",
       ],[
         'id'=>'btn-dia-'.$dia,
-        'class'=>'uk-button uk-button-primary',
-        'style'=>'color:white',
+        'class'=>'uk-button uk-button-success',
+        'style'=>'color:white;',
       ]);?>
       <div id='status-<?=$dia?>' class="uk-float-right"></div>
     <?=CHtml::endForm();?>
