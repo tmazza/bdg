@@ -8,10 +8,11 @@ $inscricao = $b->getInscricao(Yii::app()->user->id);
     Efetue o pagamento até
     <?php
     $data = $inscricao->dataInscricao;
-    if($b->codCampeonato == 'OL16M')
-      echo HView::tradDia(date('l, d/m',mktime(0,0,0,8,4,2016)));
-    else
+    if($b->codCampeonato == 'COP18'){
+      echo HView::tradDia(date('l, d/m',Bolao::dataCarencia()));
+    } else {
       echo HView::tradDia(date('l, d/m',$data+14*24*60*60));
+    }
     ?>.
     <br>
     Após esta data suas apostas não serão consideradas enquanto a inscrição não for ativada.

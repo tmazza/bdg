@@ -43,7 +43,7 @@ class Bolao extends CActiveRecord
 	 */
 	public function relations()
 	{	
-		$primeiroJogo = mktime(0,0,0,10,06,2018); # 1º jogo do brasil COP18
+		$primeiroJogo = self::dataCarencia();
 		$semanaPasada = time() - 14*24*60*60;
 
 
@@ -219,5 +219,9 @@ class Bolao extends CActiveRecord
 
 	public function getTextoVitoria(){
 		return 'Campeã' . ($this->isVencedorFem ? '' : 'o') . ' do ' . $this->nome;
+	}
+
+	public static function dataCarencia() {
+		return mktime(0,0,0,06,10,2018); # 1º jogo do brasil COP18
 	}
 }
