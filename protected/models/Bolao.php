@@ -202,6 +202,6 @@ class Bolao extends CActiveRecord {
 	}
 
 	public static function dataCarencia() {
-		return mktime(23, 59, 59, 06, 10, 2018); # 1º jogo do brasil COP18
+		return mktime(23, 59, 59, 06, 17, 2018); # 1º jogo do brasil COP18
 	}
 }
