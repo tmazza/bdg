@@ -1,3 +1,8 @@
+html {
+  background: #213218 url('/images/a.png') no-repeat;
+  background-size: cover;
+}
+
 .errorMessage {color:red;}
 #header {
   margin-bottom:12px;

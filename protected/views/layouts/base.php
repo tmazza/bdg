@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='pt' style="background:#dedede;">
+<html lang='pt'>
     <?php $this->renderPartial('//layouts/head'); ?>
     <body>
       <div id='header'>
@@ -12,7 +12,7 @@
             </div>
           <?php else: ?>
             <a href="<?=$this->createUrl('/site/index')?>" class="" style="padding:10px 2px;">
-              <?=CHtml::image($this->assetsDir.'/images/logo.png','Bolão do Gordo',['style'=>'width:140px;']);?>
+              <?=CHtml::image($this->assetsDir.'/images/logo-single.png','Bolão do Gordo',['style'=>'width:80px;']);?>
             </a>
           <?php endif; ?>
           <div class="uk-float-right uk-margin-top">

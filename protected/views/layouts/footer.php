@@ -1,5 +1,3 @@
-<br>
-<hr>
 <footer>
 <div class="uk-container uk-container-center uk-text-center">
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
