@@ -43,16 +43,16 @@ class Bolao extends CActiveRecord
 	 */
 	public function relations()
 	{	
-		$primeiroJogo = mktime(0,0,0,8,4,2016); # 1º jogo OL16M
+		$primeiroJogo = mktime(0,0,0,10,06,2018); # 1º jogo do brasil COP18
 		$semanaPasada = time() - 14*24*60*60;
 
 
 		$condCarenciaPag = ' OR (participantes_participantes.status = ' . UserBolao::StatusPendente . ' AND ';
 		
 		$condCarenciaPag .= '(';
-		$condCarenciaPag .= '(participantes_participantes.dataInscricao < ' . $primeiroJogo . ' AND participantes_participantes.idBolao  = 3)';
+		$condCarenciaPag .= '(participantes_participantes.dataInscricao < ' . $primeiroJogo . ' AND participantes_participantes.idBolao = 5)';
 		$condCarenciaPag .= ' OR ';
-		$condCarenciaPag .= '(participantes_participantes.dataInscricao > ' . $semanaPasada . ' AND participantes_participantes.idBolao != 3)';
+		$condCarenciaPag .= '(participantes_participantes.dataInscricao > ' . $semanaPasada . ' AND participantes_participantes.idBolao != 5)';
 		$condCarenciaPag .= ')';
 		$condCarenciaPag .= ')';
 		return array(
@@ -60,7 +60,9 @@ class Bolao extends CActiveRecord
 				'condition' => 'participantes_participantes.status = ' . UserBolao::StatusAtivo
 										. $condCarenciaPag,
 			],
-			'posicoes'=>[self::HAS_MANY,'Ranking','idBolao','order'=>'pontos DESC,qtdExatos DESC,qtdVencedores DESC'],
+			'posicoes' => [self::HAS_MANY,'Ranking','idBolao',
+				'order' => 'pontos DESC, qtdExatos DESC, qtdVencedores DESC'
+			],
 			'campeonato'=>[self::BELONGS_TO,'Campeonato','codCampeonato'],
 			'emailDoDia'=>[self::HAS_ONE,'BolaoEmail','idBolao',
 				'condition' => "dia='".date('Y-m-d')."'",

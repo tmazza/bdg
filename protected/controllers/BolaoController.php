@@ -51,7 +51,9 @@ class BolaoController extends MainController {
   public function actionRanking($id){
     $bolao = $this->getBolao($id);
     $this->setMenuLateral($bolao);
-    $this->render('ranking',['bolao'=>$bolao]);
+    $this->render('ranking',[
+      'bolao'=>$bolao,
+    ]);
   }
 
   public function actionEstatistica($id){
