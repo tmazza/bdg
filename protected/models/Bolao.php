@@ -36,6 +36,7 @@ class Bolao extends CActiveRecord {
 			'participantes'=>[self::MANY_MANY,'User','user_bolao(idBolao,idUsuario)',
 				'condition' => 'participantes_participantes.status = ' . UserBolao::StatusAtivo
 										. $condCarenciaPag,
+				'order' => 'participantes.nome ASC'
 			],
 			'posicoes' => [self::HAS_MANY,'Ranking','idBolao',
 				'order' => 'pontos DESC, qtdExatos DESC, qtdVencedores DESC'
