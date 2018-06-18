@@ -12,7 +12,7 @@ class SenhaController extends MainController {
        HView::ferr('Nenhum usuário encontardo com o email "'.$_POST['email'].'".');
      } else {
         $requisicaoAtiva = UserSenha::model()->find(array(
-          'condition' => "user_id = {$user->id} AND estado = " .  UserSenha::Ativa . " AND data > " . (time()-(60*60*3)),
+          'condition' => "user_id = {$user->id} AND estado = " .  UserSenha::Ativa . " AND data > " . (HTime::get()-(60*60*3)),
         ));
 
         if(is_null($requisicaoAtiva)){
@@ -20,7 +20,7 @@ class SenhaController extends MainController {
           $requisicao->user_id = $user->id;
           $requisicao->hash = $this->getHash($user);
           $requisicao->estado = 1; // Em aberto
-          $requisicao->data = time();
+          $requisicao->data = HTime::get();
           try {
             $requisicao->save();
           } catch (Exception $e){

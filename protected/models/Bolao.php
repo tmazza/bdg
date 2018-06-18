@@ -21,8 +21,7 @@ class Bolao extends CActiveRecord {
 
 	public function relations() {	
 		$primeiroJogo = self::dataCarencia();
-		$semanaPasada = time() - 14*24*60*60;
-
+		$semanaPasada = HTime::get() - 14*24*60*60;
 
 		$condCarenciaPag = ' OR (participantes_participantes.status = ' . UserBolao::StatusPendente . ' AND ';
 		
@@ -124,7 +123,7 @@ class Bolao extends CActiveRecord {
 			if(!$menor || strtotime($j->data) < $menor)
 				$menor = $j->data;
 		}
-		return strtotime($menor) - ($this->prazo * 60) + Yii::app()->controller->erroTimezone;
+		return strtotime($menor) - ($this->prazo * 60);
 	}
 
 	/**
@@ -179,7 +178,7 @@ class Bolao extends CActiveRecord {
 		if(is_null($primeiroJogo)){ # Nenhum jogo no dia.
 			return true;
 		} else {
-			$limiteDia = time() + ($this->prazo * 60) + Yii::app()->controller->erroTimezone;
+			$limiteDia = HTime::get() + ($this->prazo * 60);
 			return $primeiroJogo->data <= date('Y-m-d H:i:s',$limiteDia);
 		}
 	}

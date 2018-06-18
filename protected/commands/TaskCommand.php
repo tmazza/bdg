@@ -81,7 +81,7 @@ class TaskCommand extends MainCommand
       $ok = true;
       foreach ($alteracoes as $a) {
         $model = new Alteracao();
-        $model->data = time();
+        $model->data = HTime::get();
         $model->attributes = $a;
         $ok = $model->save() && $ok;
       }

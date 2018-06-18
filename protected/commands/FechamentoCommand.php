@@ -122,7 +122,7 @@ class FechamentoCommand extends MainCommand
           ]);
           if(is_null($jogo)){
              $time = strtotime($data);
-	     if($time > time()-48*60*60){
+	     if($time > HTime::get()-48*60*60){
 		 $erros[] = HView::removeAcentos("Jogo nao encontrado. " . $j['casa'] . ':'
                                  . $timeCasa->id . 'x' . $j['visitante'] . ':'
                                  . $timeVisi->id . ' | numJogo: ' . $j['numJogo']
@@ -130,7 +130,7 @@ class FechamentoCommand extends MainCommand
 	     }
           } else {
             $dataJogo = strtotime($jogo->data);
-            if($jogo->status != Jogo::StatusFechado && $dataJogo < time()){
+            if($jogo->status != Jogo::StatusFechado && $dataJogo < HTime::get()){
               list($golsCasa,$golsVisi) = explode('x',$placar);
 
               if($golsCasa != (int)$golsCasa){ # Controle de caracteres não numéricos que zerariam o num gols

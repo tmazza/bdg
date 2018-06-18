@@ -19,9 +19,6 @@ class MainController extends CController  {
     public $menuLateral = [];
     public $centerLogo = false;
 
-    public $erroTimezone = -109;
-
-
     protected function beforeAction($action) {
         $this->setUser();
         $this->addScripts();

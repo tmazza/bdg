@@ -11,6 +11,7 @@
         'bolao'=>$bolao,
       ]);
     }
+    
     if(!$listaCompleta){
       echo CHtml::link('Ver lista completa dos jogos fechados',$this->createUrl('/bolao/fechado',[
         'id'=>$bolao->idBolao,

@@ -89,7 +89,7 @@ class BolaoController extends MainController {
       $userBolao = new UserBolao();
       $userBolao->idUsuario = $this->user->id;
       $userBolao->idBolao = (int)$id;
-      $userBolao->dataInscricao = time();
+      $userBolao->dataInscricao = HTime::get();
       $userBolao->status = UserBolao::StatusPendente;
       if($userBolao->save()){
         HView::finf("Bem-vindo(a).");
@@ -106,7 +106,7 @@ class BolaoController extends MainController {
       $userBolao = new UserBolao();
       $userBolao->idUsuario = $this->user->id;
       $userBolao->idBolao = (int)$id;
-      $userBolao->dataInscricao = time();
+      $userBolao->dataInscricao = HTime::get();
       $userBolao->status = UserBolao::StatusAtivo;
       if($userBolao->save()){
         HView::finf("Bem-vindo(a).");
@@ -127,7 +127,7 @@ class BolaoController extends MainController {
       $jogos = $bolao->campeonato->jogosNesteDia($dia);
       // Busca hora de fechamento do dia
       $fechamento = $bolao->getHoraFechamento($jogos);
-      if(time() >= $fechamento){
+      if(HTime::get() >= $fechamento){
         echo 'Apostas do dia encerradas.';
       } else {
         $idsJogos = array_map(function($i){return $i->idJogo;},$jogos);
