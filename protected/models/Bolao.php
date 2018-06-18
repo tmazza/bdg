@@ -124,7 +124,7 @@ class Bolao extends CActiveRecord {
 			if(!$menor || strtotime($j->data) < $menor)
 				$menor = $j->data;
 		}
-		return strtotime($menor) - ($this->prazo * 60);
+		return strtotime($menor) - ($this->prazo * 60) + Yii::app()->controller->erroTimezone;
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Bolao extends CActiveRecord {
 		if(is_null($primeiroJogo)){ # Nenhum jogo no dia.
 			return true;
 		} else {
-			$limiteDia = time()+($this->prazo*60);
+			$limiteDia = time() + ($this->prazo * 60) + Yii::app()->controller->erroTimezone;
 			return $primeiroJogo->data <= date('Y-m-d H:i:s',$limiteDia);
 		}
 	}

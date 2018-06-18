@@ -7,7 +7,7 @@ $fechamento = $bolao->getHoraFechamento($jogos);
   </h4>
   <small>
     <div data-uk-tooltip='' title='Após este horário você não poderá salvar os palpites do dia.'>
-      Fecha às <?=HView::tradDia(date('H:i:s \d\e l',$fechamento-1))?>
+      Fecha às <?=HView::tradDia(date('H:i \d\e l',$fechamento-1))?>
     </div>
   </small>
   <br>
