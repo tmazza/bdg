@@ -1,56 +1,28 @@
 <?php
 
-/**
- * This is the model class for table "palpite".
- *
- * The followings are the available columns in table 'palpite':
- * @property integer $idUsuario
- * @property integer $idBolao
- * @property integer $idJogo
- * @property integer $golsMandante
- * @property integer $golsVisitante
- * @property string $vencedor
- * @property integer $pontos
- */
-class Palpite extends CActiveRecord
-{
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
+class Palpite extends CActiveRecord {
+
+	public function tableName() {
 		return 'palpite';
 	}
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		return array(
-			array('idUsuario, idBolao, idJogo, golsMandante, golsVisitante', 'required'),
-			array('idUsuario, idBolao, idJogo, pontos, golsMandante, golsVisitante', 'numerical', 'integerOnly'=>true),
-			array('golsMandante, golsVisitante','default','setOnEmpty'=>true),
-			array('vencedor', 'length', 'max'=>1),
-			array('idUsuario, idBolao, idJogo, golsMandante, golsVisitante, vencedor, pontos', 'safe', 'on'=>'search'),
-		);
+	public function rules() {
+		return [
+			['idUsuario, idBolao, idJogo, golsMandante, golsVisitante', 'required'],
+			['idUsuario, idBolao, idJogo, pontos', 'numerical', 'integerOnly'=>true],
+			['golsMandante, golsVisitante', 'numerical', 'min' => 0, 'max' => 100],
+			['golsMandante, golsVisitante','default','setOnEmpty'=>true],
+			['vencedor', 'length', 'max'=>1],
+			['idUsuario, idBolao, idJogo, golsMandante, golsVisitante, vencedor, pontos', 'safe', 'on'=>'search'],
+		];
 	}
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		return array(
-		);
+	public function relations() {
+		return [];
 	}
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
+	public function attributeLabels() {
+		return [
 			'idUsuario' => 'Id Usuario',
 			'idBolao' => 'Id Bolao',
 			'idJogo' => 'Id Jogo',
@@ -58,17 +30,10 @@ class Palpite extends CActiveRecord
 			'golsVisitante' => 'Gols Visitante',
 			'vencedor' => 'Vencedor',
 			'pontos' => 'Pontos',
-		);
+		];
 	}
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Palpite the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
+	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
 

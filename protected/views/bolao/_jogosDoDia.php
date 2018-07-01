@@ -24,25 +24,11 @@ $fechamento = $bolao->getHoraFechamento($jogos);
       ?>
       <br>
       <?php
-      echo CHtml::ajaxSubmitButton('Atualizar palpite',$this->createUrl('/bolao/salvaPalpite'),[
-        'beforeSend'=>"js:function(){
-          $('#dia-{$dia}').find('input').prop('disabled','1');
-          var icon = '<i class=\'uk-icon uk-icon-spin uk-icon-spinner\'></i>';
-          $('#status-{$dia}').html('<div class=\'uk-alert\'>'+icon+' Atualizando aguarde...</div>');
-        }",
-        'success'=>"js:function(html){
-            $('#dia-{$dia}').html(html);
-            var icon = '<i class=\'uk-icon uk-icon-check\'></i>';
-            $('#status-{$dia}').html('<div class=\'uk-alert uk-alert-success\'>'+icon+' Palpite atualizado.</div>');
-        }",
-        'error'=>"js:function(){
-            var icon = '<i class=\'uk-icon uk-icon-times\'></i>';
-            $('#status-{$dia}').html('<div class=\'uk-alert uk-alert-danger\'>'+icon+' Erro ao salvar palpite. Atualize a página e tente novamente.</div>');
-        }",
-      ],[
-        'id'=>'btn-dia-'.$dia,
-        'class'=>'uk-button uk-button-success',
-        'style'=>'color:white;',
+      echo CHtml::link('Atualizar palpite', '#!', [
+        'onclick' => "return salvaPalpite('{$dia}');",
+        'class' => 'uk-button uk-button-success',
+        'style' => 'color:white;',
+        'type' => 'text',
       ]);?>
       <div id='status-<?=$dia?>' class="uk-float-right"></div>
     <?=CHtml::endForm();?>

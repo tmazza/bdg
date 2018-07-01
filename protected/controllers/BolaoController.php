@@ -117,7 +117,12 @@ class BolaoController extends MainController {
     $this->redirect($this->createUrl('/site/index'));
   }
 
-  public function actionSalvaPalpite(){
+  public function actionSalvaPalpite() {
+
+    $result = [
+      'save' => false,
+    ];
+
     if(isset($_POST['dia']) && isset($_POST['bolao'])){
       $dia = (int) $_POST['dia'];
       $idBolao = (int) $_POST['bolao'];
@@ -135,42 +140,42 @@ class BolaoController extends MainController {
           $idJogo = (int) $j;
           if(in_array($j,$idsJogos)){
             $model = Palpite::model()->findByPk([
-              'idBolao'=>$bolao->idBolao,
-              'idUsuario'=>$this->user->id,
-              'idJogo'=>$idJogo,
+              'idBolao' => $bolao->idBolao,
+              'idUsuario' => $this->user->id,
+              'idJogo' => $idJogo,
             ]);
             if(is_null($model)){
               $model = new Palpite();
-              $model->idBolao=$bolao->idBolao;
-              $model->idUsuario=$this->user->id;
-              $model->idJogo=$idJogo;
+              $model->idBolao = $bolao->idBolao;
+              $model->idUsuario = $this->user->id;
+              $model->idJogo = $idJogo;
             }
             $camposParaUpdate=[];
             if(isset($palpite['casa']) && strlen($palpite['casa']) > 0){
-              $model->golsMandante=(int)$palpite['casa'];
+              $model->golsMandante = (int) $palpite['casa'];
               $camposParaUpdate[] = 'golsMandante';
             }
             if(isset($palpite['visi']) && strlen($palpite['visi']) > 0){
-              $model->golsVisitante=(int)$palpite['visi'];
+              $model->golsVisitante = (int) $palpite['visi'];
               $camposParaUpdate[] = 'golsVisitante';
             }
             if(count($camposParaUpdate) > 0){
               if($model->isNewRecord){
-                $model->save();
+                $result['save'] = $model->save();
               } else {
-                $model->update($camposParaUpdate);
+                if($model->validate()) {
+                  $result['save'] = $model->update($camposParaUpdate);
+                }
               }
             }
           }
         }
       }
-      sleep(1);
-      $this->renderPartial('__formJogo',[
-        'dia'=>$dia,
-        'jogos'=>$jogos,
-        'bolao'=>$bolao,
-      ]);
+      
     }
+
+    echo json_encode($result);
+
   }
 
   public function actionLoadTabBra(){

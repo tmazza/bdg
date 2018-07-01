@@ -138,6 +138,7 @@
   <script src="<?=$this->assetsDir;?>/2018/js/jquery.waypoints.min.js"></script>
   <script src="<?=$this->assetsDir;?>/2018/js/owl.carousel.min.js"></script>
   <script src="<?=$this->assetsDir;?>/2018/js/main.js"></script>
+  <script src="<?=$this->assetsDir;?>/js/main.js"></script>
 
   <?php if(!YII_DEBUG): ?>
   <script>
